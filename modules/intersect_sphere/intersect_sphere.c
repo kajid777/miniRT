@@ -1,4 +1,5 @@
 #include "../../miniRT.h"
+#include <math.h>
 
 double judge(double a, double b, double c)
 {
@@ -62,7 +63,7 @@ t_vec3 intersect_sphere(t_vec3 dir, t_vec3 origin, t_vec3 center, double radius)
 	double t = solve_quadratic(j_a, j_b, j_c);
 	//これはカメラの後ろ
 	if (t == -1)
-		return vec_new(0, 0, 0);
+		return vec_new(INFINITY, INFINITY, INFINITY);
 
 	return (get_hitpoint(t, d, o));
 }
