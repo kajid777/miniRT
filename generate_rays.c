@@ -32,8 +32,8 @@ t_vec3 calculate_viewplane_center(t_camera camera, double viewplane_distance)
 	t_vec3	normalized_direction;
 	t_vec3	cam_to_viewplane_vec;
 
-	normalized_direction = normalize(camera.direction);//正規化関数はまだないが、仮に書く。
-	cam_to_viewplane_vec = normalized_direction * viewplane_distance;
+	normalized_direction = vec_norm(camera.direction);
+	cam_to_viewplane_vec = vec_mul_scalar(normalized_direction, viewplane_distance);
 	
 	viewplane_center = add(camera.position + cam_to_viewplane_vec);
 	

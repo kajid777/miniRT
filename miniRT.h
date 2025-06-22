@@ -114,6 +114,7 @@ t_vec3	vec_sub(t_vec3 a, t_vec3 b);
 double	vec_dot(t_vec3 a, t_vec3 b);
 t_vec3	vec_cross(t_vec3 a, t_vec3 b);
 t_vec3	vec_norm(t_vec3 v);
+t_vec3	vec_mul_scalar(t_vec3 v, double scalar);
 
 //end_exit.c
 void	end_with_error(void);

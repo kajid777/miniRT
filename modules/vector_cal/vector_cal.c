@@ -47,3 +47,8 @@ t_vec3 vec_norm(t_vec3 v)
 		return (vec_new(0, 0, 0));
 	return (vec_new(v.x / norm, v.y / norm, v.z / norm));
 }
+
+t_vec3 vec_mul_scalar(t_vec3 v, double scalar)
+{
+	return (vec_new(v.x * scalar, v.y * scalar, v.z * scalar));
+}
