@@ -7,7 +7,7 @@ OBJS 		=	$(SRCS:.c=.o)
 # Compiler
 CC			=	cc
 CFLAGS       = -Wall -Wextra -Werror
-LIBX_FLAGS	=	-L./minilibx-linux -lmlx_Linux -lXext -lX11
+LIBX_FLAGS	=	-L./minilibx-linux -lmlx_Linux -lXext -lX11 -lm
 FT_PRINTF	=	-L./ft_printf -lftprintf
 # Rules
 all:		$(NAME)
