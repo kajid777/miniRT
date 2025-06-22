@@ -1,24 +1,26 @@
 #include "../../miniRT.h"
 
-int judge(double a, double b, double c)
+double judge(double a, double b, double c)
 {
 	//Δ = B^2 - 4AC
 	double result;
 	
 	result = pow(b, 2) - 4 * a * c;
-	if (result < 0)
-		return (-1);
-	else if (result > 0)
-		return (2);
-	else
-		return (1);
+	return (result);
+
 }
 
 double solve_quadratic(double a, double b, double c)
 {
 	// t = (-B ± √(B^2 - 4AC)) / (2A)
-	double t = - b + sqrt(pow(b, 2) - 4 * a * c) / (2 * a);
-	return (t);
+	double judgement = judge(a, b, c);
+	if (judgement < 0)
+		return (-1);
+	double f_t = - b + sqrt(judgement) / (2 * a);
+	double s_t = - b - sqrt(judgement) / (2 * a);
+	if (f_t < s_t)
+		return (f_t);
+	return (s_t);
 }
 
 t_vec3 get_hitpoint(double t, t_vec3 d, t_vec3 origin)
@@ -56,12 +58,10 @@ t_vec3 intersect_sphere(t_vec3 dir, t_vec3 origin, t_vec3 center, double radius)
 	double j_a = vec_dot(d, d);
 	double j_b = 2 * (vec_dot(d, vec_sub(o, c)));
 	double j_c = vec_dot(vec_sub(o, c), vec_sub(o, c)) - pow(r, 2);
-	int result = judge(j_a, j_b, j_c);
-
+	double t = solve_quadratic(j_a, j_b, j_c);
 	//これはカメラの後ろ
-	if (result == -1)
+	if (t == -1)
 		return vec_new(0, 0, 0);
 
-	double t = solve_quadratic(j_a, j_b, j_c);
 	return (get_hitpoint(t, d, o));
 } 
