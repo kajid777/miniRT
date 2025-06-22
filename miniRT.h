@@ -107,6 +107,14 @@ typedef struct s_world {
 
 int		ft_printf(const char *str, ...);
 
+//vector_cal.c
+t_vec3	vec_new(double x, double y, double z);
+t_vec3	vec_add(t_vec3 a, t_vec3 b);
+t_vec3	vec_sub(t_vec3 a, t_vec3 b);
+double	vec_dot(t_vec3 a, t_vec3 b);
+t_vec3	vec_cross(t_vec3 a, t_vec3 b);
+t_vec3	vec_norm(t_vec3 v);
+
 //end_exit.c
 void	end_with_error(void);
 int		exit_point(t_world *game);
