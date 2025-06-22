@@ -48,6 +48,16 @@ typedef struct s_camera {
     double    fov;
 } t_camera;
 
+typedef struct s_screen
+{
+    t_vec3    center;
+    t_vec3    top_left;
+    double    from_camera_distance;
+    double    pixel_step_size;
+    t_vec3    pixel_horizontal;
+    t_vec3    pixel_vertical;    /* data */
+};
+
 // Represents a point light source with position, intensity, and color
 typedef struct s_light {
     t_vec3      position;
@@ -117,6 +127,7 @@ double	vec_dot(t_vec3 a, t_vec3 b);
 t_vec3	vec_cross(t_vec3 a, t_vec3 b);
 t_vec3	vec_norm(t_vec3 v);
 t_vec3	vec_mul_scalar(t_vec3 v, double scalar);
+t_vec3	vec_div_scalar(t_vec3 v, double scalar);
 
 //end_exit.c
 void	end_with_error(void);
