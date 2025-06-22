@@ -43,6 +43,8 @@ typedef struct s_fcolor {
 typedef struct s_camera {
     t_vec3    position;
     t_vec3    direction;
+    t_vec3    up;
+    t_vec3    right;
     double    fov;
 } t_camera;
 

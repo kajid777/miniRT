@@ -34,7 +34,51 @@ t_vec3 calculate_viewplane_center(t_camera camera, double viewplane_distance)
 
 	normalized_direction = vec_norm(camera.direction);
 	cam_to_viewplane_vec = vec_mul_scalar(normalized_direction, viewplane_distance);
+	viewplane_center = vec_add(camera.position + cam_to_viewplane_vec);
+}
+
+void calculate_camera_right(t_camera camera)
+{
+	t_vec camera_right;
+	t_vec normalized_camera_right;
+	t_vec world_up;
+
+	world_up = vec_new(0, 1, 0);
+	camera_right = vec_cross(camera.direction, world_up);
+	normalized_camera_right = vec_norm(camera_right);
+	camera.right = normalized_camera_right;
+	//カメラの向きが天を仰いでいた時の例外処理をする
+}
+
+void calculate_camera_up(t_vec viewplane_center, t_camera camera)
+{
+	t_vec camera_up;
+	t_vec normalized_camera_up;
+
+	camera_up = vec_cross(camera.right, camera.direction);
+	normalized_camera_up = vec_norm(camera_up);
+	camera.up = normalized_camera_up;
+}
+
+void generate_one_ray(t_camera camera, int x, int y)
+{
 	
-	viewplane_center = add(camera.position + cam_to_viewplane_vec);
-	
+}
+
+void generate_rays(t_camera camera)
+{
+	int x;
+	int y;
+
+	x = 0;
+	y = 0;
+	while (y < SCREEN_HEIGHT)
+	{
+		while (x < SCREEN_WIDTH)
+		{
+
+			//スクリーンの中心位置からのベクトルを求める
+			//スクリーンの中心位置からのベクトルとカメラの向きからなる平面との交点を求める
+		}
+	}
 }
