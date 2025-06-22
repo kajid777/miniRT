@@ -14,13 +14,14 @@ double solve_quadratic(double a, double b, double c)
 {
 	// t = (-B ± √(B^2 - 4AC)) / (2A)
 	double judgement = judge(a, b, c);
-	if (judgement < 0)
-		return (-1);
-	double f_t = - b + sqrt(judgement) / (2 * a);
-	double s_t = - b - sqrt(judgement) / (2 * a);
-	if (f_t < s_t)
+	double f_t = (-b + sqrt(judgement)) / (2 * a);
+	double s_t = (-b - sqrt(judgement)) / (2 * a);
+
+	if (f_t < s_t && f_t >= 0)
 		return (f_t);
-	return (s_t);
+	else if (f_t > s_t && s_t >= 0)
+		return (s_t);
+	return (-1);
 }
 
 t_vec3 get_hitpoint(double t, t_vec3 d, t_vec3 origin)
@@ -64,4 +65,5 @@ t_vec3 intersect_sphere(t_vec3 dir, t_vec3 origin, t_vec3 center, double radius)
 		return vec_new(0, 0, 0);
 
 	return (get_hitpoint(t, d, o));
-} 
+}
+
