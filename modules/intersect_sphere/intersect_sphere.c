@@ -14,6 +14,21 @@ int judge(double a, double b, double c)
 		return (1);
 }
 
+double solve_quadratic(double a, double b, double c)
+{
+	// t = (-B ± √(B^2 - 4AC)) / (2A)
+	double t = - b + sqrt(pow(b, 2) - 4 * a * c) / (2 * a);
+	return (t);
+}
+
+t_vec3 get_hitpoint(double t, t_vec3 d, t_vec3 origin)
+{
+	t_vec3 p;
+
+	p = vec_add(origin, vec_mul_scalar(d, t));
+	return (p);
+}
+
 t_vec3 intersect_sphere(t_vec3 dir, t_vec3 origin, t_vec3 center, double radius)
 {
 	t_vec3 d;
@@ -46,4 +61,7 @@ t_vec3 intersect_sphere(t_vec3 dir, t_vec3 origin, t_vec3 center, double radius)
 	//これはカメラの後ろ
 	if (result == -1)
 		return vec_new(0, 0, 0);
+
+	double t = solve_quadratic(j_a, j_b, j_c);
+	return (get_hitpoint(t, d, o));
 } 
