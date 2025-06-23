@@ -58,6 +58,12 @@ typedef struct s_screen
     t_vec3    pixel_vertical;    /* data */
 };
 
+typedef struct		s_ray
+{
+	double			t;
+	t_vec3			pos;
+	t_vec3			dir;
+}					t_ray;
 // Represents a point light source with position, intensity, and color
 typedef struct s_light {
     t_vec3      position;
