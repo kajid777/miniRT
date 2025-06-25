@@ -72,6 +72,13 @@ typedef struct s_light {
     t_fcolor    color;
 } t_light;
 
+typedef struct s_ambient_lighting
+{
+    double      lighting_ratio;
+    t_fcolor    color;
+} t_ambient_lighting;
+
+
 // Represents a sphere with center, diameter, and color
 typedef struct s_sphere {
     t_vec3      center;
@@ -96,30 +103,33 @@ typedef struct s_cylinder {
 } t_cylinder;
 
 // Enum for object type
-typedef enum e_obj_type {
-    SPHERE,
-    PLANE,
-    CYLINDER
-}   t_obj_type;
+// typedef enum e_obj_type {
+//     SPHERE,
+//     PLANE,
+//     CYLINDER
+// }   t_obj_type;
 
-// Linked list node for objects (sphere, plane, cylinder, etc.)
-typedef struct s_obj_list {
-    t_obj_type           type;   // Object type
-    void                *obj;    // Pointer to the object (t_sphere*, t_plane*, t_cylinder*)
-    struct s_obj_list   *next;   // Next object in the list
-}   t_obj_list;
+// // Linked list node for objects (sphere, plane, cylinder, etc.)
+// typedef struct s_obj_list {
+//     t_obj_type           type;   // Object type
+//     void                *obj;    // Pointer to the object (t_sphere*, t_plane*, t_cylinder*)
+//     struct s_obj_list   *next;   // Next object in the list
+// }   t_obj_list;
 
 // Represents the main world state, including window and screen info
 // (camera, objects, ambient, and lights are commented out for now)
 typedef struct s_world {
     void       *mlx;  // minilibx instance pointer
     void       *win;  // minilibx window pointer
-    int        screen_width;
-    int        screen_height;
     t_camera *camera;  // List of cameras
     t_light      *light;  // List of lights
-    t_fcolor    ambient;  // Ambient light
+    t_ambient_lighting    *ambient;  // Ambient light
     t_obj_list      *objects;  // List of objects
+    
+    // 新しく追加するメンバー
+    t_sphere    *spheres;    // List of spheres
+    t_plane     *planes;     // List of planes
+    t_cylinder  *cylinders;  // List of cylinders
 }               t_world;
 
 

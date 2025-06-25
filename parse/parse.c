@@ -15,18 +15,21 @@
 // シーン構造体の各要素を初期化する関数
 void *init_world(t_world *world)
 {
-	world->al.ratio = 0;
-	world->al.color.r = 0;
-	world->al.color.g = 0;
-	world->al.color.b = 0;
-	world->cameras = ft_lstnew(NULL);
-	world->lights = ft_lstnew(NULL);
-	world->spheres = ft_lstnew(NULL);
-	world->planes = ft_lstnew(NULL);
-	world->squares = ft_lstnew(NULL);
-	world->cylinders = ft_lstnew(NULL);
-	world->triangles = ft_lstnew(NULL);
-	return (world);
+    // Initialize ambient lighting
+    world->ambient = NULL;
+    // Initialize camera
+    world->camera = NULL;
+    // Initialize light
+    world->light = NULL;
+    // Initialize new geometry lists
+    world->spheres = NULL;
+    world->planes = NULL;
+    world->cylinders = NULL;
+    
+    // Initialize MLX related members
+    world->mlx = NULL;
+    world->win = NULL;    
+    return (world);
 }
 
 // 指定された行が特定の型・要素数かどうかを判定する関数

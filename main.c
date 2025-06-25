@@ -15,12 +15,12 @@
 #include <X11/keysym.h>
 // #include "mlx.h"
 #include "miniRT.h"
-getnextline
+// getnextline
 
-main
-parse
-makefile
-test
+// main
+// parse
+// makefile
+// test
 int	main(int argc, char **argv)
 {
 	t_world *world;
