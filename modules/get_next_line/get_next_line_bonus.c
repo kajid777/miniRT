@@ -12,7 +12,7 @@
 
 #include <stdlib.h>
 #include<libc.h>
-#include "get_next_line.h"
+#include "../../includes/get_next_line.h"
 
 // __attribute__((destructor))
 // static void destructor() {
@@ -130,3 +130,4 @@ char	*get_next_line(int fd)
 // 	printf("%s", str3);
 //     return 0;
 // }
+#include "../../includes/get_next_line.h"

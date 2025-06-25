@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "../../includes/get_next_line.h"
 
 int	ft_strlen(const char *s)
 {
@@ -103,3 +103,10 @@ void	ft_bzero(void *s, size_t n)
 		i++;
 	}
 }
+
+## 修正が必要なファイル
+
+### 1. modules/get_next_line/get_next_line.c
+```c
+#include "../../includes/get_next_line.h"
+```

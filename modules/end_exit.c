@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "miniRT.h"
+#include "includes/miniRT.h"
 
 int	exit_point(t_world *world)
 {

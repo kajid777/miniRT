@@ -13,7 +13,7 @@
 #ifndef PARSE_H
 # define PARSE_H
 
-# include "minirt.h"
+# include "miniRT.h"
 
 # define WHITE_SPACES " \t"
 # define NB_ELEM_RESOLUTION 3

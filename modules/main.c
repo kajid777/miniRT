@@ -14,8 +14,7 @@
 #include <X11/X.h>
 #include <X11/keysym.h>
 // #include "mlx.h"
-#include "miniRT.h"
-// getnextline
+#include "includes/miniRT.h"
 
 // main
 // parse

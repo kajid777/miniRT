@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "../../includes/get_next_line.h"
 
 // __attribute__((destructor))
 // static void destructor() {
@@ -111,3 +111,10 @@ char	*get_next_line(int fd)
 	buffer = ft_next(buffer);
 	return (line);
 }
+
+## 修正が必要なファイル
+
+### 1. modules/get_next_line/get_next_line.c
+```c
+#include "../../includes/get_next_line.h"
+```

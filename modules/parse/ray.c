@@ -17,9 +17,9 @@ t_vect	set_vect(const char *x, const char *y, const char *z)
 {
 	t_vect	vect;
 
-	vect.x = ft_atof(x);
-	vect.y = ft_atof(y);
-	vect.z = ft_atof(z);
+	vect.x = ft_atod(x);
+	vect.y = ft_atod(y);
+	vect.z = ft_atod(z);
 	return (vect);
 }
 

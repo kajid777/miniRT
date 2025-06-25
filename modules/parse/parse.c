@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../miniRT.h"
+#include "../../includes/miniRT.h"
 
 // シーン構造体の各要素を初期化する関数
 void *init_world(t_world *world)
@@ -60,7 +60,7 @@ t_world	*parse(int fd)
 	while ((ret = get_next_line(&line, fd)) == 1)
 	{
 		data = ft_split_set(line, ' ');//いわゆるスプリット
-		if (check_line(line, data, "A", NB_ELEM_AL) && !world->al.ratio)
+		if (check_line(line, data, "A", NB_ELEM_AL))
 			set_ambient_light(world, data);
 		else if (check_line(line, data, "C", NB_ELEM_CAMERA))
 			set_camera(world, data);
