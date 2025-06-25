@@ -10,10 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minirt.h"
+#include "../includes/miniRT.h"
 
 // シーンに球体（sphere）を追加する関数
-void	set_sphere(t_scene *scene, char **strs)
+void	set_sphere(t_world *world, char **strs)
 {
 	t_sphere	*sphere;
 	double		radius;
@@ -27,11 +27,11 @@ void	set_sphere(t_scene *scene, char **strs)
 	sphere->reflec = 0;
 	if (strs[4])
 		sphere->reflec = ft_atod(strs[4]);
-	ft_lstadd_front(&(scene->spheres), ft_lstnew(sphere));
+	ft_lstadd_front(&(world->spheres), ft_lstnew(sphere));
 }
 
 // シーンに平面（plane）を追加する関数
-void	set_plane(t_scene *scene, char **strs)
+void	set_plane(t_world *world, char **strs)
 {
 	t_plane		*plane;
 
@@ -40,11 +40,11 @@ void	set_plane(t_scene *scene, char **strs)
 	plane->pos = str_to_vect(strs[1]);
 	plane->normal = normalize(str_to_vect(strs[2]));
 	plane->color = str_to_rgb(strs[3]);
-	ft_lstadd_front(&(scene->planes), ft_lstnew(plane));
+	ft_lstadd_front(&(world->planes), ft_lstnew(plane));
 }
 
 // シーンに円柱（cylinder）を追加する関数
-void	set_cylinder(t_scene *scene, char **strs)
+void	set_cylinder(t_world *world, char **strs)
 {
 	t_cylinder	*cy;
 	double		radius;
@@ -62,6 +62,6 @@ void	set_cylinder(t_scene *scene, char **strs)
 		cy->is_closed = ft_atoi_strict(strs[6]);
 	else
 		cy->is_closed = 1;
-	ft_lstadd_front(&(scene->cylinders), ft_lstnew(cy));
+	ft_lstadd_front(&(world->cylinders), ft_lstnew(cy));
 }
 

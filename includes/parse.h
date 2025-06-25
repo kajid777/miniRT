@@ -13,7 +13,7 @@
 #ifndef PARSE_H
 # define PARSE_H
 
-# include "miniRT.h"
+#include "types.h"
 
 # define WHITE_SPACES " \t"
 # define NB_ELEM_RESOLUTION 3
@@ -25,5 +25,31 @@
 # define NB_ELEM_SQUARE 5
 # define NB_ELEM_CYLINDER 6
 # define NB_ELEM_TRIANGLE 5
+
+/* ft_atod.c */
+double		ten_to(int pow);
+double		dot_part(char *str, int *len);
+double		ft_atod(char *str);
+
+/* parse.c */
+void		*init_world(t_world *world);
+bool		check_line(const char *line, char **data, const char *type, const int nb_elements);
+t_world		*parse(int fd);
+t_world		*get_world(const int argc, char *argv[]);
+
+/* ray.c */
+t_vec3		set_vect(const char *x, const char *y, const char *z);
+t_vec3		str_to_vect(const char *str);
+t_fcolor	str_to_rgb(const char *str);
+
+/* set_elements.c */
+void		set_ambient_light(t_world *world, char **data);
+void		set_camera(t_world *world, char **data);
+void		set_light(t_world *world, char **data);
+
+/* set_elements2.c */
+void		set_sphere(t_world *world, char **strs);
+void		set_plane(t_world *world, char **strs);
+void		set_cylinder(t_world *world, char **strs);
 
 #endif

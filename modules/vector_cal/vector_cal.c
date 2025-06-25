@@ -1,5 +1,4 @@
 #include <math.h>
-#include "../../miniRT.h"
 
 t_vec3 vec_new(double x, double y, double z)
 {

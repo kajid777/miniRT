@@ -111,10 +111,3 @@ char	*get_next_line(int fd)
 	buffer = ft_next(buffer);
 	return (line);
 }
-
-## 修正が必要なファイル
-
-### 1. modules/get_next_line/get_next_line.c
-```c
-#include "../../includes/get_next_line.h"
-```

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minirt.h"
+#include "../includes/miniRT.h"
 
 // 3つの文字列（x, y, z）からベクトル構造体を生成する関数
 t_vect	set_vect(const char *x, const char *y, const char *z)

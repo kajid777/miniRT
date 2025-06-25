@@ -16,7 +16,7 @@
 #  define BUFFER_SIZE 40
 # endif
 # include <stdlib.h>
-# include <libc.h>
+# include <unistd.h>
 
 int		ft_strlen(const char *s);
 char	*ft_strjoin(const char *s1, const char *s2);
