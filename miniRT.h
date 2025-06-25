@@ -20,6 +20,7 @@
 # include <string.h>
 # include <stdlib.h>
 # include "./minilibx-linux/mlx.h"
+# include "./get_next_line/get_next_line.h"
 
 define SCREEN_WIDTH 1200
 define SCREEN_HEIGHT 800

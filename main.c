@@ -15,17 +15,17 @@
 #include <X11/keysym.h>
 // #include "mlx.h"
 #include "miniRT.h"
+getnextline
 
-int	main()
+main
+parse
+makefile
+test
+int	main(int argc, char **argv)
 {
-	t_world world;
+	t_world *world;
 
-	// if (argc != 2)
-	// 	wrong_arguement();
-	// ft_memset(&game, 0, sizeof(t_complete));
-	// read_map(&game, argv);
-	// validate_map(&game);
-	// exit_setting(&game);
+	world = get_world(argc, argv);
 	world.mlx = mlx_init();
 	// if (mlx_ptr)
 	// 	when_mlx_ptr_failed(mlx_ptr);
