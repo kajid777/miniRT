@@ -12,6 +12,46 @@
 
 #include "../../includes/miniRT.h"
 
+// ft_strcmp関数 - 2つの文字列を比較する
+int	ft_strcmp(const char *s1, const char *s2)
+{
+	while (*s1 && (*s1 == *s2))
+	{
+		s1++;
+		s2++;
+	}
+	return ((unsigned char)*s1 - (unsigned char)*s2);
+}
+
+// ft_tab_size関数 - 文字列配列のサイズを返す
+int	ft_tab_size(char **tab)
+{
+	int	size;
+
+	size = 0;
+	if (!tab)
+		return (0);
+	while (tab[size])
+		size++;
+	return (size);
+}
+
+// 文字列配列の全要素をfreeする関数
+void	ft_free_tab(char **tab)
+{
+	int	i;
+
+	if (!tab)
+		return;
+	i = 0;
+	while (tab[i])
+	{
+		free(tab[i]);
+		i++;
+	}
+	free(tab);
+}
+
 // シーン構造体の各要素を初期化する関数
 void *init_world(t_world *world)
 {
@@ -35,10 +75,16 @@ void *init_world(t_world *world)
 // 指定された行が特定の型・要素数かどうかを判定する関数
 bool	check_line(const char *line, char **data, const char *type, const int nb_elements)
 {
+	if (!line)
+		return (false);
+	if (!data)
+		return (false);
 	if (!ft_strcmp(data[0], type))
 	{
-		if (ft_in_charset(line[ft_strlen(type)], WHITE_SPACES))
-			return (ft_tab_size(data) == nb_elements);
+		// if (ft_in_charset(line[ft_strlen(type)], WHITE_SPACES))
+		if (ft_tab_size(data) == nb_elements)
+			return (true);
+			// return (ft_tab_size(data) == nb_elements);
 	}
 	return (0);
 }
@@ -54,10 +100,11 @@ t_world	*parse(int fd)
 	char	**data;
 
 	if (!(world = malloc(sizeof(*world))))
-		print_err_and_exit("Malloc failed", MALLOC_ERROR);
+		exit(0);
 	if (!(init_world(world)))
 		return (NULL);
-	while ((ret = get_next_line(&line, fd)) == 1)
+	line = get_next_line(fd);
+	while (line != NULL)
 	{
 		data = ft_split_set(line, ' ');//いわゆるスプリット
 		if (check_line(line, data, "A", NB_ELEM_AL))
@@ -75,11 +122,13 @@ t_world	*parse(int fd)
 		else if (!ft_is_from_charset(line, WHITE_SPACES))//何も書かれていない行から始まる場合
 		{
 			free(line);
-			free(data);//ここはリークしてしまう、dataは文字列の列だから一個一個freeしないといけない
-			print_err_and_exit("Parse error", PARSE_ERROR);
+			ft_free_tab(data);//文字列配列の全要素をfree
+			exit(0);
+			// print_err_and_exit("Parse error", PARSE_ERROR);
 		}
 		free(line);
-		free(data);
+		ft_free_tab(data);//文字列配列の全要素をfree
+		line = get_next_line(fd);
 	}
 	return (world);
 }

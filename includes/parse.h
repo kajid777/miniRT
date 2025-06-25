@@ -30,6 +30,9 @@
 double		ten_to(int pow);
 double		dot_part(char *str, int *len);
 double		ft_atod(char *str);
+int		ft_strcmp(const char *s1, const char *s2);
+int		ft_tab_size(char **tab);
+void	ft_free_tab(char **tab);
 
 /* parse.c */
 void		*init_world(t_world *world);
