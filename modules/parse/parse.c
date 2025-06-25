@@ -52,6 +52,36 @@ void	ft_free_tab(char **tab)
 	free(tab);
 }
 
+// 文字列が指定された文字セットの文字のみで構成されているかを判定する関数
+bool	ft_is_from_charset(const char *str, const char *charset)
+{
+	int	i;
+	int	j;
+	bool	found;
+
+	if (!str || !charset)
+		return (false);
+	i = 0;
+	while (str[i])
+	{
+		found = false;
+		j = 0;
+		while (charset[j])
+		{
+			if (str[i] == charset[j])
+			{
+				found = true;
+				break;
+			}
+			j++;
+		}
+		if (!found)
+			return (false);
+		i++;
+	}
+	return (true);
+}
+
 // シーン構造体の各要素を初期化する関数
 void *init_world(t_world *world)
 {
@@ -96,7 +126,6 @@ t_world	*parse(int fd)
 {
 	t_world	*world;
 	char	*line;
-	int		ret;
 	char	**data;
 
 	if (!(world = malloc(sizeof(*world))))
@@ -106,7 +135,7 @@ t_world	*parse(int fd)
 	line = get_next_line(fd);
 	while (line != NULL)
 	{
-		data = ft_split_set(line, ' ');//いわゆるスプリット
+		data = ft_split_set(line, WHITE_SPACES);//いわゆるスプリット
 		if (check_line(line, data, "A", NB_ELEM_AL))
 			set_ambient_light(world, data);
 		else if (check_line(line, data, "C", NB_ELEM_CAMERA))

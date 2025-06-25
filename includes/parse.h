@@ -33,6 +33,8 @@ double		ft_atod(char *str);
 int		ft_strcmp(const char *s1, const char *s2);
 int		ft_tab_size(char **tab);
 void	ft_free_tab(char **tab);
+char	**ft_split_set(const char *str, const char *charset);
+bool	ft_is_from_charset(const char *str, const char *charset);
 
 /* parse.c */
 void		*init_world(t_world *world);
