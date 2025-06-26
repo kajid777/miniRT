@@ -77,18 +77,18 @@ typedef struct s_cylinder {
 } t_cylinder;
 
 // Enum for object type
-typedef enum e_obj_type {
-    SPHERE,
-    PLANE,
-    CYLINDER
-} t_obj_type;
+// typedef enum e_obj_type {
+//     SPHERE,
+//     PLANE,
+//     CYLINDER
+// } t_obj_type;
 
-// Linked list node for objects (sphere, plane, cylinder, etc.)
-typedef struct s_obj_list {
-    t_obj_type           type;   // Object type
-    void                *obj;    // Pointer to the object (t_sphere*, t_plane*, t_cylinder*)
-    struct s_obj_list   *next;   // Next object in the list
-} t_obj_list;
+// // Linked list node for objects (sphere, plane, cylinder, etc.)
+// typedef struct s_obj_list {
+//     t_obj_type           type;   // Object type
+//     void                *obj;    // Pointer to the object (t_sphere*, t_plane*, t_cylinder*)
+//     struct s_obj_list   *next;   // Next object in the list
+// } t_obj_list;
 
 // Represents the main world state, including window and screen info
 typedef struct s_world {
@@ -97,12 +97,12 @@ typedef struct s_world {
     t_camera *camera;  // List of cameras
     t_light      *light;  // List of lights
     t_ambient_lighting    *ambient;  // Ambient light
-    t_obj_list      *objects;  // List of objects
+    // t_obj_list      *objects;  // List of objects
     
     // 新しく追加するメンバー
-    t_sphere    *spheres;    // List of spheres
-    t_plane     *planes;     // List of planes
-    t_cylinder  *cylinders;  // List of cylinders
+    t_sphere    *sphere;    // List of spheres
+    t_plane     *plane;     // List of planes
+    t_cylinder  *cylinder;  // List of cylinders
 } t_world;
 
 #endif

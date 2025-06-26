@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "../../includes/miniRT.h"
+#include <math.h>
 
 //スクリーンの中心位置が決まる。
 //スクリーンの左上はしから右上はしまでfor文を回す。
@@ -34,14 +35,15 @@ t_vec3 calculate_viewplane_center(t_camera camera, double viewplane_distance)
 
 	normalized_direction = vec_norm(camera.direction);
 	cam_to_viewplane_vec = vec_mul_scalar(normalized_direction, viewplane_distance);
-	viewplane_center = vec_add(camera.position + cam_to_viewplane_vec);
+	viewplane_center = vec_add(camera.position, cam_to_viewplane_vec);
+	return (viewplane_center);
 }
 
 void calculate_camera_right(t_camera camera)
 {
-	t_vec camera_right;
-	t_vec normalized_camera_right;
-	t_vec world_up;
+	t_vec3 camera_right;
+	t_vec3 normalized_camera_right;
+	t_vec3 world_up;
 
 	world_up = vec_new(0, 1, 0);
 	camera_right = vec_cross(camera.direction, world_up);
@@ -50,10 +52,10 @@ void calculate_camera_right(t_camera camera)
 	//カメラの向きが天を仰いでいた時の例外処理をする
 }
 
-void calculate_camera_up(t_vec viewplane_center, t_camera camera)
+void calculate_camera_up(t_vec3 viewplane_center, t_camera camera)
 {
-	t_vec camera_up;
-	t_vec normalized_camera_up;
+	t_vec3 camera_up;
+	t_vec3 normalized_camera_up;
 
 	camera_up = vec_cross(camera.right, camera.direction);
 	normalized_camera_up = vec_norm(camera_up);
@@ -76,8 +78,8 @@ void calculate_pixel_step_size(t_camera camera, t_screen screen)
 
 void	calculate_step_vec(t_camera camera, t_screen screen)
 {
-	t_vec	horizontal_step_vec;
-	t_vec	vertical_step_vec;
+	t_vec3	horizontal_step_vec;
+	t_vec3	vertical_step_vec;
 
 	horizontal_step_vec = vec_div_scalar(camera.right,screen.pixel_step_size);
 	vertical_step_vec = vec_div_scalar(camera.up,screen.pixel_step_size);
@@ -87,9 +89,9 @@ void	calculate_step_vec(t_camera camera, t_screen screen)
 
 void calculate_top_left_corner(t_screen screen)
 {
-	t_vec	top_left_corner;
-	t_vec	a;
-	t_vec	b;
+	t_vec3	top_left_corner;
+	t_vec3	a;
+	t_vec3	b;
 
 	a = vec_mul_scalar(screen.pixel_step_size, SCREEN_WIDTH/2);
 	b = vec_mul_scalar(camera.pixel_step_size, SCREEN_HEIGHT/2);

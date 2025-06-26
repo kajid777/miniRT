@@ -28,7 +28,7 @@
 
 /* ft_atod.c */
 double		ten_to(int pow);
-double		dot_part(char *str, int *len);
+double		dot_part(const char *str, int *len);
 double		ft_atod(const char *str);
 int		ft_strcmp(const char *s1, const char *s2);
 int		ft_tab_size(char **tab);

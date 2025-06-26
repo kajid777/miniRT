@@ -16,18 +16,15 @@
 void	set_sphere(t_world *world, char **strs)
 {
 	t_sphere	*sphere;
-	double		radius;
+	double		diameter;
 
 	if (!(sphere = malloc(sizeof(*sphere))))
 		print_err_and_exit("Malloc failed", MALLOC_ERROR);
-	sphere->pos = str_to_vect(strs[1]);
-	radius = ft_atod(strs[2]);
-	sphere->radius2 = radius * radius;
+	sphere->center = str_to_vect(strs[1]);
+	diameter = ft_atod(strs[2]);
+	sphere->diameter = diameter;
 	sphere->color = str_to_rgb(strs[3]);
-	sphere->reflec = 0;
-	if (strs[4])
-		sphere->reflec = ft_atod(strs[4]);
-	ft_lstadd_front(&(world->spheres), ft_lstnew(sphere));
+	world->sphere = sphere;
 }
 
 // シーンに平面（plane）を追加する関数
@@ -37,31 +34,23 @@ void	set_plane(t_world *world, char **strs)
 
 	if (!(plane = malloc(sizeof(*plane))))
 		print_err_and_exit("Malloc failed", MALLOC_ERROR);
-	plane->pos = str_to_vect(strs[1]);
-	plane->normal = normalize(str_to_vect(strs[2]));
+	plane->point = str_to_vect(strs[1]);
+	plane->normal_vector = vec_norm(str_to_vect(strs[2]));
 	plane->color = str_to_rgb(strs[3]);
-	ft_lstadd_front(&(world->planes), ft_lstnew(plane));
+	world->plane = plane;
 }
 
 // シーンに円柱（cylinder）を追加する関数
 void	set_cylinder(t_world *world, char **strs)
 {
 	t_cylinder	*cy;
-	double		radius;
 
 	if (!(cy = malloc(sizeof(*cy))))
 		print_err_and_exit("Malloc failed", MALLOC_ERROR);
-	cy->pos = str_to_vect(strs[1]);
-	cy->dir = normalize(str_to_vect(strs[2]));
-	radius = ft_atod(strs[3]) / 2;
-	cy->radius2 = radius * radius;
+	cy->center = str_to_vect(strs[1]);
+	cy->direction = vec_norm(str_to_vect(strs[2]));
+	cy->diameter = ft_atod(strs[3]);
 	cy->height = ft_atod(strs[4]);
-	cy->pos2 = add_vect(cy->pos, multi_vect(cy->dir, cy->height));
-	cy->color = str_to_rgb(strs[5]);
-	if (strs[6])
-		cy->is_closed = ft_atoi_strict(strs[6]);
-	else
-		cy->is_closed = 1;
-	ft_lstadd_front(&(world->cylinders), ft_lstnew(cy));
+	world->cylinder = cy;
 }
 

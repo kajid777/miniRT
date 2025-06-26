@@ -27,7 +27,7 @@ double	ten_to(int pow)
 	return (result);
 }
 
-double	dot_part(char *str, int *len)
+double	dot_part(const char *str, int *len)
 {
 	int		i;
 	double	result;
