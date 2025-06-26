@@ -52,6 +52,7 @@ t_fcolor	char_to_rgb(const char *r, const char *g, const char *b);
 void		set_ambient_light(t_world *world, char **data);
 void		set_camera(t_world *world, char **data);
 void		set_light(t_world *world, char **data);
+t_fcolor	*mult_rgb_rgb(const t_fcolor rgb, const t_fcolor mult);
 
 /* set_elements2.c */
 void		set_sphere(t_world *world, char **strs);
