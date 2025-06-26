@@ -1,6 +1,18 @@
 #include "../../miniRT.h"
 #include <math.h>
 
+t_hit	new_hit(t_vec3 hp, t_vec3 norm, t_vec3 light_dir, double t, int is_hit)
+{
+	t_hit new;
+
+	new.hit_point = hp;
+	new.norm = norm;
+	new.light_dir = light_dir;
+	new.t = t;
+	new.is_hit = is_hit;
+	return (new);
+}
+
 double judge(double a, double b, double c)
 {
 	//Δ = B^2 - 4AC
@@ -33,13 +45,32 @@ t_vec3 get_hitpoint(double t, t_vec3 d, t_vec3 origin)
 	return (p);
 }
 
-t_vec3 intersect_sphere(t_vec3 dir, t_vec3 origin, t_vec3 center, double radius)
+t_vec3 get_norm_sphere(t_vec3 hitpoint, t_vec3 center)
 {
-	t_vec3 d;
-	t_vec3 o;
-	t_vec3 c;
-	double r;
+	t_vec3	norm;
 
+	norm = vec_sub(hitpoint, center);
+	norm = vec_norm(norm);
+	return (norm);
+}
+
+t_vec3	get_light_dir(t_vec3 hitpoint, t_vec3 light_pos)
+{
+	t_vec3	light_dir;
+
+	light_dir = vec_sub(hitpoint, light_pos);
+	light_dir = vec_norm(light_dir);
+	return (light_dir);
+}
+
+t_hit intersect_sphere(t_vec3 dir, t_vec3 origin, t_vec3 center, t_vec3 light_pos, double radius)
+{
+	t_vec3	d;
+	t_vec3	o;
+	t_vec3	c;
+	t_vec3	hp;
+	double	r;
+	t_hit	hit;
 	d = dir;
 	o = origin;
 	c = center;
@@ -63,8 +94,8 @@ t_vec3 intersect_sphere(t_vec3 dir, t_vec3 origin, t_vec3 center, double radius)
 	double t = solve_quadratic(j_a, j_b, j_c);
 	//これはカメラの後ろ
 	if (t == -1)
-		return vec_new(INFINITY, INFINITY, INFINITY);
-
-	return (get_hitpoint(t, d, o));
+		return new_hit(vec_new(0, 0, 0), vec_new(0, 0, 0), vec_new(0, 0, 0), -1, 0);
+	hp = get_hitpoint(t, d, o);
+	return (new_hit(hp, get_norm_sphere(hp, c), get_light_dir(hp, light_pos), t, 1));
 }
 
