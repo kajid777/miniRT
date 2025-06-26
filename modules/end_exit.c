@@ -12,6 +12,26 @@
 
 #include "../includes/miniRT.h"
 
+// ... existing code ...
+
+void print_err_and_exit(char *message, int exit_code)
+{
+    ft_printf("Error: %s\n", message);
+    exit(exit_code);
+}
+
+int ft_strncmp_rev(const char *s1, const char *s2, size_t n)
+{
+    size_t len1 = strlen(s1);
+    size_t len2 = strlen(s2);
+    
+    if (len1 < n || len2 < n)
+        return (1);
+    
+    return (strncmp(s1 + len1 - n, s2, n));
+}
+
+// ... existing code ...
 int	exit_point(t_world *world)
 {
 	(void)world;

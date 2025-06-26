@@ -178,6 +178,11 @@
 # include <string.h>
 # include <stdlib.h>
 # include "../minilibx-linux/mlx.h"
+// ... existing code ...
+#include <string.h>
+#include <errno.h>
+#include "../ft_printf/ft_printf.h"
+// ... existing code ...
 # include "get_next_line.h"
 # include "types.h"
 # include "parse.h"
@@ -185,7 +190,17 @@
 #define SCREEN_WIDTH 1200
 #define SCREEN_HEIGHT 800
 #define M_PI 3.14159265358979323846
+// ... existing code ...
 
+// Error codes
+#define PARSE_ERROR 1
+#define MALLOC_ERROR 2
+
+// Function declarations
+void print_err_and_exit(char *message, int exit_code);
+int ft_strncmp_rev(const char *s1, const char *s2, size_t n);
+
+// ... existing code ...
 // 関数プロトタイプ
 int		ft_printf(const char *str, ...);
 

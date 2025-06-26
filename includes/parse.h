@@ -29,7 +29,7 @@
 /* ft_atod.c */
 double		ten_to(int pow);
 double		dot_part(char *str, int *len);
-double		ft_atod(char *str);
+double		ft_atod(const char *str);
 int		ft_strcmp(const char *s1, const char *s2);
 int		ft_tab_size(char **tab);
 void	ft_free_tab(char **tab);
@@ -46,6 +46,7 @@ t_world		*get_world(const int argc, char *argv[]);
 t_vec3		set_vect(const char *x, const char *y, const char *z);
 t_vec3		str_to_vect(const char *str);
 t_fcolor	str_to_rgb(const char *str);
+t_fcolor	char_to_rgb(const char *r, const char *g, const char *b);
 
 /* set_elements.c */
 void		set_ambient_light(t_world *world, char **data);

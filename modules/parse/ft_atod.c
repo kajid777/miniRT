@@ -45,7 +45,7 @@ double	dot_part(char *str, int *len)
 	return (result);
 }
 
-double	ft_atod(char *str)
+double	ft_atod(const char *str)
 {
 	double		nbr;
 	double		sign;

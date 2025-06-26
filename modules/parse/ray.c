@@ -13,9 +13,9 @@
 #include "../includes/miniRT.h"
 
 // 3つの文字列（x, y, z）からベクトル構造体を生成する関数
-t_vect	set_vect(const char *x, const char *y, const char *z)
+t_vec3	set_vect(const char *x, const char *y, const char *z)
 {
-	t_vect	vect;
+	t_vec3	vect;
 
 	vect.x = ft_atod(x);
 	vect.y = ft_atod(y);
@@ -24,7 +24,7 @@ t_vect	set_vect(const char *x, const char *y, const char *z)
 }
 
 // カンマ区切りの文字列からベクトル構造体を生成する関数
-t_vect	str_to_vect(const char *str)
+t_vec3	str_to_vect(const char *str)
 {
 	char	**tab;
 
@@ -33,7 +33,7 @@ t_vect	str_to_vect(const char *str)
 }
 
 // カンマ区切りの文字列からRGB構造体を生成する関数
-t_rgb	str_to_rgb(const char *str)
+t_fcolor	str_to_rgb(const char *str)
 {
 	char	**tab;
 
@@ -49,13 +49,12 @@ t_rgb	str_to_rgb(const char *str)
 
 
 // 指定した位置と方向からレイ構造体を生成する関数
-t_ray	new_ray(const t_vect position, const t_vect direction)
+t_ray	new_ray(const t_vec3 position, const t_vec3 direction)
 {
 	t_ray	ray;
 
 	ray.pos = position;
 	ray.dir = direction;
-	ray.t = INFINITY;
 	return (ray);
 }
 
