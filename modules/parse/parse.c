@@ -92,9 +92,9 @@ void *init_world(t_world *world)
     // Initialize light
     world->light = NULL;
     // Initialize new geometry lists
-    world->spheres = NULL;
-    world->planes = NULL;
-    world->cylinders = NULL;
+    world->sphere = NULL;
+    world->plane = NULL;
+    world->cylinder = NULL;
     
     // Initialize MLX related members
     world->mlx = NULL;

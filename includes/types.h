@@ -94,7 +94,7 @@ typedef struct s_cylinder {
 typedef struct s_world {
     void       *mlx;  // minilibx instance pointer
     void       *win;  // minilibx window pointer
-    t_camera *camera;  // List of cameras
+    t_camera camera;  // List of cameras
     t_light      *light;  // List of lights
     t_ambient_lighting    *ambient;  // Ambient light
     // t_obj_list      *objects;  // List of objects

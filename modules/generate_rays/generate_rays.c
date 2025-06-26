@@ -52,7 +52,7 @@ void calculate_camera_right(t_camera camera)
 	//カメラの向きが天を仰いでいた時の例外処理をする
 }
 
-void calculate_camera_up(t_vec3 viewplane_center, t_camera camera)
+void calculate_camera_up(t_camera camera)
 {
 	t_vec3 camera_up;
 	t_vec3 normalized_camera_up;
@@ -113,10 +113,11 @@ t_vec3 generate_one_ray(t_camera camera, int x, int y)
 	normalized_ray = vec_norm(ray);
 	return (normalized_ray);
 }
-void generate_rays(t_camera camera, t_screen screen)
+void generate_rays(t_camera camera)
 {
 	int x;
 	int y;
+	t_screen screen;
 
 	calculate_pixel_step_size(camera, screen);
 	calculate_step_vec(camera, screen);

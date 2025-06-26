@@ -201,6 +201,8 @@ void print_err_and_exit(char *message, int exit_code);
 int ft_strncmp_rev(const char *s1, const char *s2, size_t n);
 
 // ... existing code ...
+void generate_rays(t_camera camera);
+
 // 関数プロトタイプ
 int		ft_printf(const char *str, ...);
 
@@ -220,4 +222,5 @@ int		exit_point(t_world *game);
 void	when_mlx_ptr_failed(t_world *game);
 int		exit_with_cross(t_world *game);
 
+//
 #endif

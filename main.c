@@ -25,6 +25,8 @@ int	main(int argc, char **argv)
 	t_world *world;
 
 	world = get_world(argc, argv);
+	generate_rays(world->camera);
+
 	world->mlx = mlx_init();
 	// if (mlx_ptr)
 	// 	when_mlx_ptr_failed(mlx_ptr);
