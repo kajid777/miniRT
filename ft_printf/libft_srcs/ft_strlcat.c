@@ -15,7 +15,7 @@
 
 size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
 {
-	size_t	i;
+	// size_t	i;
 	size_t	j;
 	size_t	copy_limit;
 	size_t	original_dst_len;
@@ -28,7 +28,7 @@ size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
 	src_len = ft_strlen(src);
 	if (original_dst_len >= dstsize)
 		return (dstsize + src_len);
-	i = 0;
+	// i = 0;
 	copy_limit = dstsize - original_dst_len - 1;
 	j = 0;
 	while (src[j] != '\0' && j < copy_limit)

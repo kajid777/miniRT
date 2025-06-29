@@ -13,7 +13,7 @@ SRCS		=	main.c \
 				modules/parse/set_elements2.c \
 				modules/parse/ft_atod.c \
 				modules/generate_rays/generate_rays.c \
-				modules/intersect_sphere/intersect_sphere.c \
+				# modules/intersect_sphere/intersect_sphere.c \
 				modules/vector_cal/vector_cal.c
 
 OBJS		=	$(SRCS:.c=.o)

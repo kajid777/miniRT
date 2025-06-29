@@ -17,14 +17,14 @@
 //スクリーンの左上はしから右上はしまでfor文を回す。
 //スクリーンの左から１マス右、一マス下がどのくらいのベクトルの移動なのかを確定させる。
 //スクリーンの一マスの座標とカメラを通るレイを求める。
-double calculate_viewplane_distance(int fov)
+void calculate_viewplane_distance(t_camera camera, t_screen *screen)
 {
 	double ratio;
 	double viewplane_distance;
 	
-	ratio = 1.0 / tan((M_PI * fov /180) / 2);
+	ratio = 1.0 / tan((M_PI * camera.fov /180) / 2);
 	viewplane_distance = SCREEN_WIDTH * ratio;
-	return (viewplane_distance);
+	screen->from_camera_distance = viewplane_distance;
 }
 
 t_vec3 calculate_viewplane_center(t_camera camera, double viewplane_distance)
@@ -39,69 +39,46 @@ t_vec3 calculate_viewplane_center(t_camera camera, double viewplane_distance)
 	return (viewplane_center);
 }
 
-void calculate_camera_right(t_camera camera)
-{
-	t_vec3 camera_right;
-	t_vec3 normalized_camera_right;
-	t_vec3 world_up;
-
-	world_up = vec_new(0, 1, 0);
-	camera_right = vec_cross(camera.direction, world_up);
-	normalized_camera_right = vec_norm(camera_right);
-	camera.right = normalized_camera_right;
-	//カメラの向きが天を仰いでいた時の例外処理をする
-}
-
-void calculate_camera_up(t_camera camera)
-{
-	t_vec3 camera_up;
-	t_vec3 normalized_camera_up;
-
-	camera_up = vec_cross(camera.right, camera.direction);
-	normalized_camera_up = vec_norm(camera_up);
-	camera.up = normalized_camera_up;
-}
 
 
-
-void calculate_pixel_step_size(t_camera camera, t_screen screen)
+void calculate_pixel_step_size(t_camera camera, t_screen *screen)
 {
 	double	ratio;
 	double	horizontal_half_width;
 	// double	vertical_half_width;
 
 	// vertical_half_width = SCREEN_HEIGHT / 2;
-	ratio = tan((M_PI * camera.fov / 180) / 2);
-	horizontal_half_width = camera.viewplane_distance * ratio;
-	screen.pixel_step_size =  horizontal_half_width / (SCREEN_WIDTH / 2);
+	ratio = tan((M_PI * (camera.fov) / 180) / 2);
+	horizontal_half_width = (screen->from_camera_distance) * ratio;
+	screen->pixel_step_size =  horizontal_half_width / (SCREEN_WIDTH / 2);
 }
 
-void	calculate_step_vec(t_camera camera, t_screen screen)
+void	calculate_step_vec(t_camera camera, t_screen *screen)
 {
 	t_vec3	horizontal_step_vec;
 	t_vec3	vertical_step_vec;
 
-	horizontal_step_vec = vec_div_scalar(camera.right,screen.pixel_step_size);
-	vertical_step_vec = vec_div_scalar(camera.up,screen.pixel_step_size);
-	screen.pixel_horizontal = horizontal_step_vec;
-	screen.pixel_vertical = vertical_step_vec;
+	horizontal_step_vec = vec_div_scalar(camera.right, screen->pixel_step_size);
+	vertical_step_vec = vec_div_scalar(camera.up, screen->pixel_step_size);
+	screen->pixel_horizontal = horizontal_step_vec;
+	screen->pixel_vertical = vertical_step_vec;
 }
 
-void calculate_top_left_corner(t_screen screen)
+void calculate_top_left_corner(t_screen *screen)
 {
 	t_vec3	top_left_corner;
 	t_vec3	a;
 	t_vec3	b;
 
-	a = vec_mul_scalar(screen.pixel_step_size, SCREEN_WIDTH/2);
-	b = vec_mul_scalar(camera.pixel_step_size, SCREEN_HEIGHT/2);
+	a = vec_mul_scalar(screen->pixel_horizontal, SCREEN_WIDTH/2);
+	b = vec_mul_scalar(screen->pixel_vertical, SCREEN_HEIGHT/2);
 
-	top_left_corner = vec_sub(screen.center, a);
-	top_left_corner = vec_sub(screen.center, b);
-	screen.top_left = top_left_corner;
+	top_left_corner = vec_sub(screen->center, a);
+	top_left_corner = vec_sub(screen->center, b);
+	screen->top_left = top_left_corner;
 }
 
-t_vec3 generate_one_ray(t_camera camera, int x, int y)
+t_vec3 generate_one_ray(t_camera camera, t_screen screen, int x, int y)
 {
 	t_vec3	obj_on_screen;
 	t_vec3	ray;
@@ -117,18 +94,22 @@ void generate_rays(t_camera camera)
 {
 	int x;
 	int y;
-	t_screen screen;
+	t_screen *screen;
+	screen = malloc(sizeof(t_screen));
+	if (!screen)
+		exit(1);
 
+    calculate_viewplane_distance(camera, screen);
 	calculate_pixel_step_size(camera, screen);
 	calculate_step_vec(camera, screen);
-	calculate_top_left_corner(camera, screen);
+	calculate_top_left_corner(screen);
 	x = 0;
 	y = 0;
 	while (y < SCREEN_HEIGHT)
 	{
 		while (x < SCREEN_WIDTH)
 		{
-			generate_one_ray(camera, screen, x, y);
+			generate_one_ray(camera, *screen, x, y);
 
 			//スクリーンの中心位置からのベクトルを求める
 			//スクリーンの中心位置からのベクトルとカメラの向きからなる平面との交点を求める

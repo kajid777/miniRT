@@ -1,4 +1,4 @@
-#include "../../miniRT.h"
+#include "../../includes/miniRT.h"
 #include <math.h>
 
 double judge(double a, double b, double c)
