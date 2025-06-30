@@ -1,0 +1,62 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/09 09:51:14 by hthomas           #+#    #+#             */
+/*   Updated: 2020/04/15 14:37:49 by hthomas          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef PARSE_H
+# define PARSE_H
+
+#include "types.h"
+
+# define WHITE_SPACES " \t"
+# define NB_ELEM_RESOLUTION 3
+# define NB_ELEM_AL 3
+# define NB_ELEM_CAMERA 4
+# define NB_ELEM_LIGHT 4
+# define NB_ELEM_SPHERE 4
+# define NB_ELEM_PLANE 4
+# define NB_ELEM_SQUARE 5
+# define NB_ELEM_CYLINDER 6
+# define NB_ELEM_TRIANGLE 5
+
+/* ft_atod.c */
+double		ten_to(int pow);
+double		dot_part(const char *str, int *len);
+double		ft_atod(const char *str);
+int		ft_strcmp(const char *s1, const char *s2);
+int		ft_tab_size(char **tab);
+void	ft_free_tab(char **tab);
+char	**ft_split_set(const char *str, const char *charset);
+bool	ft_is_from_charset(const char *str, const char *charset);
+
+/* parse.c */
+void		*init_world(t_world *world);
+bool		check_line(const char *line, char **data, const char *type, const int nb_elements);
+t_world		*parse(int fd);
+t_world		*get_world(const int argc, char *argv[]);
+
+/* ray.c */
+t_vec3		set_vect(const char *x, const char *y, const char *z);
+t_vec3		str_to_vect(const char *str);
+t_fcolor	str_to_rgb(const char *str);
+t_fcolor	char_to_rgb(const char *r, const char *g, const char *b);
+
+/* set_elements.c */
+void		set_ambient_light(t_world *world, char **data);
+void		set_camera(t_world *world, char **data);
+void		set_light(t_world *world, char **data);
+t_fcolor	*mult_rgb_rgb(const t_fcolor rgb, const t_fcolor mult);
+
+/* set_elements2.c */
+void		set_sphere(t_world *world, char **strs);
+void		set_plane(t_world *world, char **strs);
+void		set_cylinder(t_world *world, char **strs);
+
+#endif
