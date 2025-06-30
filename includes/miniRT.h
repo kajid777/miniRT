@@ -30,7 +30,7 @@
 #define SCREEN_WIDTH 1200
 #define SCREEN_HEIGHT 800
 #define MALLOC_ERROR 1
-
+#define PARSE_ERROR 1
 //cylinder structures
 typedef struct s_cylinder_calc
 {
