@@ -36,21 +36,6 @@ int	ft_tab_size(char **tab)
 	return (size);
 }
 
-// 文字列配列の全要素をfreeする関数
-void	ft_free_tab(char **tab)
-{
-	int	i;
-
-	if (!tab)
-		return;
-	i = 0;
-	while (tab[i])
-	{
-		free(tab[i]);
-		i++;
-	}
-	free(tab);
-}
 
 // 文字列が指定された文字セットの文字のみで構成されているかを判定する関数
 bool	ft_is_from_charset(const char *str, const char *charset)

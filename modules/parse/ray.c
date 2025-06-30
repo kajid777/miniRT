@@ -32,6 +32,17 @@ t_vec3	str_to_vect(const char *str)
 	return (set_vect(tab[0], tab[1], tab[2]));
 }
 
+// 3つの文字列（r, g, b）からRGB構造体を生成する関数
+t_fcolor	char_to_rgb(const char *r, const char *g, const char *b)
+{
+	t_fcolor	color;
+
+	color.red = ft_atod(r);
+	color.green = ft_atod(g);
+	color.blue = ft_atod(b);
+	return (color);
+}
+
 // カンマ区切りの文字列からRGB構造体を生成する関数
 t_fcolor	str_to_rgb(const char *str)
 {
