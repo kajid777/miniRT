@@ -51,7 +51,9 @@ void print_err_and_exit(char *message, int exit_code);
 int ft_strncmp_rev(const char *s1, const char *s2, size_t n);
 
 void camera_prepare(t_camera *camera);
-void generate_rays(t_camera camera);
+t_vec3 calculate_viewplane_center(t_camera camera, double viewplane_distance);
+t_vec3 generate_one_ray(t_camera camera, t_screen screen, int x, int y);
+t_fcolor get_object_color(t_hit hit, t_world *world);
 
 // 関数プロトタイプ
 int		ft_printf(const char *str, ...);
@@ -102,5 +104,15 @@ t_hit	select_best_cylinder_hit(double t1, double t2, int num_solutions,
 		t_cylinder_params params);
 t_hit	get_cylinder_side_hit(t_vec3 d, t_vec3 o,
 		t_cylinder cylinder, t_vec3 light_pos);
+
+//intersect_plane.c
+t_hit	intersect_plane(t_vec3 dir, t_vec3 origin, t_vec3 point, t_vec3 normal);
+
+//render.c
+t_hit	find_closest_intersection(t_vec3 ray_origin, t_vec3 ray_dir, t_world *world);
+t_fcolor	calculate_lighting(t_hit hit, t_world *world);
+int	color_to_int(t_fcolor color);
+t_fcolor	trace_ray(t_vec3 ray_origin, t_vec3 ray_dir, t_world *world);
+void	render_scene(t_world *world);
 
 #endif
