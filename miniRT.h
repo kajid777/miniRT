@@ -25,6 +25,7 @@
 # define SCREEN_WIDTH 1200
 # define SCREEN_HEIGHT 800
 # define M_PI 3.14159265358979323846
+# define EPSILON 1e-9
 
 // Represents a 3D vector (x, y, z coordinates)
 typedef struct    s_vec3 {
@@ -103,6 +104,15 @@ typedef struct s_obj_list {
     struct s_obj_list   *next;   // Next object in the list
 }   t_obj_list;
 
+// Represents intersection result with ray-object collision
+typedef struct s_hit {
+    t_vec3  hit_point;
+    t_vec3  norm;
+    t_vec3  light_dir;
+    double  t;
+    int     is_hit;
+} t_hit;
+
 // Represents the main world state, including window and screen info
 // (camera, objects, ambient, and lights are commented out for now)
 typedef struct s_world {
@@ -135,5 +145,27 @@ void	end_with_error(void);
 int		exit_point(t_world *game);
 void	when_mlx_ptr_failed(t_world *game);
 int		exit_with_cross(t_world *game);
+
+//intersect_utils.c
+t_hit	new_hit(t_vec3 hp, t_vec3 norm, t_vec3 light_dir, double t, int is_hit);
+double	judge(double a, double b, double c);
+double	solve_quadratic(double a, double b, double c);
+int		solve_quadratic_both(double a, double b, double c, double *t1, double *t2);
+t_vec3	get_hitpoint(double t, t_vec3 d, t_vec3 origin);
+t_vec3	get_norm_sphere(t_vec3 hitpoint, t_vec3 center);
+t_vec3	get_norm_cylinder(t_vec3 hitpoint, t_cylinder cylinder);
+t_hit	intersect_cylinder_caps(t_vec3 dir, t_vec3 origin, t_cylinder cylinder, t_vec3 light_pos);
+t_vec3	get_light_dir(t_vec3 hitpoint, t_vec3 light_pos);
+
+//intersection functions
+t_hit	intersect_sphere(t_vec3 dir, t_vec3 origin, t_vec3 center, t_vec3 light_pos, double radius);
+t_hit	intersect_plane(t_vec3 dir, t_vec3 origin, t_vec3 point, t_vec3 normal, t_vec3 light_pos);
+t_hit	intersect_cylinder(t_vec3 dir, t_vec3 origin, t_cylinder cylinder, t_vec3 light_pos);
+
+//color calculation functions
+t_fcolor	color_new(double red, double blue, double green);
+t_fcolor	color_mul(t_fcolor c1, t_fcolor c2);
+t_fcolor	color_mul_scalar(t_fcolor c, double scalar);
+t_fcolor	color_cal(double diffuse, t_fcolor color, t_fcolor ambient);
 
 #endif
