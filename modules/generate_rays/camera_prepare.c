@@ -25,6 +25,6 @@ void calculate_camera_up(t_camera *camera)
 
 void camera_prepare(t_camera *camera)
 {
-    calculate_camera_right(*camera);
-    calculate_camera_up(*camera);
+    calculate_camera_right(camera);
+    calculate_camera_up(camera);
 }

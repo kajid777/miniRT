@@ -20,14 +20,16 @@
 # include <string.h>
 # include <stdlib.h>
 # include <math.h>
+# include <float.h>
 # include "../minilibx-linux/mlx.h"
+# include "../ft_printf/libft_srcs/libft.h"
 # include "get_next_line.h"
 # include "types.h"
 # include "parse.h"
 
 #define SCREEN_WIDTH 1200
 #define SCREEN_HEIGHT 800
-#define M_PI 3.14159265358979323846
+#define MALLOC_ERROR 1
 
 //cylinder structures
 typedef struct s_cylinder_calc

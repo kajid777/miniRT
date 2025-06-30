@@ -13,8 +13,20 @@ SRCS		=	main.c \
 				modules/parse/set_elements2.c \
 				modules/parse/ft_atod.c \
 				modules/generate_rays/generate_rays.c \
-				# modules/intersect_sphere/intersect_sphere.c \
-				modules/vector_cal/vector_cal.c
+				modules/generate_rays/camera_prepare.c \
+				modules/intersect_sphere/intersect_sphere.c \
+				modules/intersect_plane/intersect_plane.c \
+				modules/intersect_cylinder/intersect_cylinder.c \
+				modules/intersect_cylinder/cylinder_calc.c \
+				modules/intersect_cylinder/cylinder_utils.c \
+				modules/intersect_utils.c \
+				modules/intersect_utils_basic.c \
+				modules/vector_cal/vector_cal.c \
+				modules/vector_cal/vector_basic.c \
+				modules/vector_cal/vector_ops.c \
+				modules/color_cal/color.c \
+				modules/helper_functions.c \
+				modules/vector_helpers.c
 
 OBJS		=	$(SRCS:.c=.o)
 
