@@ -1,161 +1,3 @@
-// /* ************************************************************************** */
-// /*                                                                            */
-// /*                                                        :::      ::::::::   */
-// /*   miniRT.h                                           :+:      :+:    :+:   */
-// /*                                                    +:+ +:+         +:+     */
-// /*   By: dkajiwar <dkajiwar@student.42.fr>          +#+  +:+       +#+        */
-// /*                                                +#+#+#+#+#+   +#+           */
-// /*   Created: 2024/12/12 15:28:26 by dkajiwar          #+#    #+#             */
-// /*   Updated: 2025/06/18 16:58:42 by dkajiwar         ###   ########.fr       */
-// /*                                                                            */
-// /* ************************************************************************** */
-
-// #ifndef MINIRT_H
-// # define MINIRT_H
-
-// # include <unistd.h>
-// # include <stdio.h>
-// # include <fcntl.h>
-// # include <errno.h>
-// # include <string.h>
-// # include <stdlib.h>
-// # include "../minilibx-linux/mlx.h"
-// # include "get_next_line.h"
-// # include "types.h"
-// # include "parse.h"
-
-// #define SCREEN_WIDTH 1200
-// #define SCREEN_HEIGHT 800
-// #define M_PI 3.14159265358979323846
-
-// // Represents a 3D vector (x, y, z coordinates)
-// typedef struct    s_vec3 {
-//     double     x;
-//     double     y;
-//     double     z;
-// } t_vec3;
-
-// // Represents a floating-point RGB color
-// typedef struct s_fcolor {
-//     double     red;
-//     double     green;
-//     double     blue;
-// }               t_fcolor;
-
-// // Represents a camera with position, direction, and field of view
-// typedef struct s_camera {
-//     t_vec3    position;
-//     t_vec3    direction;
-//     t_vec3    up;
-//     t_vec3    right;
-//     double    fov;
-// } t_camera;
-
-// typedef struct s_screen
-// {
-//     t_vec3    center;
-//     t_vec3    top_left;
-//     double    from_camera_distance;
-//     double    pixel_step_size;
-//     t_vec3    pixel_horizontal;
-//     t_vec3    pixel_vertical;    /* data */
-// };
-
-// typedef struct		s_ray
-// {
-// 	double			t;
-// 	t_vec3			pos;
-// 	t_vec3			dir;
-// }					t_ray;
-// // Represents a point light source with position, intensity, and color
-// typedef struct s_light {
-//     t_vec3      position;
-//     double      intensity;
-//     t_fcolor    color;
-// } t_light;
-
-// typedef struct s_ambient_lighting
-// {
-//     double      lighting_ratio;
-//     t_fcolor    color;
-// } t_ambient_lighting;
-
-
-// // Represents a sphere with center, diameter, and color
-// typedef struct s_sphere {
-//     t_vec3      center;
-//     double      diameter;
-//     t_fcolor    color;
-// } t_sphere;
-
-// // Represents a plane with a point, normal vector, and color
-// typedef struct s_plane {
-//     t_vec3      point;
-//     t_vec3      normal_vector;
-//     t_fcolor    color;
-// } t_plane;
-
-// // Represents a cylinder with center, direction, diameter, height, and color
-// typedef struct s_cylinder {
-//     t_vec3      center;
-//     t_vec3      direction;
-//     double      diameter;
-//     double      height;
-//     t_fcolor    color;
-// } t_cylinder;
-
-// // Enum for object type
-// // typedef enum e_obj_type {
-// //     SPHERE,
-// //     PLANE,
-// //     CYLINDER
-// // }   t_obj_type;
-
-// // // Linked list node for objects (sphere, plane, cylinder, etc.)
-// // typedef struct s_obj_list {
-// //     t_obj_type           type;   // Object type
-// //     void                *obj;    // Pointer to the object (t_sphere*, t_plane*, t_cylinder*)
-// //     struct s_obj_list   *next;   // Next object in the list
-// // }   t_obj_list;
-
-// // Represents the main world state, including window and screen info
-// // (camera, objects, ambient, and lights are commented out for now)
-// typedef struct s_world {
-//     void       *mlx;  // minilibx instance pointer
-//     void       *win;  // minilibx window pointer
-//     t_camera *camera;  // List of cameras
-//     t_light      *light;  // List of lights
-//     t_ambient_lighting    *ambient;  // Ambient light
-//     // t_obj_list      *objects;  // List of objects
-    
-//     // 新しく追加するメンバー
-//     t_sphere    *spheres;    // List of spheres
-//     t_plane     *planes;     // List of planes
-//     t_cylinder  *cylinders;  // List of cylinders
-// }               t_world;
-
-
-
-// // 関数プロトタイプ
-// int		ft_printf(const char *str, ...);
-
-// //vector_cal.c
-// t_vec3	vec_new(double x, double y, double z);
-// t_vec3	vec_add(t_vec3 a, t_vec3 b);
-// t_vec3	vec_sub(t_vec3 a, t_vec3 b);
-// double	vec_dot(t_vec3 a, t_vec3 b);
-// t_vec3	vec_cross(t_vec3 a, t_vec3 b);
-// t_vec3	vec_norm(t_vec3 v);
-// t_vec3	vec_mul_scalar(t_vec3 v, double scalar);
-// t_vec3	vec_div_scalar(t_vec3 v, double scalar);
-
-// //end_exit.c
-// void	end_with_error(void);
-// int		exit_point(t_world *game);
-// void	when_mlx_ptr_failed(t_world *game);
-// int		exit_with_cross(t_world *game);
-
-// #endif
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
@@ -177,12 +19,8 @@
 # include <errno.h>
 # include <string.h>
 # include <stdlib.h>
+# include <math.h>
 # include "../minilibx-linux/mlx.h"
-// ... existing code ...
-#include <string.h>
-#include <errno.h>
-#include "../ft_printf/ft_printf.h"
-// ... existing code ...
 # include "get_next_line.h"
 # include "types.h"
 # include "parse.h"
@@ -190,20 +28,27 @@
 #define SCREEN_WIDTH 1200
 #define SCREEN_HEIGHT 800
 #define M_PI 3.14159265358979323846
-// ... existing code ...
 
-// Error codes
-#define PARSE_ERROR 1
-#define MALLOC_ERROR 2
+//cylinder structures
+typedef struct s_cylinder_calc
+{
+	t_vec3	d_perp;
+	t_vec3	w_perp;
+}	t_cylinder_calc;
+
+typedef struct s_cylinder_params
+{
+	t_vec3		d;
+	t_vec3		o;
+	t_cylinder	cylinder;
+	t_vec3		light_pos;
+}	t_cylinder_params;
 
 // Function declarations
 void print_err_and_exit(char *message, int exit_code);
 int ft_strncmp_rev(const char *s1, const char *s2, size_t n);
 
-// ... existing code ...
 void camera_prepare(t_camera *camera);
-
-
 void generate_rays(t_camera camera);
 
 // 関数プロトタイプ
@@ -225,5 +70,35 @@ int		exit_point(t_world *game);
 void	when_mlx_ptr_failed(t_world *game);
 int		exit_with_cross(t_world *game);
 
-//
+//intersect_utils_basic.c
+t_hit	new_hit(t_vec3 hp, t_vec3 norm, t_vec3 light_dir, double t, int is_hit);
+t_vec3	get_hitpoint(double t, t_vec3 d, t_vec3 origin);
+t_vec3	get_light_dir(t_vec3 hitpoint, t_vec3 light_pos);
+
+//intersect_sphere.c
+t_hit	intersect_sphere(t_vec3 dir, t_vec3 origin, t_vec3 center, double radius);
+
+//intersect_utils.c (assuming this exists)
+double	solve_quadratic(double a, double b, double c);
+t_vec3	get_norm_sphere(t_vec3 hit_point, t_vec3 center);
+
+//intersect_cylinder.c
+t_vec3	get_norm_cylinder(t_vec3 hitpoint, t_cylinder cylinder);
+t_hit	intersect_cylinder_caps(t_vec3 dir, t_vec3 origin,
+		t_cylinder cylinder, t_vec3 light_pos);
+t_hit	intersect_cylinder(t_vec3 dir, t_vec3 origin,
+		t_cylinder cylinder, t_vec3 light_pos);
+
+//cylinder_calc.c
+void	calc_cylinder_vectors(t_vec3 d, t_vec3 o,
+		t_cylinder cylinder, t_cylinder_calc *calc);
+int		solve_cylinder_quadratic(t_cylinder_calc calc, t_cylinder cylinder,
+		double results[2]);
+
+//cylinder_utils.c
+t_hit	select_best_cylinder_hit(double t1, double t2, int num_solutions,
+		t_cylinder_params params);
+t_hit	get_cylinder_side_hit(t_vec3 d, t_vec3 o,
+		t_cylinder cylinder, t_vec3 light_pos);
+
 #endif

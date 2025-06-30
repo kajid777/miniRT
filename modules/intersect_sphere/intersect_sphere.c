@@ -1,4 +1,4 @@
-#include "../../miniRT.h"
+#include "../../includes/miniRT.h"
 
 static double	calc_sphere_quadratic(t_vec3 dir, t_vec3 origin, t_sphere sphere)
 {

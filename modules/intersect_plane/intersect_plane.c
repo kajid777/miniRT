@@ -1,4 +1,4 @@
-#include "../../miniRT.h"
+#include "../../includes/miniRT.h"
 
 static t_hit	plane_intersection_calc(t_vec3 dir, t_vec3 origin, 
 		t_plane plane)
@@ -11,12 +11,12 @@ static t_hit	plane_intersection_calc(t_vec3 dir, t_vec3 origin,
 
 	norm = vec_norm(plane.normal_vector);
 	denominator = vec_dot(dir, norm);
-	if (fabs(denominator) < EPSILON)
+	if (fabs(denominator) < DBL_EPSILON)
 		return (new_hit(vec_new(0, 0, 0), vec_new(0, 0, 0), 
 				vec_new(0, 0, 0), -1, 0));
 	numerator = vec_dot(vec_sub(plane.point, origin), norm);
 	t = numerator / denominator;
-	if (t < EPSILON)
+	if (t < DBL_EPSILON)
 		return (new_hit(vec_new(0, 0, 0), vec_new(0, 0, 0), 
 				vec_new(0, 0, 0), -1, 0));
 	hp = get_hitpoint(t, dir, origin);

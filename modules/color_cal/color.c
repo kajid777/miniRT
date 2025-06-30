@@ -1,4 +1,4 @@
-#include "../../miniRT.h"
+#include "../../includes/miniRT.h"
 
 t_fcolor	color_new(double red, double blue, double green)
 {

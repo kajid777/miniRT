@@ -1,7 +1,5 @@
 #include "../../includes/miniRT.h"
 
-
-
 void calculate_camera_right(t_camera *camera)
 {
 	t_vec3 camera_right;

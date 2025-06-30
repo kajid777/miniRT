@@ -1,3 +1,4 @@
+#include "../../includes/miniRT.h"
 
 t_vec3	vec_mul_scalar(t_vec3 v, double scalar)
 {

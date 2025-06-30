@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/miniRT.h"
+#include "../../includes/miniRT.h"
 
 // シーンに球体（sphere）を追加する関数
 void	set_sphere(t_world *world, char **strs)

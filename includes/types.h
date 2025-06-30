@@ -91,6 +91,15 @@ typedef struct s_cylinder {
 // } t_obj_list;
 
 // Represents the main world state, including window and screen info
+// Hit structure for ray-object intersection
+typedef struct s_hit {
+    t_vec3  hit_point;
+    t_vec3  norm;
+    t_vec3  light_dir;
+    double  t;
+    int     is_hit;
+} t_hit;
+
 typedef struct s_world {
     void       *mlx;  // minilibx instance pointer
     void       *win;  // minilibx window pointer

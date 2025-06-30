@@ -1,4 +1,4 @@
-#include "../miniRT.h"
+#include "../includes/miniRT.h"
 
 static void	set_hit_values(t_hit *hit, t_vec3 hp, t_vec3 norm, 
 		t_vec3 light_dir, double t, int is_hit)
@@ -10,11 +10,11 @@ static void	set_hit_values(t_hit *hit, t_vec3 hp, t_vec3 norm,
 	hit->is_hit = is_hit;
 }
 
-t_hit	new_hit(t_vec3 hp, t_vec3 norm, t_vec3 light_dir, double t)
+t_hit	new_hit(t_vec3 hp, t_vec3 norm, t_vec3 light_dir, double t, int is_hit)
 {
 	t_hit	new;
 
-	set_hit_values(&new, hp, norm, light_dir, t, 1);
+	set_hit_values(&new, hp, norm, light_dir, t, is_hit);
 	return (new);
 }
 

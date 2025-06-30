@@ -1,4 +1,4 @@
-#include "../../miniRT.h"
+#include "../../includes/miniRT.h"
 
 double	vec_dot(t_vec3 a, t_vec3 b)
 {
