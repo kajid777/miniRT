@@ -50,12 +50,30 @@ void	when_mlx_ptr_failed(t_world *world)
 
 int	exit_with_cross(t_world *world)
 {
-	// mlx_destroy_image(game->mlx_ptr, game->floor);
-
-	if (world->win)
-		mlx_destroy_window(world->mlx, world->win);
-	mlx_destroy_display(world->mlx);
-	exit_point(world);
+	if (world && world->mlx)
+	{
+		mlx_loop_end(world->mlx);
+		if (world->win)
+			mlx_destroy_window(world->mlx, world->win);
+		mlx_destroy_display(world->mlx);
+		free(world->mlx);
+	}
+	if (world)
+	{
+		if (world->camera)
+			free(world->camera);
+		if (world->light)
+			free(world->light);
+		if (world->ambient)
+			free(world->ambient);
+		if (world->sphere)
+			free(world->sphere);
+		if (world->plane)
+			free(world->plane);
+		if (world->cylinder)
+			free(world->cylinder);
+		free(world);
+	}
 	exit(0);
 }
 

@@ -13,17 +13,17 @@ static t_hit	plane_intersection_calc(t_vec3 dir, t_vec3 origin,
 	denominator = vec_dot(dir, norm);
 	if (fabs(denominator) < DBL_EPSILON)
 		return (new_hit(vec_new(0, 0, 0), vec_new(0, 0, 0), 
-				vec_new(0, 0, 0), -1, 0));
+				vec_new(0, 0, 0), -1, 0, NONE));
 	numerator = vec_dot(vec_sub(plane.point, origin), norm);
 	t = numerator / denominator;
-	if (t < DBL_EPSILON)
+	if (t <= 0)
 		return (new_hit(vec_new(0, 0, 0), vec_new(0, 0, 0), 
-				vec_new(0, 0, 0), -1, 0));
+				vec_new(0, 0, 0), -1, 0, NONE));
 	hp = get_hitpoint(t, dir, origin);
 	if (denominator < 0)
-		return (new_hit(hp, norm, vec_new(0, 0, 0), t, 1));
+		return (new_hit(hp, norm, vec_new(0, 0, 0), t, 1, PLANE));
 	else
-		return (new_hit(hp, vec_mul_scalar(norm, -1), vec_new(0, 0, 0), t, 1));
+		return (new_hit(hp, vec_mul_scalar(norm, -1), vec_new(0, 0, 0), t, 1, PLANE));
 }
 
 t_hit	intersect_plane(t_vec3 dir, t_vec3 origin, t_vec3 point, 

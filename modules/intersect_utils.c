@@ -10,17 +10,24 @@ double	judge(double a, double b, double c)
 
 double	solve_quadratic(double a, double b, double c)
 {
-	double	judgement;
-	double	f_t;
-	double	s_t;
+	double	discriminant;
+	double	t1;
+	double	t2;
+	double	sqrt_disc;
 
-	judgement = judge(a, b, c);
-	f_t = (-b + sqrt(judgement)) / (2 * a);
-	s_t = (-b - sqrt(judgement)) / (2 * a);
-	if (f_t < s_t && f_t >= 0)
-		return (f_t);
-	else if (f_t > s_t && s_t >= 0)
-		return (s_t);
+	discriminant = b * b - 4 * a * c;
+	if (discriminant < 0)
+		return (-1);
+	
+	sqrt_disc = sqrt(discriminant);
+	t1 = (-b - sqrt_disc) / (2 * a);
+	t2 = (-b + sqrt_disc) / (2 * a);
+	
+	if (t1 > 0.001)
+		return (t1);
+	else if (t2 > 0.001)
+		return (t2);
+	
 	return (-1);
 }
 

@@ -77,11 +77,12 @@ typedef struct s_cylinder {
 } t_cylinder;
 
 // Enum for object type
-// typedef enum e_obj_type {
-//     SPHERE,
-//     PLANE,
-//     CYLINDER
-// } t_obj_type;
+typedef enum e_obj_type {
+    SPHERE,
+    PLANE,
+    CYLINDER,
+    NONE
+} t_obj_type;
 
 // // Linked list node for objects (sphere, plane, cylinder, etc.)
 // typedef struct s_obj_list {
@@ -98,6 +99,7 @@ typedef struct s_hit {
     t_vec3  light_dir;
     double  t;
     int     is_hit;
+    t_obj_type obj_type;
 } t_hit;
 
 typedef struct s_world {

@@ -60,7 +60,7 @@ void	calculate_step_vec(t_camera camera, t_screen *screen)
 	t_vec3	vertical_step_vec;
 
 	horizontal_step_vec = vec_div_scalar(camera.right, screen->pixel_step_size);
-	vertical_step_vec = vec_div_scalar(camera.up, screen->pixel_step_size);
+	vertical_step_vec = vec_div_scalar(vec_mul_scalar(camera.up, -1), screen->pixel_step_size);
 	screen->pixel_horizontal = horizontal_step_vec;
 	screen->pixel_vertical = vertical_step_vec;
 }
@@ -86,7 +86,7 @@ t_vec3 generate_one_ray(t_camera camera, t_screen screen, int x, int y)
 	t_vec3	normalized_ray;
 
 	obj_on_screen = vec_add(screen.top_left, vec_mul_scalar(screen.pixel_horizontal, x));
-	obj_on_screen = vec_sub(obj_on_screen, vec_mul_scalar(screen.pixel_vertical, y));
+	obj_on_screen = vec_add(obj_on_screen, vec_mul_scalar(screen.pixel_vertical, y));
 	ray = vec_sub(obj_on_screen, camera.position);
 	normalized_ray = vec_norm(ray);
 	return (normalized_ray);
@@ -104,7 +104,7 @@ t_hit	find_closest_intersection(t_vec3 ray_origin, t_vec3 ray_dir, t_world *worl
 	if (world->sphere)
 	{
 		current_hit = intersect_sphere(ray_dir, ray_origin, 
-			world->sphere->center, world->sphere->diameter / 2.0);
+			world->sphere->center, world->sphere->diameter / 2.0, world->light->position);
 		if (current_hit.is_hit && current_hit.t > 0.001 && current_hit.t < closest_t)
 		{
 			closest_t = current_hit.t;
@@ -189,11 +189,11 @@ t_fcolor	get_object_color(t_hit hit, t_world *world)
 {
 	t_fcolor	object_color;
 	
-	if (world->sphere && hit.t > 0)
+	if (hit.obj_type == SPHERE && world->sphere)
 		object_color = world->sphere->color;
-	else if (world->plane && hit.t > 0)
+	else if (hit.obj_type == PLANE && world->plane)
 		object_color = world->plane->color;
-	else if (world->cylinder && hit.t > 0)
+	else if (hit.obj_type == CYLINDER && world->cylinder)
 		object_color = world->cylinder->color;
 	else
 	{

@@ -17,26 +17,28 @@ static double	calc_sphere_quadratic(t_vec3 dir, t_vec3 origin, t_sphere sphere)
 }
 
 static t_hit	sphere_intersection_calc(t_vec3 dir, t_vec3 origin, 
-		t_sphere sphere)
+		t_sphere sphere, t_vec3 light_pos)
 {
 	double	t;
 	t_vec3	hp;
+	t_vec3	light_dir;
 
 	t = calc_sphere_quadratic(dir, origin, sphere);
 	if (t == -1)
 		return (new_hit(vec_new(0, 0, 0), vec_new(0, 0, 0), 
-				vec_new(0, 0, 0), -1, 0));
+				vec_new(0, 0, 0), -1, 0, NONE));
 	hp = get_hitpoint(t, dir, origin);
+	light_dir = get_light_dir(hp, light_pos);
 	return (new_hit(hp, get_norm_sphere(hp, sphere.center), 
-			vec_new(0, 0, 0), t, 1));
+			light_dir, t, 1, SPHERE));
 }
 
 t_hit	intersect_sphere(t_vec3 dir, t_vec3 origin, t_vec3 center, 
-		double radius)
+		double radius, t_vec3 light_pos)
 {
 	t_sphere	sphere;
 
 	sphere.center = center;
 	sphere.diameter = radius * 2;
-	return (sphere_intersection_calc(dir, origin, sphere));
+	return (sphere_intersection_calc(dir, origin, sphere, light_pos));
 }

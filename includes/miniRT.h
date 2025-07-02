@@ -75,12 +75,12 @@ void	when_mlx_ptr_failed(t_world *game);
 int		exit_with_cross(t_world *game);
 
 //intersect_utils_basic.c
-t_hit	new_hit(t_vec3 hp, t_vec3 norm, t_vec3 light_dir, double t, int is_hit);
+t_hit	new_hit(t_vec3 hp, t_vec3 norm, t_vec3 light_dir, double t, int is_hit, t_obj_type obj_type);
 t_vec3	get_hitpoint(double t, t_vec3 d, t_vec3 origin);
 t_vec3	get_light_dir(t_vec3 hitpoint, t_vec3 light_pos);
 
 //intersect_sphere.c
-t_hit	intersect_sphere(t_vec3 dir, t_vec3 origin, t_vec3 center, double radius);
+t_hit	intersect_sphere(t_vec3 dir, t_vec3 origin, t_vec3 center, double radius, t_vec3 light_pos);
 
 //intersect_utils.c (assuming this exists)
 double	solve_quadratic(double a, double b, double c);

@@ -34,7 +34,7 @@ int	main(int argc, char **argv)
 
 	render_scene(world);
 
-	mlx_hook(world->win, 17, 0, exit_with_cross, &world);
+	mlx_hook(world->win, 17, 0, exit_with_cross, world);
 	mlx_loop(world->mlx);
 	return (0);
 }

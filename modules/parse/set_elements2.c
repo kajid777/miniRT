@@ -51,6 +51,7 @@ void	set_cylinder(t_world *world, char **strs)
 	cy->direction = vec_norm(str_to_vect(strs[2]));
 	cy->diameter = ft_atod(strs[3]);
 	cy->height = ft_atod(strs[4]);
+	cy->color = str_to_rgb(strs[5]);
 	world->cylinder = cy;
 }
 
