@@ -45,6 +45,27 @@ double	dot_part(const char *str, int *len)
 	return (result);
 }
 
+void	skip_whitespace(const char *str, int *i)
+{
+	while (str[*i] == '\t' || str[*i] == '\n' || str[*i] == '\v' || str[*i] == '\f'
+		|| str[*i] == '\r' || str[*i] == ' ')
+		(*i)++;
+}
+
+double	parse_sign(const char *str, int *i)
+{
+	if (str[*i] == '-' || str[*i] == '+')
+	{
+		if (str[*i] == '-')
+		{
+			(*i)++;
+			return (-1);
+		}
+		(*i)++;
+	}
+	return (1);
+}
+
 double	ft_atod(const char *str)
 {
 	double		nbr;
@@ -54,11 +75,8 @@ double	ft_atod(const char *str)
 	nbr = 0;
 	sign = 1;
 	i = 0;
-	while (str[i] == '\t' || str[i] == '\n' || str[i] == '\v' || str[i] == '\f'
-		|| str[i] == '\r' || str[i] == ' ')
-		i++;
-	if (str[i] == '-' || str[i] == '+')
-		sign *= (str[i++] == '-' ? -1 : 1);
+	skip_whitespace(str, &i);
+	sign = parse_sign(str, &i);
 	while (str[i] != '\0' && str[i] >= '0' && str[i] <= '9')
 	{
 		nbr *= 10;
