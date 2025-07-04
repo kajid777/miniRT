@@ -275,12 +275,10 @@ void	render_scene(t_world *world)
 			color_int = color_to_int(pixel_color);
 			
 			*(int*)(addr + (y * line_length + x * (bits_per_pixel / 8))) = color_int;
-			
 			x++;
 		}
 		y++;
 	}
-	
 	mlx_put_image_to_window(world->mlx, world->win, img, 0, 0);
 	mlx_destroy_image(world->mlx, img);
 	free(screen);

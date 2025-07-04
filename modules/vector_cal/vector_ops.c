@@ -17,6 +17,11 @@ t_vec3	vec_cross(t_vec3 a, t_vec3 b)
 	return (vec_new(f, s, t));
 }
 
+double	vec_length(t_vec3 v)
+{
+	return (sqrt(v.x * v.x + v.y * v.y + v.z * v.z));
+}
+
 t_vec3	vec_norm(t_vec3 v)
 {
 	double	norm;
