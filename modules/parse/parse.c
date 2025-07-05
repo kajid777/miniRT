@@ -167,6 +167,9 @@ t_world	*get_world(const int argc, char *argv[])
 	if (!(world = parse(fd)))
 		print_err_and_exit("Parsing error", 1);
 	if (close(fd) == -1)
+	{
+		free_world(world);
 		print_err_and_exit("close failed", 1);
+	}
 	return (world);
 }
