@@ -37,30 +37,34 @@ int	ft_tab_size(char **tab)
 }
 
 
+// 文字が文字セット内にあるかをチェックする関数
+static bool	is_char_in_charset(char c, const char *charset)
+{
+	int	j;
+
+	j = 0;
+	while (charset[j])
+	{
+		if (c == charset[j])
+		{
+			return (true);
+		}
+		j++;
+	}
+	return (false);
+}
+
 // 文字列が指定された文字セットの文字のみで構成されているかを判定する関数
 bool	ft_is_from_charset(const char *str, const char *charset)
 {
 	int	i;
-	int	j;
-	bool	found;
 
 	if (!str || !charset)
 		return (false);
 	i = 0;
 	while (str[i])
 	{
-		found = false;
-		j = 0;
-		while (charset[j])
-		{
-			if (str[i] == charset[j])
-			{
-				found = true;
-				break;
-			}
-			j++;
-		}
-		if (!found)
+		if (!is_char_in_charset(str[i], charset))
 			return (false);
 		i++;
 	}
@@ -102,6 +106,29 @@ bool	check_line(const char *line, char **data, const char *type, const int nb_el
 	return (0);
 }
 
+// 1行の解析処理を行う関数
+static void	process_line(t_world *world, char *line, char **data)
+{
+	if (check_line(line, data, "A", NB_ELEM_AL))
+		set_ambient_light(world, data);
+	else if (check_line(line, data, "C", NB_ELEM_CAMERA))
+		set_camera(world, data);
+	else if (check_line(line, data, "L", NB_ELEM_LIGHT))
+		set_light(world, data);
+	else if (check_line(line, data, "sp", NB_ELEM_SPHERE))
+		set_sphere(world, data);
+	else if (check_line(line, data, "pl", NB_ELEM_PLANE))
+		set_plane(world, data);
+	else if (check_line(line, data, "cy", NB_ELEM_CYLINDER))
+		set_cylinder(world, data);
+	else if (!ft_is_from_charset(line, WHITE_SPACES))//何も書かれていない行から始まる場合
+	{
+		free(line);
+		ft_free_tab(data);//文字列配列の全要素をfree
+		print_err_and_exit("Parse error", PARSE_ERROR);
+	}
+}
+
 // ファイルディスクリプタからシーン情報をパースしてt_world構造体に格納する関数
 // 各行ごとに要素タイプを判定し、対応するセット関数を呼び出す
 // パースエラー時はエラー終了する
@@ -124,24 +151,7 @@ t_world	*parse(int fd)
 			free_world(world);
 			print_err_and_exit("Malloc failed", 1);
 		}
-		if (check_line(line, data, "A", NB_ELEM_AL))
-			set_ambient_light(world, data);
-		else if (check_line(line, data, "C", NB_ELEM_CAMERA))
-			set_camera(world, data);
-		else if (check_line(line, data, "L", NB_ELEM_LIGHT))
-			set_light(world, data);
-		else if (check_line(line, data, "sp", NB_ELEM_SPHERE))
-			set_sphere(world, data);
-		else if (check_line(line, data, "pl", NB_ELEM_PLANE))
-			set_plane(world, data);
-		else if (check_line(line, data, "cy", NB_ELEM_CYLINDER))
-			set_cylinder(world, data);
-		else if (!ft_is_from_charset(line, WHITE_SPACES))//何も書かれていない行から始まる場合
-		{
-			free(line);
-			ft_free_tab(data);//文字列配列の全要素をfree
-			print_err_and_exit("Parse error", PARSE_ERROR);
-		}
+		process_line(world, line, data);
 		free(line);
 		ft_free_tab(data);//文字列配列の全要素をfree
 		line = get_next_line(fd);

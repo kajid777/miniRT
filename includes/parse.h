@@ -32,8 +32,15 @@ double		dot_part(const char *str, int *len);
 double		ft_atod(const char *str);
 int		ft_strcmp(const char *s1, const char *s2);
 int		ft_tab_size(char **tab);
+
+/* ft_split_set.c */
 void	ft_free_tab(char **tab);
+int		is_in_charset(char c, const char *charset);
+int		count_segments_set(const char *str, const char *charset);
+
+/* ft_split_set_2.c */
 char	**ft_split_set(const char *str, const char *charset);
+
 bool	ft_is_from_charset(const char *str, const char *charset);
 
 /* parse.c */
