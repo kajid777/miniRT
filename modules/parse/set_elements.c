@@ -53,6 +53,41 @@ static void	validate_camera_fov(double fov, t_camera *camera, t_world *world)
 		print_err_and_exit("Error: FOV must be between 0 and 180 degrees", 1);
 	}
 }
+
+// アンビエントライトの比率が有効かチェックする関数
+static void	validate_ambient_ratio(double ratio, t_ambient_lighting *ambient, t_world *world)
+{
+	if (ratio < 0.0 || ratio > 1.0)
+	{
+		free(ambient);
+		free_world(world);
+		print_err_and_exit("Error: Ambient lighting ratio must be in range [0.0,1.0]", 1);
+	}
+}
+
+// 正規化ベクトルが有効かチェックする関数
+static void	validate_normalized_vector(t_vec3 vector, void *object, t_world *world)
+{
+	if (vector.x < -1.0 || vector.x > 1.0 || 
+		vector.y < -1.0 || vector.y > 1.0 || 
+		vector.z < -1.0 || vector.z > 1.0)
+	{
+		free(object);
+		free_world(world);
+		print_err_and_exit("Error: Normalized vector must be in range [-1,1] for each axis", 1);
+	}
+}
+
+// ライトの明度比率が有効かチェックする関数
+static void	validate_light_brightness(double brightness, t_light *light, t_world *world)
+{
+	if (brightness < 0.0 || brightness > 1.0)
+	{
+		free(light);
+		free_world(world);
+		print_err_and_exit("Error: Light brightness ratio must be in range [0.0,1.0]", 1);
+	}
+}
 // シーンの環境光（アンビエントライト）を設定する関数
 void	set_ambient_light(t_world *world, char **data)
 {
@@ -65,6 +100,8 @@ void	set_ambient_light(t_world *world, char **data)
 		print_err_and_exit("Malloc failed", 1);
 	}
 	ratio = ft_atod(data[1]);
+	validate_ambient_ratio(ratio, ambient_light, world);
+	
 	ambient_light->color = *mult_rgb_double(str_to_rgb(data[2], world), ratio, world);
 	ambient_light->lighting_ratio = ratio;
 	world->ambient = ambient_light;
@@ -87,6 +124,7 @@ void	set_camera(t_world *world, char **data)
 	fov = ft_atod(data[3]);
 	
 	validate_camera_direction(direction, camera, world);
+	validate_normalized_vector(direction, camera, world);
 	validate_camera_fov(fov, camera, world);
 	
 	camera->direction = vec_norm(direction);
@@ -98,6 +136,7 @@ void	set_camera(t_world *world, char **data)
 void	set_light(t_world *world, char **data)
 {
 	t_light		*light;
+	double		brightness;
 	int			ratio;
 
 	if (!(light = malloc(sizeof(*light))))
@@ -106,7 +145,10 @@ void	set_light(t_world *world, char **data)
 		print_err_and_exit("Malloc failed", 1);
 	}
 	light->position = str_to_vect(data[1]);
-	ratio = ft_atod(data[2]) * 255;
+	brightness = ft_atod(data[2]);
+	validate_light_brightness(brightness, light, world);
+	
+	ratio = brightness * 255;
 	light->color = *mult_rgb_double(str_to_rgb(data[3], world), ratio, world);
 	world->light = light;
 }

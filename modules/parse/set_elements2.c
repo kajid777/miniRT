@@ -12,6 +12,52 @@
 
 #include "../../includes/miniRT.h"
 
+// 正規化ベクトルが有効かチェックする関数
+static void	validate_normalized_vector(t_vec3 vector, void *object, t_world *world)
+{
+	if (vector.x < -1.0 || vector.x > 1.0 || 
+		vector.y < -1.0 || vector.y > 1.0 || 
+		vector.z < -1.0 || vector.z > 1.0)
+	{
+		free(object);
+		free_world(world);
+		print_err_and_exit("Error: Normalized vector must be in range [-1,1] for each axis", 1);
+	}
+}
+
+// 球体の直径が有効かチェックする関数
+static void	validate_sphere_diameter(double diameter, t_sphere *sphere, t_world *world)
+{
+	if (diameter <= 0)
+	{
+		free(sphere);
+		free_world(world);
+		print_err_and_exit("Error: Sphere diameter must be greater than 0", 1);
+	}
+}
+
+// 円柱の直径が有効かチェックする関数
+static void	validate_cylinder_diameter(double diameter, t_cylinder *cylinder, t_world *world)
+{
+	if (diameter <= 0)
+	{
+		free(cylinder);
+		free_world(world);
+		print_err_and_exit("Error: Cylinder diameter must be greater than 0", 1);
+	}
+}
+
+// 円柱の高さが有効かチェックする関数
+static void	validate_cylinder_height(double height, t_cylinder *cylinder, t_world *world)
+{
+	if (height <= 0)
+	{
+		free(cylinder);
+		free_world(world);
+		print_err_and_exit("Error: Cylinder height must be greater than 0", 1);
+	}
+}
+
 // シーンに球体（sphere）を追加する関数
 void	set_sphere(t_world *world, char **strs)
 {
@@ -25,6 +71,8 @@ void	set_sphere(t_world *world, char **strs)
 	}
 	sphere->center = str_to_vect(strs[1]);
 	diameter = ft_atod(strs[2]);
+	validate_sphere_diameter(diameter, sphere, world);
+	
 	sphere->diameter = diameter;
 	sphere->color = str_to_rgb(strs[3], world);
 	world->sphere = sphere;
@@ -34,6 +82,7 @@ void	set_sphere(t_world *world, char **strs)
 void	set_plane(t_world *world, char **strs)
 {
 	t_plane		*plane;
+	t_vec3		normal;
 
 	if (!(plane = malloc(sizeof(*plane))))
 	{
@@ -41,7 +90,10 @@ void	set_plane(t_world *world, char **strs)
 		print_err_and_exit("Malloc failed", 1);
 	}
 	plane->point = str_to_vect(strs[1]);
-	plane->normal_vector = vec_norm(str_to_vect(strs[2]));
+	normal = str_to_vect(strs[2]);
+	validate_normalized_vector(normal, plane, world);
+	
+	plane->normal_vector = vec_norm(normal);
 	plane->color = str_to_rgb(strs[3], world);
 	world->plane = plane;
 }
@@ -50,6 +102,7 @@ void	set_plane(t_world *world, char **strs)
 void	set_cylinder(t_world *world, char **strs)
 {
 	t_cylinder	*cy;
+	t_vec3		direction;
 
 	if (!(cy = malloc(sizeof(*cy))))
 	{
@@ -57,9 +110,16 @@ void	set_cylinder(t_world *world, char **strs)
 		print_err_and_exit("Malloc failed", MALLOC_ERROR);
 	}
 	cy->center = str_to_vect(strs[1]);
-	cy->direction = vec_norm(str_to_vect(strs[2]));
+	direction = str_to_vect(strs[2]);
+	validate_normalized_vector(direction, cy, world);
+	
+	cy->direction = vec_norm(direction);
 	cy->diameter = ft_atod(strs[3]);
 	cy->height = ft_atod(strs[4]);
+	
+	validate_cylinder_diameter(cy->diameter, cy, world);
+	validate_cylinder_height(cy->height, cy, world);
+	
 	cy->color = str_to_rgb(strs[5], world);
 	world->cylinder = cy;
 }
