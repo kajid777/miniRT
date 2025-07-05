@@ -31,6 +31,28 @@ t_fcolor	*mult_rgb_double(const t_fcolor rgb, const double mult, t_world *world)
 {
 	return (int_to_rgb(rgb.red * mult, rgb.green * mult, rgb.blue * mult, world));
 }
+
+// カメラの方向ベクトルが有効かチェックする関数
+static void	validate_camera_direction(t_vec3 direction, t_camera *camera, t_world *world)
+{
+	if (direction.x == 0 && direction.y == 0 && direction.z == 0)
+	{
+		free(camera);
+		free_world(world);
+		print_err_and_exit("Error: Camera direction cannot be (0,0,0)", 1);
+	}
+}
+
+// カメラのFOVが有効かチェックする関数
+static void	validate_camera_fov(double fov, t_camera *camera, t_world *world)
+{
+	if (fov <= 0 || fov >= 180)
+	{
+		free(camera);
+		free_world(world);
+		print_err_and_exit("Error: FOV must be between 0 and 180 degrees", 1);
+	}
+}
 // シーンの環境光（アンビエントライト）を設定する関数
 void	set_ambient_light(t_world *world, char **data)
 {
@@ -52,6 +74,7 @@ void	set_ambient_light(t_world *world, char **data)
 void	set_camera(t_world *world, char **data)
 {
 	t_camera	*camera;
+	t_vec3		direction;
 	double		fov;
 
 	if (!(camera = malloc(sizeof(*camera))))
@@ -60,17 +83,14 @@ void	set_camera(t_world *world, char **data)
 		print_err_and_exit("Malloc failed", MALLOC_ERROR);
 	}
 	camera->position = str_to_vect(data[1]);
-	camera->direction = vec_norm(str_to_vect(data[2]));
-	// camera->up = new_vect(0, 1, 0);
+	direction = str_to_vect(data[2]);
 	fov = ft_atod(data[3]);
-	if (fov <= 0 || fov >= 180)
-	{
-		free(camera);
-		free_world(world);
-		print_err_and_exit("Error: FOV must be between 0 and 180 degrees", 1);
-	}
+	
+	validate_camera_direction(direction, camera, world);
+	validate_camera_fov(fov, camera, world);
+	
+	camera->direction = vec_norm(direction);
 	camera->fov = fov;
-	// world->camerasではなくworld->cameraに直接代入
 	world->camera = camera;
 }
 
