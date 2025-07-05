@@ -47,8 +47,6 @@ typedef struct s_cylinder_params
 }	t_cylinder_params;
 
 // Function declarations
-void print_err_and_exit(char *message, int exit_code);
-int ft_strncmp_rev(const char *s1, const char *s2, size_t n);
 
 void camera_prepare(t_camera *camera);
 t_vec3 calculate_viewplane_center(t_camera camera, double viewplane_distance);
@@ -69,11 +67,13 @@ t_vec3	vec_norm(t_vec3 v);
 t_vec3	vec_mul_scalar(t_vec3 v, double scalar);
 t_vec3	vec_div_scalar(t_vec3 v, double scalar);
 
-//end_exit.c
-void	end_with_error(void);
-int		exit_point(t_world *game);
+//errors/end_exit.c
+void print_err_and_exit(char *message, int exit_code);
+int ft_strncmp_rev(const char *s1, const char *s2, size_t n);
 void	when_mlx_ptr_failed(t_world *game);
 int		exit_with_cross(t_world *game);
+
+//errors/free_world.c
 void	free_world(t_world *world);
 
 //intersect_utils_basic.c
