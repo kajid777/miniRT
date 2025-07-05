@@ -27,11 +27,16 @@ int	main(int argc, char **argv)
 
 	world->mlx = mlx_init();
 	if (!world->mlx)
-		return (1);
+	{
+		free_world(world);
+		print_err_and_exit("mlx_init failed", 1);
+	}
 	world->win = mlx_new_window(world->mlx, SCREEN_WIDTH, SCREEN_HEIGHT, "miniRT");
 	if (!world->win)
-		return (free(world->mlx), 1);
-
+	{
+		free_world(world);
+		print_err_and_exit("mlx_new_window failed", 1);
+	}
 	render_scene(world);
 
 	mlx_hook(world->win, 17, 0, exit_with_cross, world);

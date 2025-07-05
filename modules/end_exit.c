@@ -51,29 +51,8 @@ void	when_mlx_ptr_failed(t_world *world)
 int	exit_with_cross(t_world *world)
 {
 	if (world && world->mlx)
-	{
 		mlx_loop_end(world->mlx);
-		if (world->win)
-			mlx_destroy_window(world->mlx, world->win);
-		mlx_destroy_display(world->mlx);
-		free(world->mlx);
-	}
-	if (world)
-	{
-		if (world->camera)
-			free(world->camera);
-		if (world->light)
-			free(world->light);
-		if (world->ambient)
-			free(world->ambient);
-		if (world->sphere)
-			free(world->sphere);
-		if (world->plane)
-			free(world->plane);
-		if (world->cylinder)
-			free(world->cylinder);
-		free(world);
-	}
+	free_world(world);
 	exit(0);
 }
 
@@ -81,4 +60,68 @@ void	end_with_error(void)
 {
 	ft_printf("Error\n");
 	exit(1);
+}
+
+void	free_world(t_world *world)
+{
+	if (!world)
+		return;
+	
+	// Free camera
+	if (world->camera)
+	{
+		free(world->camera);
+		world->camera = NULL;
+	}
+	
+	// Free light
+	if (world->light)
+	{
+		free(world->light);
+		world->light = NULL;
+	}
+	
+	// Free ambient lighting
+	if (world->ambient)
+	{
+		free(world->ambient);
+		world->ambient = NULL;
+	}
+	
+	// Free sphere
+	if (world->sphere)
+	{
+		free(world->sphere);
+		world->sphere = NULL;
+	}
+	
+	// Free plane
+	if (world->plane)
+	{
+		free(world->plane);
+		world->plane = NULL;
+	}
+	
+	// Free cylinder
+	if (world->cylinder)
+	{
+		free(world->cylinder);
+		world->cylinder = NULL;
+	}
+	
+	// Free MLX resources
+	if (world->mlx)
+	{
+		if (world->win)
+		{
+			mlx_destroy_window(world->mlx, world->win);
+			world->win = NULL;
+		}
+		mlx_destroy_display(world->mlx);
+		free(world->mlx);
+		world->mlx = NULL;
+	}
+	
+	// Finally free the world structure itself
+	free(world);
 }

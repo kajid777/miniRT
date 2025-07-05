@@ -19,7 +19,10 @@ void	set_sphere(t_world *world, char **strs)
 	double		diameter;
 
 	if (!(sphere = malloc(sizeof(*sphere))))
-		print_err_and_exit("Malloc failed", MALLOC_ERROR);
+	{
+		free_world(world);
+		print_err_and_exit("Malloc failed", 1);
+	}
 	sphere->center = str_to_vect(strs[1]);
 	diameter = ft_atod(strs[2]);
 	sphere->diameter = diameter;
@@ -33,7 +36,10 @@ void	set_plane(t_world *world, char **strs)
 	t_plane		*plane;
 
 	if (!(plane = malloc(sizeof(*plane))))
-		print_err_and_exit("Malloc failed", MALLOC_ERROR);
+	{
+		free_world(world);
+		print_err_and_exit("Malloc failed", 1);
+	}
 	plane->point = str_to_vect(strs[1]);
 	plane->normal_vector = vec_norm(str_to_vect(strs[2]));
 	plane->color = str_to_rgb(strs[3]);
@@ -46,7 +52,10 @@ void	set_cylinder(t_world *world, char **strs)
 	t_cylinder	*cy;
 
 	if (!(cy = malloc(sizeof(*cy))))
+	{
+		free_world(world);
 		print_err_and_exit("Malloc failed", MALLOC_ERROR);
+	}
 	cy->center = str_to_vect(strs[1]);
 	cy->direction = vec_norm(str_to_vect(strs[2]));
 	cy->diameter = ft_atod(strs[3]);

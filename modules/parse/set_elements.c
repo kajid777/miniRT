@@ -12,21 +12,24 @@
 
 #include "../../includes/miniRT.h"
 
-t_fcolor	*int_to_rgb(const int r, const int g, const int b)
+t_fcolor	*int_to_rgb(const int r, const int g, const int b, t_world *world)
 {
 	t_fcolor	*rgb;
 
 	if(!(rgb = malloc(sizeof(*rgb))))
+	{
+		free_world(world);
 		print_err_and_exit("Malloc failed", MALLOC_ERROR);
+	}
 	rgb->red = r;
 	rgb->green = g;
 	rgb->blue = b;
 	return (rgb);
 }
 
-t_fcolor	*mult_rgb_double(const t_fcolor rgb, const double mult)
+t_fcolor	*mult_rgb_double(const t_fcolor rgb, const double mult, t_world *world)
 {
-	return (int_to_rgb(rgb.red * mult, rgb.green * mult, rgb.blue * mult));
+	return (int_to_rgb(rgb.red * mult, rgb.green * mult, rgb.blue * mult, world));
 }
 // シーンの環境光（アンビエントライト）を設定する関数
 void	set_ambient_light(t_world *world, char **data)
@@ -35,9 +38,12 @@ void	set_ambient_light(t_world *world, char **data)
 	double			ratio;
 
 	if (!(ambient_light = malloc(sizeof(*ambient_light))))
-		print_err_and_exit("Malloc failed", MALLOC_ERROR);
+	{
+		free_world(world);
+		print_err_and_exit("Malloc failed", 1);
+	}
 	ratio = ft_atod(data[1]);
-	ambient_light->color = *mult_rgb_double(str_to_rgb(data[2]), ratio);
+	ambient_light->color = *mult_rgb_double(str_to_rgb(data[2]), ratio, world);
 	ambient_light->lighting_ratio = ratio;
 	world->ambient = ambient_light;
 }
@@ -48,7 +54,10 @@ void	set_camera(t_world *world, char **data)
 	t_camera	*camera;
 
 	if (!(camera = malloc(sizeof(*camera))))
+	{
+		free_world(world);
 		print_err_and_exit("Malloc failed", MALLOC_ERROR);
+	}
 	camera->position = str_to_vect(data[1]);
 	camera->direction = vec_norm(str_to_vect(data[2]));
 	// camera->up = new_vect(0, 1, 0);
@@ -64,10 +73,12 @@ void	set_light(t_world *world, char **data)
 	int			ratio;
 
 	if (!(light = malloc(sizeof(*light))))
-		print_err_and_exit("Malloc failed", MALLOC_ERROR);
+	{
+		free_world(world);
+		print_err_and_exit("Malloc failed", 1);
+	}
 	light->position = str_to_vect(data[1]);
 	ratio = ft_atod(data[2]) * 255;
-	light->color = *mult_rgb_double(str_to_rgb(data[3]), ratio);
-	// world->lightsではなくworld->lightに直接代入
+	light->color = *mult_rgb_double(str_to_rgb(data[3]), ratio, world);
 	world->light = light;
 }

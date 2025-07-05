@@ -96,10 +96,8 @@ bool	check_line(const char *line, char **data, const char *type, const int nb_el
 		return (false);
 	if (!ft_strcmp(data[0], type))
 	{
-		// if (ft_in_charset(line[ft_strlen(type)], WHITE_SPACES))
 		if (ft_tab_size(data) == nb_elements)
 			return (true);
-			// return (ft_tab_size(data) == nb_elements);
 	}
 	return (0);
 }
@@ -114,13 +112,18 @@ t_world	*parse(int fd)
 	char	**data;
 
 	if (!(world = malloc(sizeof(*world))))
-		exit(0);
-	if (!(init_world(world)))
-		return (NULL);
+		print_err_and_exit("malloc failed in parse", 1);
+	init_world(world);
 	line = get_next_line(fd);
 	while (line != NULL)
 	{
 		data = ft_split_set(line, WHITE_SPACES);//いわゆるスプリット
+		if (!data)
+		{
+			free(line);
+			free_world(world);
+			print_err_and_exit("Malloc failed", 1);
+		}
 		if (check_line(line, data, "A", NB_ELEM_AL))
 			set_ambient_light(world, data);
 		else if (check_line(line, data, "C", NB_ELEM_CAMERA))
@@ -137,8 +140,7 @@ t_world	*parse(int fd)
 		{
 			free(line);
 			ft_free_tab(data);//文字列配列の全要素をfree
-			exit(0);
-			// print_err_and_exit("Parse error", PARSE_ERROR);
+			print_err_and_exit("Parse error", PARSE_ERROR);
 		}
 		free(line);
 		ft_free_tab(data);//文字列配列の全要素をfree
@@ -159,12 +161,12 @@ t_world	*get_world(const int argc, char *argv[])
 	if (argc > 3)
 		print_err_and_exit("Error: expecting a 2 arguments maximum", 1);
 	if (argc == 2 && ft_strncmp_rev(argv[1], ".rt", 3))
-		print_err_and_exit("First argument must be a '.rt' file", 1);//終わりの文字がrtでない場合
+		print_err_and_exit("First argument must be a '.rt' file", 1);
 	if ((fd = open(argv[1], O_RDONLY)) == -1)
-		print_err_and_exit(strerror(errno), errno);
+		print_err_and_exit("open failed", 1);
 	if (!(world = parse(fd)))
-		print_err_and_exit("Parsing error", PARSE_ERROR);
+		print_err_and_exit("Parsing error", 1);
 	if (close(fd) == -1)
-		print_err_and_exit(strerror(errno), errno);
+		print_err_and_exit("close failed", 1);
 	return (world);
 }

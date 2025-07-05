@@ -64,6 +64,7 @@ t_vec3	vec_add(t_vec3 a, t_vec3 b);
 t_vec3	vec_sub(t_vec3 a, t_vec3 b);
 double	vec_dot(t_vec3 a, t_vec3 b);
 t_vec3	vec_cross(t_vec3 a, t_vec3 b);
+double	vec_length(t_vec3 v);
 t_vec3	vec_norm(t_vec3 v);
 t_vec3	vec_mul_scalar(t_vec3 v, double scalar);
 t_vec3	vec_div_scalar(t_vec3 v, double scalar);
@@ -73,6 +74,7 @@ void	end_with_error(void);
 int		exit_point(t_world *game);
 void	when_mlx_ptr_failed(t_world *game);
 int		exit_with_cross(t_world *game);
+void	free_world(t_world *world);
 
 //intersect_utils_basic.c
 t_hit	new_hit(t_vec3 hp, t_vec3 norm, t_vec3 light_dir, double t, int is_hit, t_obj_type obj_type);

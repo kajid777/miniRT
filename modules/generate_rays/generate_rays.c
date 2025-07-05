@@ -255,7 +255,8 @@ void	render_scene(t_world *world)
 	if (!screen)
 	{
 		mlx_destroy_image(world->mlx, img);
-		return;
+		free_world(world);
+		print_err_and_exit("Malloc failed", MALLOC_ERROR);
 	}
 	
 	calculate_viewplane_distance(*world->camera, screen);
