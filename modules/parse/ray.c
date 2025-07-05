@@ -37,9 +37,9 @@ t_fcolor	char_to_rgb(const char *r, const char *g, const char *b)
 {
 	t_fcolor	color;
 
-	color.red = ft_atod(r);
-	color.green = ft_atod(g);
-	color.blue = ft_atod(b);
+	color.red = ft_atod(r) / 255;
+	color.green = ft_atod(g) / 255;
+	color.blue = ft_atod(b) / 255;
 	return (color);
 }
 

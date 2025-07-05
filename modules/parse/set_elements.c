@@ -70,7 +70,6 @@ void	set_camera(t_world *world, char **data)
 void	set_light(t_world *world, char **data)
 {
 	t_light		*light;
-	int			ratio;
 
 	if (!(light = malloc(sizeof(*light))))
 	{
@@ -78,7 +77,7 @@ void	set_light(t_world *world, char **data)
 		print_err_and_exit("Malloc failed", 1);
 	}
 	light->position = str_to_vect(data[1]);
-	ratio = ft_atod(data[2]) * 255;
-	light->color = *mult_rgb_double(str_to_rgb(data[3]), ratio, world);
+	light->intensity = ft_atod(data[2]);
+	light->color = str_to_rgb(data[3]);
 	world->light = light;
 }

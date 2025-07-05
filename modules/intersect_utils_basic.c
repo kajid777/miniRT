@@ -35,3 +35,23 @@ t_vec3	get_light_dir(t_vec3 hitpoint, t_vec3 light_pos)
 	light_dir = vec_norm(light_dir);
 	return (light_dir);
 }
+
+int	is_in_shadow(t_vec3 point, t_vec3 light_pos, t_world *world)
+{
+	t_vec3	shadow_ray_dir;
+	t_vec3	shadow_ray_origin;
+	t_hit	shadow_hit;
+	double	light_distance;
+	double	epsilon;
+
+	epsilon = 0.001;
+	light_distance = vec_length(vec_sub(light_pos, point));
+	shadow_ray_dir = vec_norm(vec_sub(light_pos, point));
+	shadow_ray_origin = vec_add(point, vec_mul_scalar(shadow_ray_dir, epsilon));
+	
+	shadow_hit = find_closest_intersection(shadow_ray_origin, shadow_ray_dir, world);
+	
+	if (shadow_hit.is_hit && shadow_hit.t > 0 && shadow_hit.t < light_distance)
+		return (1);
+	return (0);
+}

@@ -115,7 +115,7 @@ t_hit	find_closest_intersection(t_vec3 ray_origin, t_vec3 ray_dir, t_world *worl
 	if (world->plane)
 	{
 		current_hit = intersect_plane(ray_dir, ray_origin, 
-			world->plane->point, world->plane->normal_vector);
+			world->plane->point, world->plane->normal_vector, world->light->position);
 		if (current_hit.is_hit && current_hit.t > 0.001 && current_hit.t < closest_t)
 		{
 			closest_t = current_hit.t;
@@ -143,6 +143,7 @@ t_fcolor	calculate_lighting(t_hit hit, t_world *world)
 	t_fcolor	ambient;
 	t_fcolor	diffuse;
 	double		light_intensity;
+	int			in_shadow;
 	
 	ambient.red = world->ambient->color.red * world->ambient->lighting_ratio;
 	ambient.green = world->ambient->color.green * world->ambient->lighting_ratio;
@@ -152,9 +153,20 @@ t_fcolor	calculate_lighting(t_hit hit, t_world *world)
 	if (light_intensity < 0)
 		light_intensity = 0;
 	
-	diffuse.red = world->light->color.red * world->light->intensity * light_intensity;
-	diffuse.green = world->light->color.green * world->light->intensity * light_intensity;
-	diffuse.blue = world->light->color.blue * world->light->intensity * light_intensity;
+	in_shadow = is_in_shadow(hit.hit_point, world->light->position, world);
+	
+	if (in_shadow)
+	{
+		diffuse.red = 0;
+		diffuse.green = 0;
+		diffuse.blue = 0;
+	}
+	else
+	{
+		diffuse.red = world->light->color.red * world->light->intensity * light_intensity;
+		diffuse.green = world->light->color.green * world->light->intensity * light_intensity;
+		diffuse.blue = world->light->color.blue * world->light->intensity * light_intensity;
+	}
 	
 	result.red = ambient.red + diffuse.red;
 	result.green = ambient.green + diffuse.green;
