@@ -67,7 +67,7 @@ void	set_camera(t_world *world, char **data)
 	{
 		free(camera);
 		free_world(world);
-		print_err_and_exit("Error: FOV must be between 0 and 180 degrees", PARSE_ERROR);
+		print_err_and_exit("Error: FOV must be between 0 and 180 degrees", 1);
 	}
 	camera->fov = fov;
 	// world->camerasではなくworld->cameraに直接代入

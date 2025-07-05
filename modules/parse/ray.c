@@ -38,7 +38,7 @@ static void	validate_rgb_value(double value, t_world *world)
 	if (value < 0 || value > 255)
 	{
 		free_world(world);
-		print_err_and_exit("Error: RGB values must be between 0 and 255", 1);
+		print_err_and_exit("RGB values must be between 0 and 255", 1);
 	}
 }
 
@@ -51,9 +51,9 @@ t_fcolor	char_to_rgb(const char *r, const char *g, const char *b, t_world *world
 	color.green = ft_atod(g);
 	color.blue = ft_atod(b);
 	
-	validate_rgb_value(color.red, "Red", world);
-	validate_rgb_value(color.green, "Green", world);
-	validate_rgb_value(color.blue, "Blue", world);
+	validate_rgb_value(color.red, world);
+	validate_rgb_value(color.green, world);
+	validate_rgb_value(color.blue, world);
 	
 	return (color);
 }
