@@ -33,12 +33,8 @@ static t_hit	sphere_intersection_calc(t_vec3 dir, t_vec3 origin,
 			light_dir, t, 1, SPHERE));
 }
 
-t_hit	intersect_sphere(t_vec3 dir, t_vec3 origin, t_vec3 center, 
-		double radius, t_vec3 light_pos)
+t_hit	intersect_sphere(t_vec3 dir, t_vec3 origin, t_sphere sphere, 
+		t_vec3 light_pos)
 {
-	t_sphere	sphere;
-
-	sphere.center = center;
-	sphere.diameter = radius * 2;
 	return (sphere_intersection_calc(dir, origin, sphere, light_pos));
 }

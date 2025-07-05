@@ -42,14 +42,12 @@ static t_hit	check_cylinder_cap(t_vec3 dir, t_vec3 origin,
 }
 
 t_hit	intersect_cylinder_caps(t_vec3 dir, t_vec3 origin,
-		t_cylinder cylinder, t_vec3 light_pos)
+		t_cylinder cylinder)
 {
 	t_vec3	cap_center_bottom;
 	t_vec3	cap_center_top;
 	t_hit	bottom_hit;
 	t_hit	top_hit;
-
-	(void)light_pos;
 
 	if (vec_dot(dir, cylinder.direction) == 0)
 		return (new_hit(vec_new(0, 0, 0), vec_new(0, 0, 0),
@@ -80,7 +78,7 @@ t_hit	intersect_cylinder(t_vec3 dir, t_vec3 origin,
 	t_hit	cap_hit;
 
 	side_hit = get_cylinder_side_hit(dir, origin, cylinder, light_pos);
-	cap_hit = intersect_cylinder_caps(dir, origin, cylinder, light_pos);
+	cap_hit = intersect_cylinder_caps(dir, origin, cylinder);
 	if (side_hit.is_hit && cap_hit.is_hit)
 	{
 		if (side_hit.t < cap_hit.t)

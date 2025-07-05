@@ -17,6 +17,14 @@ typedef struct s_fcolor {
     double     blue;
 } t_fcolor;
 
+// Structure to store rendering data
+typedef struct s_render_data
+{
+	int		bits_per_pixel;
+	int		line_length;
+	char	*addr;
+}	t_render_data;
+
 // Represents a camera with position, direction, and field of view
 typedef struct s_camera {
     t_vec3    position;

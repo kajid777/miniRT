@@ -49,9 +49,18 @@ typedef struct s_cylinder_params
 // Function declarations
 
 void camera_prepare(t_camera *camera);
+void calculate_viewplane_distance(t_camera camera, t_screen *screen);
 t_vec3 calculate_viewplane_center(t_camera camera, double viewplane_distance);
+void calculate_pixel_step_size(t_camera camera, t_screen *screen);
+void calculate_step_vec(t_camera camera, t_screen *screen);
+void calculate_top_left_corner(t_screen *screen);
 t_vec3 generate_one_ray(t_camera camera, t_screen screen, int x, int y);
+t_hit find_closest_intersection(t_vec3 ray_origin, t_vec3 ray_dir, t_world *world);
+t_fcolor calculate_lighting(t_hit hit, t_world *world);
 t_fcolor get_object_color(t_hit hit, t_world *world);
+t_fcolor trace_ray(t_vec3 ray_origin, t_vec3 ray_dir, t_world *world);
+int color_to_int(t_fcolor color);
+void render_scene(t_world *world);
 
 // 関数プロトタイプ
 int		ft_printf(const char *str, ...);
@@ -83,7 +92,7 @@ t_vec3	get_light_dir(t_vec3 hitpoint, t_vec3 light_pos);
 int		is_in_shadow(t_vec3 point, t_vec3 light_pos, t_world *world);
 
 //intersect_sphere.c
-t_hit	intersect_sphere(t_vec3 dir, t_vec3 origin, t_vec3 center, double radius, t_vec3 light_pos);
+t_hit	intersect_sphere(t_vec3 dir, t_vec3 origin, t_sphere sphere, t_vec3 light_pos);
 
 //intersect_utils.c (assuming this exists)
 double	solve_quadratic(double a, double b, double c);
@@ -92,7 +101,7 @@ t_vec3	get_norm_sphere(t_vec3 hit_point, t_vec3 center);
 //intersect_cylinder.c
 t_vec3	get_norm_cylinder(t_vec3 hitpoint, t_cylinder cylinder);
 t_hit	intersect_cylinder_caps(t_vec3 dir, t_vec3 origin,
-		t_cylinder cylinder, t_vec3 light_pos);
+		t_cylinder cylinder);
 t_hit	intersect_cylinder(t_vec3 dir, t_vec3 origin,
 		t_cylinder cylinder, t_vec3 light_pos);
 
@@ -109,7 +118,7 @@ t_hit	get_cylinder_side_hit(t_vec3 d, t_vec3 o,
 		t_cylinder cylinder, t_vec3 light_pos);
 
 //intersect_plane.c
-t_hit	intersect_plane(t_vec3 dir, t_vec3 origin, t_vec3 point, t_vec3 normal, t_vec3 light_pos);
+t_hit	intersect_plane(t_vec3 dir, t_vec3 origin, t_plane plane, t_vec3 light_pos);
 
 //render.c
 t_hit	find_closest_intersection(t_vec3 ray_origin, t_vec3 ray_dir, t_world *world);
