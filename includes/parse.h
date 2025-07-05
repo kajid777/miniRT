@@ -30,8 +30,17 @@
 double		ten_to(int pow);
 double		dot_part(const char *str, int *len);
 double		ft_atod(const char *str);
+
+/* parse_1.c */
 int		ft_strcmp(const char *s1, const char *s2);
 int		ft_tab_size(char **tab);
+bool	ft_is_from_charset(const char *str, const char *charset);
+
+/* parse_2.c */
+void		*init_world(t_world *world);
+bool		check_line(const char *line, char **data, const char *type, const int nb_elements);
+t_world		*parse(int fd);
+t_world		*get_world(const int argc, char *argv[]);
 
 /* ft_split_set.c */
 void	ft_free_tab(char **tab);
@@ -40,14 +49,6 @@ int		count_segments_set(const char *str, const char *charset);
 
 /* ft_split_set_2.c */
 char	**ft_split_set(const char *str, const char *charset);
-
-bool	ft_is_from_charset(const char *str, const char *charset);
-
-/* parse.c */
-void		*init_world(t_world *world);
-bool		check_line(const char *line, char **data, const char *type, const int nb_elements);
-t_world		*parse(int fd);
-t_world		*get_world(const int argc, char *argv[]);
 
 /* ray.c */
 t_vec3		set_vect(const char *x, const char *y, const char *z);
