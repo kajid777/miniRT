@@ -32,24 +32,46 @@ t_vec3	str_to_vect(const char *str)
 	return (set_vect(tab[0], tab[1], tab[2]));
 }
 
+// RGB値の範囲をチェックする関数
+static void	validate_rgb_value(double value, t_world *world)
+{
+	if (value < 0 || value > 255)
+	{
+		free_world(world);
+		print_err_and_exit("RGB values must be between 0 and 255", 1);
+	}
+}
+
 // 3つの文字列（r, g, b）からRGB構造体を生成する関数
-t_fcolor	char_to_rgb(const char *r, const char *g, const char *b)
+t_fcolor	char_to_rgb(const char *r, const char *g, const char *b, t_world *world)
 {
 	t_fcolor	color;
 
 	color.red = ft_atod(r) / 255;
 	color.green = ft_atod(g) / 255;
 	color.blue = ft_atod(b) / 255;
+	
+	validate_rgb_value(color.red, world);
+	validate_rgb_value(color.green, world);
+	validate_rgb_value(color.blue, world);
 	return (color);
 }
 
 // カンマ区切りの文字列からRGB構造体を生成する関数
-t_fcolor	str_to_rgb(const char *str)
+t_fcolor	str_to_rgb(const char *str, t_world *world)
 {
 	char	**tab;
+	t_fcolor	color;
 
 	tab = ft_split(str, ',');
-	return (char_to_rgb(tab[0], tab[1], tab[2]));
+	if (!tab)
+	{
+		free_world(world);
+		print_err_and_exit("Malloc failed", MALLOC_ERROR);
+	}
+	color = char_to_rgb(tab[0], tab[1], tab[2], world);
+	ft_free_tab(tab);
+	return (color);
 }
 
 // 角度をラジアンに変換する関数

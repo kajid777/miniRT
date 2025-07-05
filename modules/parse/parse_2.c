@@ -108,9 +108,9 @@ t_world	*get_world(const int argc, char *argv[])
 	t_world		*world;
 
 	if (argc < 2)
-		print_err_and_exit("Error: expecting a '.rt'file", 1);
+		print_err_and_exit("expecting a '.rt'file", 1);
 	if (argc > 3)
-		print_err_and_exit("Error: expecting a 2 arguments maximum", 1);
+		print_err_and_exit("expecting a 2 arguments maximum", 1);
 	if (argc == 2 && ft_strncmp_rev(argv[1], ".rt", 3))
 		print_err_and_exit("First argument must be a '.rt' file", 1);
 	if ((fd = open(argv[1], O_RDONLY)) == -1)

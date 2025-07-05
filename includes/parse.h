@@ -53,8 +53,8 @@ char	**ft_split_set(const char *str, const char *charset);
 /* ray.c */
 t_vec3		set_vect(const char *x, const char *y, const char *z);
 t_vec3		str_to_vect(const char *str);
-t_fcolor	str_to_rgb(const char *str);
-t_fcolor	char_to_rgb(const char *r, const char *g, const char *b);
+t_fcolor	str_to_rgb(const char *str, t_world *world);
+t_fcolor	char_to_rgb(const char *r, const char *g, const char *b, t_world *world);
 
 /* set_elements.c */
 void		set_ambient_light(t_world *world, char **data);
