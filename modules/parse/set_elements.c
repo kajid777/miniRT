@@ -43,7 +43,7 @@ void	set_ambient_light(t_world *world, char **data)
 		print_err_and_exit("Malloc failed", 1);
 	}
 	ratio = ft_atod(data[1]);
-	ambient_light->color = *mult_rgb_double(str_to_rgb(data[2]), ratio, world);
+	ambient_light->color = *mult_rgb_double(str_to_rgb(data[2], world), ratio, world);
 	ambient_light->lighting_ratio = ratio;
 	world->ambient = ambient_light;
 }
@@ -52,6 +52,7 @@ void	set_ambient_light(t_world *world, char **data)
 void	set_camera(t_world *world, char **data)
 {
 	t_camera	*camera;
+	double		fov;
 
 	if (!(camera = malloc(sizeof(*camera))))
 	{
@@ -61,7 +62,14 @@ void	set_camera(t_world *world, char **data)
 	camera->position = str_to_vect(data[1]);
 	camera->direction = vec_norm(str_to_vect(data[2]));
 	// camera->up = new_vect(0, 1, 0);
-	camera->fov = ft_atod(data[3]);
+	fov = ft_atod(data[3]);
+	if (fov <= 0 || fov >= 180)
+	{
+		free(camera);
+		free_world(world);
+		print_err_and_exit("Error: FOV must be between 0 and 180 degrees", PARSE_ERROR);
+	}
+	camera->fov = fov;
 	// world->camerasではなくworld->cameraに直接代入
 	world->camera = camera;
 }
@@ -79,6 +87,6 @@ void	set_light(t_world *world, char **data)
 	}
 	light->position = str_to_vect(data[1]);
 	ratio = ft_atod(data[2]) * 255;
-	light->color = *mult_rgb_double(str_to_rgb(data[3]), ratio, world);
+	light->color = *mult_rgb_double(str_to_rgb(data[3], world), ratio, world);
 	world->light = light;
 }

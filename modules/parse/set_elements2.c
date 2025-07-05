@@ -26,7 +26,7 @@ void	set_sphere(t_world *world, char **strs)
 	sphere->center = str_to_vect(strs[1]);
 	diameter = ft_atod(strs[2]);
 	sphere->diameter = diameter;
-	sphere->color = str_to_rgb(strs[3]);
+	sphere->color = str_to_rgb(strs[3], world);
 	world->sphere = sphere;
 }
 
@@ -42,7 +42,7 @@ void	set_plane(t_world *world, char **strs)
 	}
 	plane->point = str_to_vect(strs[1]);
 	plane->normal_vector = vec_norm(str_to_vect(strs[2]));
-	plane->color = str_to_rgb(strs[3]);
+	plane->color = str_to_rgb(strs[3], world);
 	world->plane = plane;
 }
 
@@ -60,7 +60,7 @@ void	set_cylinder(t_world *world, char **strs)
 	cy->direction = vec_norm(str_to_vect(strs[2]));
 	cy->diameter = ft_atod(strs[3]);
 	cy->height = ft_atod(strs[4]);
-	cy->color = str_to_rgb(strs[5]);
+	cy->color = str_to_rgb(strs[5], world);
 	world->cylinder = cy;
 }
 
