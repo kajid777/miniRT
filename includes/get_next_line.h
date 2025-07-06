@@ -20,10 +20,10 @@
 # endif
 
 char	*get_next_line(int fd);
-size_t	ft_strlen(char *s);
+size_t	gnl_strlen(char *s);
 char	*ft_strnjoin(char *s1, char *s2, int n);
-void	*ft_memmove(void *dest, const void *src, int num);
-void	ft_bzero(char *m, int size);
-char	*ft_strchr(char *s, int c);
+void	*gnl_memmove(void *dest, const void *src, int num);
+void	gnl_bzero(char *m, int size);
+char	*gnl_strchr(char *s, int c);
 
 #endif

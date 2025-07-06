@@ -25,9 +25,9 @@ static char	*read_buff(int *ret, char *buff, char *str)
 		{
 			str = ft_strnjoin(str, buff, i + 1);
 			*ret = *ret - (i + 1);
-			l_nl = ft_strlen(buff + i + 1);
-			ft_memmove(buff, buff + i + 1, l_nl);
-			ft_bzero(buff + l_nl, ft_strlen(buff + l_nl));
+			l_nl = gnl_strlen(buff + i + 1);
+			gnl_memmove(buff, buff + i + 1, l_nl);
+			gnl_bzero(buff + l_nl, gnl_strlen(buff + l_nl));
 			return (str);
 		}
 		i++;
@@ -45,21 +45,21 @@ static char	*read_line(int fd, int *ret, char *buff, char *str)
 	}
 	while (0 < *ret)
 	{
-		if (ft_strchr(buff, '\n'))
+		if (gnl_strchr(buff, '\n'))
 		{
 			return (read_buff(ret, buff, str));
 		}
 		else
 		{
 			buff[*ret] = '\0';
-			str = ft_strnjoin(str, buff, ft_strlen(buff));
+			str = ft_strnjoin(str, buff, gnl_strlen(buff));
 			*ret = read(fd, buff, BUFFER_SIZE);
 		}
 	}
 	if (*ret == -1)
 		return (free(str), NULL);
-	if (!ft_strchr(buff, '\n'))
-		ft_bzero(buff, ft_strlen(buff));
+	if (!gnl_strchr(buff, '\n'))
+		gnl_bzero(buff, gnl_strlen(buff));
 	return (str);
 }
 
@@ -72,21 +72,21 @@ static char	*read_nextline(int fd, int *ret, char *buff, char *str)
 	}
 	while (0 < *ret)
 	{
-		if (ft_strchr(buff, '\n'))
+		if (gnl_strchr(buff, '\n'))
 		{
 			return (read_buff(ret, buff, str));
 		}
 		else
 		{	
 			buff[*ret] = '\0';
-			str = ft_strnjoin(str, buff, ft_strlen(buff));
+			str = ft_strnjoin(str, buff, gnl_strlen(buff));
 			*ret = read(fd, buff, BUFFER_SIZE);
 		}
 	}
 	if (*ret == -1)
 		return (free(str), NULL);
-	if (!ft_strchr(buff, '\n'))
-		ft_bzero(buff, ft_strlen(buff));
+	if (!gnl_strchr(buff, '\n'))
+		gnl_bzero(buff, gnl_strlen(buff));
 	return (str);
 }
 
@@ -101,7 +101,7 @@ char	*get_next_line(int fd)
 	str = malloc(1);
 	if (!str)
 		return (NULL);
-	ft_bzero(str, 1);
+	gnl_bzero(str, 1);
 	if (*buff)
 		return (read_nextline(fd, &ret, buff, str));
 	return (read_line(fd, &ret, buff, str));
