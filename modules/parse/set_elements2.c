@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 16:53:11 by hthomas           #+#    #+#             */
-/*   Updated: 2025/07/06 13:02:33 by marvin           ###   ########.fr       */
+/*   Updated: 2025/07/06 13:19:03 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,11 +68,9 @@ void	set_sphere(t_world *world, char **strs)
 	sphere->center = str_to_vect(strs[1]);
 	diameter = ft_atod(strs[2]);
 	validate_sphere_diameter(diameter, sphere, world);
-	
 	sphere->diameter = diameter;
 	sphere->color = str_to_rgb(strs[3], world);
 	sphere->next = NULL;
-	
 	if (world->sphere == NULL)
 	{
 		world->sphere = sphere;
@@ -101,11 +99,9 @@ void	set_plane(t_world *world, char **strs)
 	plane->point = str_to_vect(strs[1]);
 	normal = str_to_vect(strs[2]);
 	validate_normalized_vector(normal, plane, world);
-	
 	plane->normal_vector = vec_norm(normal);
 	plane->color = str_to_rgb(strs[3], world);
 	plane->next = NULL;
-	
 	if (world->plane == NULL)
 	{
 		world->plane = plane;
@@ -134,17 +130,13 @@ void	set_cylinder(t_world *world, char **strs)
 	cy->center = str_to_vect(strs[1]);
 	direction = str_to_vect(strs[2]);
 	validate_normalized_vector(direction, cy, world);
-	
 	cy->direction = vec_norm(direction);
 	cy->diameter = ft_atod(strs[3]);
 	cy->height = ft_atod(strs[4]);
-	
 	validate_cylinder_diameter(cy->diameter, cy, world);
 	validate_cylinder_height(cy->height, cy, world);
-	
 	cy->color = str_to_rgb(strs[5], world);
 	cy->next = NULL;
-	
 	if (world->cylinder == NULL)
 	{
 		world->cylinder = cy;

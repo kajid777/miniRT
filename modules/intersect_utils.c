@@ -18,16 +18,13 @@ double	solve_quadratic(double a, double b, double c)
 	discriminant = b * b - 4 * a * c;
 	if (discriminant < 0)
 		return (-1);
-	
 	sqrt_disc = sqrt(discriminant);
 	t1 = (-b - sqrt_disc) / (2 * a);
 	t2 = (-b + sqrt_disc) / (2 * a);
-	
 	if (t1 > 0.001)
 		return (t1);
 	else if (t2 > 0.001)
 		return (t2);
-	
 	return (-1);
 }
 

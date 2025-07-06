@@ -20,7 +20,6 @@ void *init_world(t_world *world)
     world->sphere = NULL;
     world->plane = NULL;
     world->cylinder = NULL;
-    
     world->mlx = NULL;
     world->win = NULL;    
     return (world);
