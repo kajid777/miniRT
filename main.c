@@ -9,16 +9,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-// #include <stdio.h>
-// #include <X11/X.h>
-// #include <X11/keysym.h>
-// #include "mlx.h"
 #include "includes/miniRT.h"
-
-// main
-// parse
-// makefile
-// test
 int	main(int argc, char **argv)
 {
 	t_world *world;

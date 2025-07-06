@@ -12,7 +12,6 @@
 
 #include "../../includes/miniRT.h"
 
-// セグメントを作成してresult配列に格納する関数
 static int	create_segment(char **result, int seg_idx, const char *str, int seg_start, int seg_len)
 {
 	result[seg_idx] = (char *)malloc((seg_len + 1) * sizeof(char));
@@ -22,13 +21,11 @@ static int	create_segment(char **result, int seg_idx, const char *str, int seg_s
 	return (1);
 }
 
-// 区切り文字を処理する関数
 static void	process_delimiter(int *seg_start, int i)
 {
 	*seg_start = i + 1;
 }
 
-// セグメントを処理する関数
 static int	process_segment(char **result, int *seg_idx, const char *str, int seg_start, int seg_len)
 {
 	if (seg_len > 0)
@@ -40,7 +37,6 @@ static int	process_segment(char **result, int *seg_idx, const char *str, int seg
 	return (1);
 }
 
-// セグメントリストを作成する関数
 static int	make_lists_set(char **result, const char *str, const char *charset, int str_len)
 {
 	int	seg_idx;
@@ -65,7 +61,6 @@ static int	make_lists_set(char **result, const char *str, const char *charset, i
 	return (1);
 }
 
-// 文字セットで文字列を分割する関数
 char	**ft_split_set(const char *str, const char *charset)
 {
 	int		num_segments;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_elements2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 16:53:11 by hthomas           #+#    #+#             */
-/*   Updated: 2022/01/27 11:17:53 by hthomas          ###   ########.fr       */
+/*   Updated: 2025/07/06 13:02:33 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ static void	validate_normalized_vector(t_vec3 vector, void *object, t_world *wor
 	}
 }
 
-// 球体の直径が有効かチェックする関数
 static void	validate_sphere_diameter(double diameter, t_sphere *sphere, t_world *world)
 {
 	if (diameter <= 0)
@@ -36,7 +35,6 @@ static void	validate_sphere_diameter(double diameter, t_sphere *sphere, t_world 
 	}
 }
 
-// 円柱の直径が有効かチェックする関数
 static void	validate_cylinder_diameter(double diameter, t_cylinder *cylinder, t_world *world)
 {
 	if (diameter <= 0)
@@ -47,7 +45,6 @@ static void	validate_cylinder_diameter(double diameter, t_cylinder *cylinder, t_
 	}
 }
 
-// 円柱の高さが有効かチェックする関数
 static void	validate_cylinder_height(double height, t_cylinder *cylinder, t_world *world)
 {
 	if (height <= 0)
@@ -58,7 +55,6 @@ static void	validate_cylinder_height(double height, t_cylinder *cylinder, t_worl
 	}
 }
 
-// シーンに球体（sphere）を追加する関数
 void	set_sphere(t_world *world, char **strs)
 {
 	t_sphere	*sphere;
@@ -75,9 +71,8 @@ void	set_sphere(t_world *world, char **strs)
 	
 	sphere->diameter = diameter;
 	sphere->color = str_to_rgb(strs[3], world);
-	sphere->next = NULL;  // Initialize next pointer
+	sphere->next = NULL;
 	
-	// Add to end of linked list
 	if (world->sphere == NULL)
 	{
 		world->sphere = sphere;
@@ -93,7 +88,6 @@ void	set_sphere(t_world *world, char **strs)
 	}
 }
 
-// シーンに平面（plane）を追加する関数
 void	set_plane(t_world *world, char **strs)
 {
 	t_plane		*plane;
@@ -110,9 +104,8 @@ void	set_plane(t_world *world, char **strs)
 	
 	plane->normal_vector = vec_norm(normal);
 	plane->color = str_to_rgb(strs[3], world);
-	plane->next = NULL;  // Initialize next pointer
+	plane->next = NULL;
 	
-	// Add to end of linked list
 	if (world->plane == NULL)
 	{
 		world->plane = plane;
@@ -128,7 +121,6 @@ void	set_plane(t_world *world, char **strs)
 	}
 }
 
-// シーンに円柱（cylinder）を追加する関数
 void	set_cylinder(t_world *world, char **strs)
 {
 	t_cylinder	*cy;
@@ -151,9 +143,8 @@ void	set_cylinder(t_world *world, char **strs)
 	validate_cylinder_height(cy->height, cy, world);
 	
 	cy->color = str_to_rgb(strs[5], world);
-	cy->next = NULL;  // Initialize next pointer
+	cy->next = NULL;
 	
-	// Add to end of linked list
 	if (world->cylinder == NULL)
 	{
 		world->cylinder = cy;

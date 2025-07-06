@@ -12,27 +12,20 @@
 
 #include "../../includes/miniRT.h"
 
-// シーン構造体の各要素を初期化する関数
 void *init_world(t_world *world)
 {
-    // Initialize ambient lighting
     world->ambient = NULL;
-    // Initialize camera
     world->camera = NULL;
-    // Initialize light
     world->light = NULL;
-    // Initialize new geometry lists
     world->sphere = NULL;
     world->plane = NULL;
     world->cylinder = NULL;
     
-    // Initialize MLX related members
     world->mlx = NULL;
     world->win = NULL;    
     return (world);
 }
 
-// 指定された行が特定の型・要素数かどうかを判定する関数
 bool	check_line(const char *line, char **data, const char *type, const int nb_elements)
 {
 	if (!line)
@@ -47,7 +40,6 @@ bool	check_line(const char *line, char **data, const char *type, const int nb_el
 	return (0);
 }
 
-// 1行の解析処理を行う関数
 static void	process_line(t_world *world, char *line, char **data)
 {
 	if (check_line(line, data, "A", NB_ELEM_AL))
@@ -62,17 +54,14 @@ static void	process_line(t_world *world, char *line, char **data)
 		set_plane(world, data);
 	else if (check_line(line, data, "cy", NB_ELEM_CYLINDER))
 		set_cylinder(world, data);
-	else if (!ft_is_from_charset(line, WHITE_SPACES))//何も書かれていない行から始まる場合
+	else if (!ft_is_from_charset(line, WHITE_SPACES))
 	{
 		free(line);
-		ft_free_tab(data);//文字列配列の全要素をfree
+		ft_free_tab(data);
 		print_err_and_exit("Parse error", PARSE_ERROR);
 	}
 }
 
-// ファイルディスクリプタからシーン情報をパースしてt_world構造体に格納する関数
-// 各行ごとに要素タイプを判定し、対応するセット関数を呼び出す
-// パースエラー時はエラー終了する
 t_world	*parse(int fd)
 {
 	t_world	*world;
@@ -85,7 +74,7 @@ t_world	*parse(int fd)
 	line = get_next_line(fd);
 	while (line != NULL)
 	{
-		data = ft_split_set(line, WHITE_SPACES);//いわゆるスプリット
+		data = ft_split_set(line, WHITE_SPACES);
 		if (!data)
 		{
 			free(line);
@@ -94,14 +83,12 @@ t_world	*parse(int fd)
 		}
 		process_line(world, line, data);
 		free(line);
-		ft_free_tab(data);//文字列配列の全要素をfree
+		ft_free_tab(data);
 		line = get_next_line(fd);
 	}
 	return (world);
 }
 
-// コマンドライン引数を検証し、シーンファイルを開いてパースする関数
-// パース後のt_world構造体を返す
 t_world	*get_world(const int argc, char *argv[])
 {
 	int			fd;

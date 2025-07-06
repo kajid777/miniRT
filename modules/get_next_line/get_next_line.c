@@ -3,19 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dkajiwar <dkajiwar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/25 18:36:06 by dkajiwar          #+#    #+#             */
-/*   Updated: 2024/06/14 18:31:14 by dkajiwar         ###   ########.fr       */
+/*   Updated: 2025/07/06 13:05:21 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/get_next_line.h"
 
-// __attribute__((destructor))
-// static void destructor() {
-//     system("leaks -q a.out");
-// }
+
 
 char	*ft_free(char *buffer, char *buf)
 {

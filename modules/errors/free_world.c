@@ -40,31 +40,26 @@ void	free_world(t_world *world)
 	if (!world)
 		return;
 	
-	// Free camera
 	if (world->camera)
 	{
 		free(world->camera);
 		world->camera = NULL;
 	}
 	
-	// Free light
 	if (world->light)
 	{
 		free(world->light);
 		world->light = NULL;
 	}
 	
-	// Free ambient lighting
 	if (world->ambient)
 	{
 		free(world->ambient);
 		world->ambient = NULL;
 	}
 	
-	// Free all object lists
 	free_obj_lists(world);
 	
-	// Free MLX resources
 	if (world->mlx)
 	{
 		if (world->win)
@@ -77,6 +72,5 @@ void	free_world(t_world *world)
 		world->mlx = NULL;
 	}
 	
-	// Finally free the world structure itself
 	free(world);
 } 
