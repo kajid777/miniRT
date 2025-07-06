@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersect_utils_basic.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: thashimo <thashimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/07/06 18:16:14 by marvin           ###   ########.fr       */
+/*   Created: 2025/07/06 18:38:02 by thashimo          #+#    #+#             */
+/*   Updated: 2025/07/06 18:38:06 by thashimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

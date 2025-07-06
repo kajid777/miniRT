@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersect_cylinder.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: thashimo <thashimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/06 14:08:33 by tac               #+#    #+#             */
-/*   Updated: 2025/07/06 18:18:28 by marvin           ###   ########.fr       */
+/*   Updated: 2025/07/06 18:51:26 by thashimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,5 @@ t_hit	intersect_cylinder(t_vec3 dir, t_vec3 origin, t_cylinder *cylinder,
 		return (cap_hit);
 	}
 	return (new_hit((t_hit_params){vec_new(0, 0, 0),
-			vec_new(0, 0, 0), vec_new(0, 0, 0), -1, 0,
-			NONE, NULL}));
+			vec_new(0, 0, 0), vec_new(0, 0, 0), -1, 0, NONE, NULL}));
 }

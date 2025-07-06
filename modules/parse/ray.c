@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dkajiwar <dkajiwar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: thashimo <thashimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 17:51:22 by hthomas           #+#    #+#             */
-/*   Updated: 2025/07/06 17:21:49 by dkajiwar         ###   ########.fr       */
+/*   Updated: 2025/07/06 18:42:11 by thashimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,13 +73,4 @@ t_fcolor	str_to_rgb(const char *str, t_world *world)
 	color = char_to_rgb(tab[0], tab[1], tab[2], world);
 	ft_free_tab(tab);
 	return (color);
-}
-
-t_ray	new_ray(const t_vec3 position, const t_vec3 direction)
-{
-	t_ray	ray;
-
-	ray.pos = position;
-	ray.dir = direction;
-	return (ray);
 }

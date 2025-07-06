@@ -33,4 +33,4 @@ t_fcolor	*mult_rgb_double(const t_fcolor rgb, const double mult,
 {
 	return (int_to_rgb(rgb.red * mult, rgb.green * mult, rgb.blue * mult,
 			world));
-} 
+}

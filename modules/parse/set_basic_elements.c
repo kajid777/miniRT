@@ -70,4 +70,4 @@ void	set_light(t_world *world, char **data)
 	light->intensity = brightness;
 	light->color = str_to_rgb(data[3], world);
 	world->light = light;
-} 
+}

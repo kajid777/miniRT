@@ -15,7 +15,6 @@
 
 #include "../../includes/miniRT.h"
 
-// Free all object lists (spheres, planes, cylinders)
 void	free_obj_lists(t_world *world)
 {
 	t_sphere	*temp_sphere;
@@ -79,4 +78,12 @@ void	free_world(t_world *world)
 	free_obj_lists(world);
 	free_mlx_resources(world);
 	free(world);
+}
+
+void	disable_window_resize(t_world *world)
+{
+	if (world && world->mlx && world->win)
+		mlx_int_anti_resize_win(world->mlx,
+			((t_win_list *)(world->win))->window,
+			SCREEN_WIDTH, SCREEN_HEIGHT);
 }

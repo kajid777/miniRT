@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_1.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tac <tac@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: thashimo <thashimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 12:21:27 by hthomas           #+#    #+#             */
-/*   Updated: 2025/07/06 14:10:33 by tac              ###   ########.fr       */
+/*   Updated: 2025/07/06 18:42:20 by thashimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,4 +64,13 @@ bool	ft_is_from_charset(const char *str, const char *charset)
 		i++;
 	}
 	return (true);
+}
+
+t_ray	new_ray(const t_vec3 position, const t_vec3 direction)
+{
+	t_ray	ray;
+
+	ray.pos = position;
+	ray.dir = direction;
+	return (ray);
 }

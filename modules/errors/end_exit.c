@@ -14,7 +14,6 @@
 /* ************************************************************************** */
 
 #include "../../includes/miniRT.h"
-#include "../../minilibx-linux/mlx_int.h"
 
 void	print_err_and_exit(char *message, int exit_code)
 {
@@ -59,12 +58,4 @@ int	handle_key_press(int keycode, t_world *world)
 		exit(0);
 	}
 	return (0);
-}
-
-void	disable_window_resize(t_world *world)
-{
-	if (world && world->mlx && world->win)
-		mlx_int_anti_resize_win(world->mlx, 
-			((t_win_list *)(world->win))->window, 
-			SCREEN_WIDTH, SCREEN_HEIGHT);
 }
