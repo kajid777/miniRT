@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_elements.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 16:54:10 by hthomas           #+#    #+#             */
-/*   Updated: 2022/01/25 20:37:03 by hthomas          ###   ########.fr       */
+/*   Updated: 2025/07/06 13:04:30 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ t_fcolor	*mult_rgb_double(const t_fcolor rgb, const double mult, t_world *world)
 	return (int_to_rgb(rgb.red * mult, rgb.green * mult, rgb.blue * mult, world));
 }
 
-// カメラの方向ベクトルが有効かチェックする関数
 static void	validate_camera_direction(t_vec3 direction, t_camera *camera, t_world *world)
 {
 	if (direction.x == 0 && direction.y == 0 && direction.z == 0)
@@ -43,7 +42,6 @@ static void	validate_camera_direction(t_vec3 direction, t_camera *camera, t_worl
 	}
 }
 
-// カメラのFOVが有効かチェックする関数
 static void	validate_camera_fov(double fov, t_camera *camera, t_world *world)
 {
 	if (fov <= 0 || fov >= 180)
@@ -54,7 +52,6 @@ static void	validate_camera_fov(double fov, t_camera *camera, t_world *world)
 	}
 }
 
-// アンビエントライトの比率が有効かチェックする関数
 static void	validate_ambient_ratio(double ratio, t_ambient_lighting *ambient, t_world *world)
 {
 	if (ratio < 0.0 || ratio > 1.0)
@@ -65,7 +62,6 @@ static void	validate_ambient_ratio(double ratio, t_ambient_lighting *ambient, t_
 	}
 }
 
-// 正規化ベクトルが有効かチェックする関数
 static void	validate_normalized_vector(t_vec3 vector, void *object, t_world *world)
 {
 	if (vector.x < -1.0 || vector.x > 1.0 || 
@@ -78,7 +74,6 @@ static void	validate_normalized_vector(t_vec3 vector, void *object, t_world *wor
 	}
 }
 
-// ライトの明度比率が有効かチェックする関数
 static void	validate_light_brightness(double brightness, t_light *light, t_world *world)
 {
 	if (brightness < 0.0 || brightness > 1.0)
@@ -88,7 +83,6 @@ static void	validate_light_brightness(double brightness, t_light *light, t_world
 		print_err_and_exit("Error: Light brightness ratio must be in range [0.0,1.0]", 1);
 	}
 }
-// シーンの環境光（アンビエントライト）を設定する関数
 void	set_ambient_light(t_world *world, char **data)
 {
 	t_ambient_lighting	*ambient_light;
@@ -107,7 +101,6 @@ void	set_ambient_light(t_world *world, char **data)
 	world->ambient = ambient_light;
 }
 
-// シーンにカメラを追加する関数
 void	set_camera(t_world *world, char **data)
 {
 	t_camera	*camera;
@@ -132,7 +125,6 @@ void	set_camera(t_world *world, char **data)
 	world->camera = camera;
 }
 
-// シーンにライトを追加する関数
 void	set_light(t_world *world, char **data)
 {
 	t_light		*light;

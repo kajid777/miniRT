@@ -14,7 +14,6 @@ void calculate_camera_right(t_camera *camera)
 	}
 	normalized_camera_right = vec_norm(camera_right);
 	camera->right = normalized_camera_right;
-	//カメラの向きが天を仰いでいた時の例外処理をする
 }
 
 void calculate_camera_up(t_camera *camera)

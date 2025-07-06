@@ -12,7 +12,6 @@
 
 #include "../../includes/miniRT.h"
 
-// 文字列配列の全要素をfreeする関数
 void	ft_free_tab(char **tab)
 {
 	int	i;
@@ -28,7 +27,6 @@ void	ft_free_tab(char **tab)
 	free(tab);
 }
 
-// 文字が指定されたセットに含まれるかチェックする関数
 int	is_in_charset(char c, const char *charset)
 {
 	int	i;
@@ -43,7 +41,6 @@ int	is_in_charset(char c, const char *charset)
 	return (0);
 }
 
-// セグメント数をカウントする関数
 int	count_segments_set(const char *str, const char *charset)
 {
 	int	count;

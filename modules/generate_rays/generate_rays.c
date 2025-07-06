@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   generate_rays.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dkajiwar <dkajiwar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 18:35:03 by dkajiwar          #+#    #+#             */
-/*   Updated: 2025/06/22 15:36:05 by dkajiwar         ###   ########.fr       */
+/*   Updated: 2025/07/06 13:21:17 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,7 @@ void calculate_pixel_step_size(t_camera camera, t_screen *screen)
 {
 	double	ratio;
 	double	horizontal_half_width;
-	// double	vertical_half_width;
 
-	// vertical_half_width = SCREEN_HEIGHT / 2;
 	ratio = tan((M_PI * (camera.fov) / 180) / 2);
 	horizontal_half_width = (screen->from_camera_distance) * ratio;
 	screen->pixel_step_size =  horizontal_half_width / (SCREEN_WIDTH / 2);
@@ -73,7 +71,6 @@ void calculate_top_left_corner(t_screen *screen)
 
 	a = vec_mul_scalar(screen->pixel_horizontal, SCREEN_WIDTH/2);
 	b = vec_mul_scalar(screen->pixel_vertical, SCREEN_HEIGHT/2);
-
 	top_left_corner = vec_sub(screen->center, a);
 	top_left_corner = vec_sub(top_left_corner, b);
 	screen->top_left = top_left_corner;

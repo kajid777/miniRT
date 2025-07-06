@@ -9,22 +9,12 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-// #include <stdio.h>
-// #include <X11/X.h>
-// #include <X11/keysym.h>
-// #include "mlx.h"
 #include "includes/miniRT.h"
-
-// main
-// parse
-// makefile
-// test
 int	main(int argc, char **argv)
 {
 	t_world *world;
 
 	world = get_world(argc, argv);
-
 	world->mlx = mlx_init();
 	if (!world->mlx)
 	{
@@ -38,7 +28,6 @@ int	main(int argc, char **argv)
 		print_err_and_exit("mlx_new_window failed", 1);
 	}
 	render_scene(world);
-
 	mlx_hook(world->win, 17, 0, exit_with_cross, world);
 	mlx_loop(world->mlx);
 	return (0);

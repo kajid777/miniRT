@@ -12,8 +12,6 @@
 
 #include "../../includes/miniRT.h"
 
-// ... existing code ...
-
 void print_err_and_exit(char *message, int exit_code)
 {
     ft_printf("Error: %s\n", message);
