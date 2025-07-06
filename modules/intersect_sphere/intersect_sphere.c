@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   intersect_sphere.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/07/06 13:48:32 by marvin            #+#    #+#             */
+/*   Updated: 2025/07/06 13:48:32 by marvin           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/miniRT.h"
 
 static double	calc_sphere_quadratic(t_vec3 dir, t_vec3 origin, t_sphere sphere)
