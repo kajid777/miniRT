@@ -1,12 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   intersect_utils.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tac <tac@student.42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/07/06 14:11:29 by tac               #+#    #+#             */
+/*   Updated: 2025/07/06 14:11:30 by tac              ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/miniRT.h"
-
-double	judge(double a, double b, double c)
-{
-	double	result;
-
-	result = pow(b, 2) - 4 * a * c;
-	return (result);
-}
 
 double	solve_quadratic(double a, double b, double c)
 {
@@ -41,11 +45,11 @@ static void	swap_if_needed(double *t1, double *t2)
 }
 
 static void	set_quadratic_results(double sqrt_disc, double a, double b,
-		double *t1, double *t2)
+		double *results)
 {
-	*t1 = (-b - sqrt_disc) / (2 * a);
-	*t2 = (-b + sqrt_disc) / (2 * a);
-	swap_if_needed(t1, t2);
+	results[0] = (-b - sqrt_disc) / (2 * a);
+	results[1] = (-b + sqrt_disc) / (2 * a);
+	swap_if_needed(&results[0], &results[1]);
 }
 
 int	solve_quadratic_both(double a, double b, double c, double *results)
@@ -53,24 +57,25 @@ int	solve_quadratic_both(double a, double b, double c, double *results)
 	double	discriminant;
 	double	sqrt_disc;
 
-	discriminant = judge(a, b, c);
+	discriminant = pow(b, 2) - 4 * a * c;
 	if (discriminant < 0)
 		return (0);
 	if (discriminant == 0)
 	{
-		results[0] = results[1] = -b / (2 * a);
+		results[0] = -b / (2 * a);
+		results[1] = results[0];
 		return (1);
 	}
 	sqrt_disc = sqrt(discriminant);
-	set_quadratic_results(sqrt_disc, a, b, &results[0], &results[1]);
+	set_quadratic_results(sqrt_disc, a, b, results);
 	return (2);
 }
 
-t_vec3	get_norm_sphere(t_vec3 hitpoint, t_vec3 center)
+t_vec3	get_light_dir(t_vec3 hitpoint, t_vec3 light_pos)
 {
-	t_vec3	norm;
+	t_vec3	light_dir;
 
-	norm = vec_sub(hitpoint, center);
-	norm = vec_norm(norm);
-	return (norm);
+	light_dir = vec_sub(light_pos, hitpoint);
+	light_dir = vec_norm(light_dir);
+	return (light_dir);
 }

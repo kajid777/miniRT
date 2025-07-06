@@ -1,23 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_split_set.c                                    :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/01 00:00:00 by user              #+#    #+#             */
-/*   Updated: 2024/01/01 00:00:00 by user             ###   ########.fr       */
+/*   ft_split_set.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+        
+	+:+     */
+/*   By: tac <tac@student.42.fr>                    +#+  +:+      
+	+#+        */
+/*                                                +#+#+#+#+#+  
+	+#+           */
+/*   Created: 2025/07/06 14:09:40 by tac               #+#    #+#             */
+/*   Updated: 2025/07/06 14:09:40 by tac              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/miniRT.h"
 
+
 void	ft_free_tab(char **tab)
 {
-	int	i;
+	int i;
 
 	if (!tab)
-		return;
+		return ;
 	i = 0;
 	while (tab[i])
 	{
@@ -29,7 +33,7 @@ void	ft_free_tab(char **tab)
 
 int	is_in_charset(char c, const char *charset)
 {
-	int	i;
+	int i;
 
 	i = 0;
 	while (charset[i])
@@ -43,8 +47,8 @@ int	is_in_charset(char c, const char *charset)
 
 int	count_segments_set(const char *str, const char *charset)
 {
-	int	count;
-	int	inside_segment;
+	int count;
+	int inside_segment;
 
 	count = 0;
 	inside_segment = 0;

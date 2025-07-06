@@ -1,18 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_split_set_2.c                                  :+:      :+:    :+:   */
+/*   ft_split_set_2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: tac <tac@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/01 00:00:00 by user              #+#    #+#             */
-/*   Updated: 2024/01/01 00:00:00 by user             ###   ########.fr       */
+/*   Created: 2025/07/06 14:09:27 by tac               #+#    #+#             */
+/*   Updated: 2025/07/06 14:09:27 by tac              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/miniRT.h"
 
-static int	create_segment(char **result, int seg_idx, const char *str, int seg_start, int seg_len)
+
+static int	create_segment(char **result, int seg_idx, const char *str,
+		int seg_start, int seg_len)
 {
 	result[seg_idx] = (char *)malloc((seg_len + 1) * sizeof(char));
 	if (result[seg_idx] == 0)
@@ -26,7 +28,8 @@ static void	process_delimiter(int *seg_start, int i)
 	*seg_start = i + 1;
 }
 
-static int	process_segment(char **result, int *seg_idx, const char *str, int seg_start, int seg_len)
+static int	process_segment(char **result, int *seg_idx, const char *str,
+		int seg_start, int seg_len)
 {
 	if (seg_len > 0)
 	{
@@ -37,12 +40,13 @@ static int	process_segment(char **result, int *seg_idx, const char *str, int seg
 	return (1);
 }
 
-static int	make_lists_set(char **result, const char *str, const char *charset, int str_len)
+static int	make_lists_set(char **result, const char *str, const char *charset,
+		int str_len)
 {
-	int	seg_idx;
-	int	seg_start;
-	int	seg_len;
-	int	i;
+	int seg_idx;
+	int seg_start;
+	int seg_len;
+	int i;
 
 	seg_idx = 0;
 	seg_start = 0;
@@ -63,10 +67,10 @@ static int	make_lists_set(char **result, const char *str, const char *charset, i
 
 char	**ft_split_set(const char *str, const char *charset)
 {
-	int		num_segments;
-	char	**result;
-	int		str_len;
-	int		i;
+	int num_segments;
+	char **result;
+	int str_len;
+	int i;
 
 	if (str == NULL)
 		return (NULL);

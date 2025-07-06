@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cylinder_calc.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tac <tac@student.42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/07/06 14:08:18 by tac               #+#    #+#             */
+/*   Updated: 2025/07/06 14:08:21 by tac              ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/miniRT.h"
 
 static int	solve_quadratic_both(double a, double b, double c,
@@ -20,8 +32,8 @@ static int	solve_quadratic_both(double a, double b, double c,
 	return (2);
 }
 
-void	calc_cylinder_vectors(t_vec3 d, t_vec3 o,
-		t_cylinder cylinder, t_cylinder_calc *calc)
+void	calc_cylinder_vectors(t_vec3 d, t_vec3 o, t_cylinder cylinder,
+		t_cylinder_calc *calc)
 {
 	t_vec3	w;
 	double	d_parallel;
@@ -37,12 +49,12 @@ void	calc_cylinder_vectors(t_vec3 d, t_vec3 o,
 int	solve_cylinder_quadratic(t_cylinder_calc calc, t_cylinder cylinder,
 		double results[2])
 {
-	double	quad[3];
+	double quad[3];
 
 	quad[0] = vec_dot(calc.d_perp, calc.d_perp);
 	quad[1] = 2.0 * vec_dot(calc.w_perp, calc.d_perp);
-	quad[2] = vec_dot(calc.w_perp, calc.w_perp)
-		- (cylinder.diameter / 2) * (cylinder.diameter / 2);
+	quad[2] = vec_dot(calc.w_perp, calc.w_perp) - (cylinder.diameter / 2)
+		* (cylinder.diameter / 2);
 	if (quad[0] == 0)
 	{
 		if (quad[2] <= 0)
