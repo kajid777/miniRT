@@ -31,6 +31,7 @@ SRCS		=	main.c \
 				modules/intersect_cylinder/intersect_cylinder.c \
 				modules/intersect_cylinder/cylinder_calc.c \
 				modules/intersect_cylinder/cylinder_utils.c \
+				modules/intersect_shadow.c \
 				modules/intersect_utils.c \
 				modules/intersect_utils_basic.c \
 				modules/vector_cal/vector_cal.c \

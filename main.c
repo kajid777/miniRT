@@ -1,18 +1,20 @@
 /* ************************************************************************** */
+/*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dkajiwar <dkajiwar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: thashimo <thashimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/19 21:06:22 by dkajiwar          #+#    #+#             */
-/*   Updated: 2025/06/15 16:02:03 by dkajiwar         ###   ########.fr       */
+/*   Created: 2025/06/15 16:02:03 by dkajiwar          #+#    #+#             */
+/*   Updated: 2025/07/06 19:11:07 by thashimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/miniRT.h"
+
 int	main(int argc, char **argv)
 {
-	t_world *world;
+	t_world	*world;
 
 	world = get_world(argc, argv);
 	world->mlx = mlx_init();
@@ -21,7 +23,8 @@ int	main(int argc, char **argv)
 		free_world(world);
 		print_err_and_exit("mlx_init failed", 1);
 	}
-	world->win = mlx_new_window(world->mlx, SCREEN_WIDTH, SCREEN_HEIGHT, "miniRT");
+	world->win = mlx_new_window(world->mlx, SCREEN_WIDTH,
+			SCREEN_HEIGHT, "miniRT");
 	if (!world->win)
 	{
 		free_world(world);

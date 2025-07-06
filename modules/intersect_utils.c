@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   intersect_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dkajiwar <dkajiwar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: thashimo <thashimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/06 14:11:29 by tac               #+#    #+#             */
-/*   Updated: 2025/07/06 17:17:12 by dkajiwar         ###   ########.fr       */
+/*   Updated: 2025/07/06 18:37:19 by thashimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../includes/miniRT.h"
+#include "../includes/miniRT.h"
 
 double	solve_quadratic(double a, double b, double c)
 {

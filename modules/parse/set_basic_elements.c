@@ -70,4 +70,4 @@ void	set_light(t_world *world, t_parse_ctx *ctx)
 	light->intensity = brightness;
 	light->color = str_to_rgb(ctx->data[3], world);
 	world->light = light;
-} 
+}

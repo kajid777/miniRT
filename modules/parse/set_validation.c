@@ -89,4 +89,4 @@ void	val_light_brightness(double brightness, t_light *light,
 		print_err_and_exit("Light brightness ratio must be in range [0.0,1.0]",
 			1);
 	}
-} 
+}
