@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 09:51:14 by hthomas           #+#    #+#             */
-/*   Updated: 2025/07/06 19:21:38 by marvin           ###   ########.fr       */
+/*   Updated: 2025/07/06 20:12:53 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,9 @@ void		*init_world(t_world *world);
 bool		check_line(const char *line, char **data, const char *type,
 				const int nb_elements);
 t_world		*parse(int fd);
+
+/* parse_3.c */
+void		validate_required_elements(t_world *world);
 t_world		*get_world(const int argc, char *argv[]);
 
 /* ft_split_set.c */

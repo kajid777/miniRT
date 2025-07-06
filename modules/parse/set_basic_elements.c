@@ -17,6 +17,7 @@ void	set_ambient_light(t_world *world, t_parse_ctx *ctx)
 	t_ambient_lighting	*ambient_light;
 	double				ratio;
 
+	check_duplicate_ambient(world, ctx);
 	ambient_light = malloc(sizeof(*ambient_light));
 	if (!(ambient_light))
 	{
@@ -36,6 +37,7 @@ void	set_camera(t_world *world, t_parse_ctx *ctx)
 	t_vec3		direction;
 	double		fov;
 
+	check_duplicate_camera(world, ctx);
 	camera = malloc(sizeof(*camera));
 	if (!(camera))
 	{
@@ -58,6 +60,7 @@ void	set_light(t_world *world, t_parse_ctx *ctx)
 	t_light	*light;
 	double	brightness;
 
+	check_duplicate_light(world, ctx);
 	light = malloc(sizeof(*light));
 	if (!(light))
 	{

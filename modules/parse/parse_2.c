@@ -40,6 +40,8 @@ bool	check_line(const char *line, char **data, const char *type,
 	return (0);
 }
 
+
+
 static void	process_line(t_world *world, char *line, char **data)
 {
 	t_parse_ctx	ctx;
@@ -66,17 +68,17 @@ static void	process_line(t_world *world, char *line, char **data)
 	}
 }
 
-t_world	*parse(int fd)
+static void	parse_file_content(t_world *world, int fd)
 {
-	t_world	*world;
 	char	*line;
 	char	**data;
 
-	world = malloc(sizeof(*world));
-	if (!(world))
-		print_err_and_exit("malloc failed in parse", 1);
-	init_world(world);
 	line = get_next_line(fd);
+	if (line == NULL)
+	{
+		free_world(world);
+		print_err_and_exit("Error: Empty file", 1);
+	}
 	while (line != NULL)
 	{
 		data = ft_split_set(line, WHITE_SPACES);
@@ -91,30 +93,19 @@ t_world	*parse(int fd)
 		ft_free_tab(data);
 		line = get_next_line(fd);
 	}
-	return (world);
 }
 
-t_world	*get_world(const int argc, char *argv[])
+t_world	*parse(int fd)
 {
-	int		fd;
 	t_world	*world;
 
-	if (argc < 2)
-		print_err_and_exit("expecting a '.rt'file", 1);
-	if (argc > 3)
-		print_err_and_exit("expecting a 2 arguments maximum", 1);
-	if (argc == 2 && ft_strncmp_rev(argv[1], ".rt", 3))
-		print_err_and_exit("First argument must be a '.rt' file", 1);
-	fd = open(argv[1], O_RDONLY);
-	if (fd == -1)
-		print_err_and_exit("open failed", 1);
-	world = parse(fd);
+	world = malloc(sizeof(*world));
 	if (!(world))
-		print_err_and_exit("Parsing error", 1);
-	if (close(fd) == -1)
-	{
-		free_world(world);
-		print_err_and_exit("close failed", 1);
-	}
+		print_err_and_exit("malloc failed in parse", 1);
+	init_world(world);
+	parse_file_content(world, fd);
+	validate_required_elements(world);
 	return (world);
 }
+
+
