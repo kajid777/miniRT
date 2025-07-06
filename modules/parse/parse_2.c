@@ -71,11 +71,9 @@ static void	parse_file_content(t_world *world, int fd)
 	char	*line;
 	char	**data;
 
-	printf("debug1\n");
 	line = get_next_line(fd);
 	if (line == NULL)
 	{
-		printf("debug2\n");
 		free_world(world);
 		print_err_and_exit("Error: Empty file", 1);
 	}
