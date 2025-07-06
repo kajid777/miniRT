@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 15:28:26 by dkajiwar          #+#    #+#             */
-/*   Updated: 2025/07/06 17:48:42 by marvin           ###   ########.fr       */
+/*   Updated: 2025/07/06 18:24:04 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ t_vec3			generate_one_ray(t_camera camera, t_screen screen, int x,
 t_hit			find_closest_intersection(t_vec3 ray_origin, t_vec3 ray_dir,
 					t_world *world);
 t_fcolor		calculate_lighting(t_hit hit, t_world *world);
-t_fcolor		get_object_color(t_hit hit, t_world *world);
+t_fcolor		get_object_color(t_hit hit);
 t_fcolor		trace_ray(t_vec3 ray_origin, t_vec3 ray_dir, t_world *world);
 int				color_to_int(t_fcolor color);
 void			render_scene(t_world *world);
@@ -106,7 +106,7 @@ t_vec3			get_light_dir(t_vec3 hitpoint, t_vec3 light_pos);
 int				is_in_shadow(t_vec3 point, t_vec3 light_pos, t_world *world);
 
 // intersect_sphere.c
-t_hit			intersect_sphere(t_vec3 dir, t_vec3 origin, t_sphere sphere,
+t_hit			intersect_sphere(t_vec3 dir, t_vec3 origin, t_sphere *sphere,
 					t_vec3 light_pos);
 
 // intersect_utils.c (assuming this exists)
@@ -118,7 +118,7 @@ t_vec3			get_norm_cylinder(t_vec3 hitpoint, t_cylinder cylinder);
 t_hit			intersect_cylinder_caps(t_vec3 dir, t_vec3 origin,
 					t_cylinder cylinder);
 t_hit			intersect_cylinder(t_vec3 dir, t_vec3 origin,
-					t_cylinder cylinder, t_vec3 light_pos);
+					t_cylinder *cylinder, t_vec3 light_pos);
 
 // cylinder_calc.c
 void			calc_cylinder_vectors(t_vec3 d, t_vec3 o, t_cylinder cylinder,
@@ -133,7 +133,7 @@ t_hit			get_cylinder_side_hit(t_vec3 d, t_vec3 o, t_cylinder cylinder,
 					t_vec3 light_pos);
 
 // intersect_plane.c
-t_hit			intersect_plane(t_vec3 dir, t_vec3 origin, t_plane plane,
+t_hit			intersect_plane(t_vec3 dir, t_vec3 origin, t_plane *plane,
 					t_vec3 light_pos);
 
 // render.c

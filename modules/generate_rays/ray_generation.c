@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray_generation.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thashimo <thashimo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/06 14:07:40 by tac               #+#    #+#             */
-/*   Updated: 2025/07/06 15:34:22 by thashimo         ###   ########.fr       */
+/*   Updated: 2025/07/06 18:23:31 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ t_fcolor	trace_ray(t_vec3 ray_origin, t_vec3 ray_dir, t_world *world)
 		color.blue = 0.0;
 		return (color);
 	}
-	object_color = get_object_color(hit, world);
+	object_color = get_object_color(hit);
 	color = calculate_lighting(hit, world);
 	color.red *= object_color.red;
 	color.green *= object_color.green;

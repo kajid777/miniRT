@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersect_cylinder.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thashimo <thashimo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/06 14:08:33 by tac               #+#    #+#             */
-/*   Updated: 2025/07/06 16:56:15 by thashimo         ###   ########.fr       */
+/*   Updated: 2025/07/06 18:18:28 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,16 +42,16 @@ static t_hit	check_cylinder_cap(t_vec3 dir, t_vec3 origin,
 			cylinder.direction);
 	if (t <= 0)
 		return (new_hit((t_hit_params){vec_new(0, 0, 0),
-				vec_new(0, 0, 0), vec_new(0, 0, 0), INFINITY, 0, NONE}));
+				vec_new(0, 0, 0), vec_new(0, 0, 0), INFINITY, 0, NONE, NULL}));
 	hp = get_hitpoint(t, dir, origin);
 	to_center = vec_sub(hp, cap_center);
 	distance_sq = vec_dot(to_center, to_center);
 	if (distance_sq <= radius_sq)
 		return (new_hit((t_hit_params){hp, cylinder.direction,
-				get_light_dir(hp, vec_new(0, 0, 0)), t, 1, CYLINDER}));
+				get_light_dir(hp, vec_new(0, 0, 0)), t, 1, CYLINDER, NULL}));
 	return (new_hit((t_hit_params){vec_new(0, 0, 0),
 			vec_new(0, 0, 0), vec_new(0, 0, 0),
-			INFINITY, 0, NONE}));
+			INFINITY, 0, NONE, NULL}));
 }
 
 t_hit	intersect_cylinder_caps(t_vec3 dir, t_vec3 origin, t_cylinder cylinder)
@@ -63,7 +63,7 @@ t_hit	intersect_cylinder_caps(t_vec3 dir, t_vec3 origin, t_cylinder cylinder)
 
 	if (vec_dot(dir, cylinder.direction) == 0)
 		return (new_hit((t_hit_params){vec_new(0, 0, 0),
-				vec_new(0, 0, 0), vec_new(0, 0, 0), INFINITY, 0, NONE}));
+				vec_new(0, 0, 0), vec_new(0, 0, 0), INFINITY, 0, NONE, NULL}));
 	cap_center_bottom = vec_add(cylinder.center,
 			vec_mul_scalar(cylinder.direction, -cylinder.height / 2));
 	cap_center_top = vec_add(cylinder.center, vec_mul_scalar(cylinder.direction,
@@ -83,25 +83,35 @@ t_hit	intersect_cylinder_caps(t_vec3 dir, t_vec3 origin, t_cylinder cylinder)
 	return (top_hit);
 }
 
-t_hit	intersect_cylinder(t_vec3 dir, t_vec3 origin, t_cylinder cylinder,
+t_hit	intersect_cylinder(t_vec3 dir, t_vec3 origin, t_cylinder *cylinder,
 		t_vec3 light_pos)
 {
 	t_hit	side_hit;
 	t_hit	cap_hit;
 
-	side_hit = get_cylinder_side_hit(dir, origin, cylinder, light_pos);
-	cap_hit = intersect_cylinder_caps(dir, origin, cylinder);
+	side_hit = get_cylinder_side_hit(dir, origin, *cylinder, light_pos);
+	cap_hit = intersect_cylinder_caps(dir, origin, *cylinder);
 	if (side_hit.is_hit && cap_hit.is_hit)
 	{
 		if (side_hit.t < cap_hit.t)
+		{
+			side_hit.hit_object = cylinder;
 			return (side_hit);
+		}
+		cap_hit.hit_object = cylinder;
 		return (cap_hit);
 	}
 	if (side_hit.is_hit)
+	{
+		side_hit.hit_object = cylinder;
 		return (side_hit);
+	}
 	if (cap_hit.is_hit)
+	{
+		cap_hit.hit_object = cylinder;
 		return (cap_hit);
+	}
 	return (new_hit((t_hit_params){vec_new(0, 0, 0),
 			vec_new(0, 0, 0), vec_new(0, 0, 0), -1, 0,
-			NONE}));
+			NONE, NULL}));
 }

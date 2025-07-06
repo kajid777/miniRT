@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray_lighting.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thashimo <thashimo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/06 14:07:53 by tac               #+#    #+#             */
-/*   Updated: 2025/07/06 16:53:57 by thashimo         ###   ########.fr       */
+/*   Updated: 2025/07/06 18:23:14 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,16 +73,16 @@ t_fcolor	calculate_lighting(t_hit hit, t_world *world)
 	return (result);
 }
 
-t_fcolor	get_object_color(t_hit hit, t_world *world)
+t_fcolor	get_object_color(t_hit hit)
 {
 	t_fcolor	object_color;
 
-	if (hit.obj_type == SPHERE && world->sphere)
-		object_color = world->sphere->color;
-	else if (hit.obj_type == PLANE && world->plane)
-		object_color = world->plane->color;
-	else if (hit.obj_type == CYLINDER && world->cylinder)
-		object_color = world->cylinder->color;
+	if (hit.obj_type == SPHERE && hit.hit_object)
+		object_color = ((t_sphere *)hit.hit_object)->color;
+	else if (hit.obj_type == PLANE && hit.hit_object)
+		object_color = ((t_plane *)hit.hit_object)->color;
+	else if (hit.obj_type == CYLINDER && hit.hit_object)
+		object_color = ((t_cylinder *)hit.hit_object)->color;
 	else
 	{
 		object_color.red = 1.0;

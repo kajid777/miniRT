@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersect_utils_basic.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dkajiwar <dkajiwar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/07/06 17:29:35 by dkajiwar         ###   ########.fr       */
+/*   Updated: 2025/07/06 18:16:14 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,18 @@ static void	set_hit_extra(t_hit *hit, double t, int is_hit, t_obj_type obj_type)
 	hit->obj_type = obj_type;
 }
 
+static void	set_hit_object(t_hit *hit, void *hit_object)
+{
+	hit->hit_object = hit_object;
+}
+
 t_hit	new_hit(t_hit_params params)
 {
 	t_hit	new;
 
 	set_hit_basic(&new, params.hp, params.norm, params.light_dir);
 	set_hit_extra(&new, params.t, params.is_hit, params.obj_type);
+	set_hit_object(&new, params.hit_object);
 	return (new);
 }
 

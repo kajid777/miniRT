@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray_intersection.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thashimo <thashimo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/06 14:07:48 by tac               #+#    #+#             */
-/*   Updated: 2025/07/06 16:53:43 by thashimo         ###   ########.fr       */
+/*   Updated: 2025/07/06 18:19:31 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static t_hit	check_sphere_intersection(t_vec3 ray_origin, t_vec3 ray_dir,
 	while (current_sphere)
 	{
 		current_hit = intersect_sphere(ray_dir, ray_origin,
-				*current_sphere, world->light->position);
+				current_sphere, world->light->position);
 		if (current_hit.is_hit && current_hit.t > 0.001
 			&& current_hit.t < closest_sphere_t)
 		{
@@ -53,7 +53,7 @@ static t_hit	check_plane_intersection(t_vec3 ray_origin, t_vec3 ray_dir,
 	while (current_plane)
 	{
 		current_hit = intersect_plane(ray_dir, ray_origin,
-				*current_plane, world->light->position);
+				current_plane, world->light->position);
 		if (current_hit.is_hit && current_hit.t > 0.001
 			&& current_hit.t < closest_plane_t)
 		{
@@ -79,7 +79,7 @@ static t_hit	check_cylinder_intersection(t_vec3 ray_origin, t_vec3 ray_dir,
 	while (current_cylinder)
 	{
 		current_hit = intersect_cylinder(ray_dir, ray_origin,
-				*current_cylinder, world->light->position);
+				current_cylinder, world->light->position);
 		if (current_hit.is_hit && current_hit.t > 0.001
 			&& current_hit.t < closest_cylinder_t)
 		{
