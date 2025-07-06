@@ -42,18 +42,22 @@ bool	check_line(const char *line, char **data, const char *type,
 
 static void	process_line(t_world *world, char *line, char **data)
 {
+	t_parse_ctx	ctx;
+
+	ctx.line = line;
+	ctx.data = data;
 	if (check_line(line, data, "A", NB_ELEM_AL))
-		set_ambient_light(world, data);
+		set_ambient_light(world, &ctx);
 	else if (check_line(line, data, "C", NB_ELEM_CAMERA))
-		set_camera(world, data);
+		set_camera(world, &ctx);
 	else if (check_line(line, data, "L", NB_ELEM_LIGHT))
-		set_light(world, data);
+		set_light(world, &ctx);
 	else if (check_line(line, data, "sp", NB_ELEM_SPHERE))
-		set_sphere(world, data);
+		set_sphere(world, &ctx);
 	else if (check_line(line, data, "pl", NB_ELEM_PLANE))
-		set_plane(world, data);
+		set_plane(world, &ctx);
 	else if (check_line(line, data, "cy", NB_ELEM_CYLINDER))
-		set_cylinder(world, data);
+		set_cylinder(world, &ctx);
 	else if (!ft_is_from_charset(line, WHITE_SPACES))
 	{
 		free(line);

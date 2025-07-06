@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 15:28:26 by dkajiwar          #+#    #+#             */
-/*   Updated: 2025/07/06 18:24:04 by marvin           ###   ########.fr       */
+/*   Updated: 2025/07/06 19:21:20 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,14 +157,15 @@ int				process_segment(t_split_segment *seg);
 
 // set_validation.c
 void			val_camera_direction(t_vec3 direction, t_camera *camera,
-					t_world *world);
-void			val_camera_fov(double fov, t_camera *camera, t_world *world);
+					t_world *world, t_parse_ctx *ctx);
+void			val_camera_fov(double fov, t_camera *camera, t_world *world,
+					t_parse_ctx *ctx);
 void			val_ambient_ratio(double ratio, t_ambient_lighting *ambient,
-					t_world *world);
+					t_world *world, t_parse_ctx *ctx);
 void			val_normalized_vector(t_vec3 vector, void *object,
-					t_world *world);
+					t_world *world, t_parse_ctx *ctx);
 void			val_light_brightness(double brightness, t_light *light,
-					t_world *world);
+					t_world *world, t_parse_ctx *ctx);
 
 // set_colors.c
 t_fcolor		*int_to_rgb(const int r, const int g, const int b,
