@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: thashimo <thashimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 15:28:26 by dkajiwar          #+#    #+#             */
-/*   Updated: 2025/07/06 19:36:51 by marvin           ###   ########.fr       */
+/*   Updated: 2025/07/06 20:20:45 by thashimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "../ft_printf/libft_srcs/libft.h"
 # include "../minilibx-linux/mlx.h"
+# include "../minilibx-linux/mlx_int.h"
 # include "get_next_line.h"
 # include "parse.h"
 # include "types.h"
@@ -160,17 +161,13 @@ void			val_camera_direction(t_vec3 direction, t_camera *camera,
 					t_world *world, t_parse_ctx *ctx);
 void			val_camera_fov(double fov, t_camera *camera, t_world *world,
 					t_parse_ctx *ctx);
-					t_world *world, t_parse_ctx *ctx);
 void			val_camera_fov(double fov, t_camera *camera, t_world *world,
 					t_parse_ctx *ctx);
 void			val_ambient_ratio(double ratio, t_ambient_lighting *ambient,
 					t_world *world, t_parse_ctx *ctx);
-					t_world *world, t_parse_ctx *ctx);
 void			val_normalized_vector(t_vec3 vector, void *object,
 					t_world *world, t_parse_ctx *ctx);
-					t_world *world, t_parse_ctx *ctx);
 void			val_light_brightness(double brightness, t_light *light,
-					t_world *world, t_parse_ctx *ctx);
 					t_world *world, t_parse_ctx *ctx);
 
 // set_colors.c
