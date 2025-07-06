@@ -9,6 +9,7 @@ SRCS		=	main.c \
 				modules/get_next_line/get_next_line_utils.c \
 				modules/parse/parse_1.c \
 				modules/parse/parse_2.c \
+				modules/parse/parse_3.c \
 				modules/parse/ft_split_set.c \
 				modules/parse/ft_split_set_2.c \
 				modules/parse/ft_split_set_3.c \
