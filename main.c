@@ -27,8 +27,10 @@ int	main(int argc, char **argv)
 		free_world(world);
 		print_err_and_exit("mlx_new_window failed", 1);
 	}
+	disable_window_resize(world);
 	render_scene(world);
 	mlx_hook(world->win, 17, 0, exit_with_cross, world);
+	mlx_key_hook(world->win, handle_key_press, world);
 	mlx_loop(world->mlx);
 	return (0);
 }

@@ -14,6 +14,7 @@
 /* ************************************************************************** */
 
 #include "../../includes/miniRT.h"
+#include "../../minilibx-linux/mlx_int.h"
 
 void	print_err_and_exit(char *message, int exit_code)
 {
@@ -46,4 +47,24 @@ int	exit_with_cross(t_world *world)
 		mlx_loop_end(world->mlx);
 	free_world(world);
 	exit(0);
+}
+
+int	handle_key_press(int keycode, t_world *world)
+{
+	if (keycode == 65307)
+	{
+		if (world && world->mlx)
+			mlx_loop_end(world->mlx);
+		free_world(world);
+		exit(0);
+	}
+	return (0);
+}
+
+void	disable_window_resize(t_world *world)
+{
+	if (world && world->mlx && world->win)
+		mlx_int_anti_resize_win(world->mlx, 
+			((t_win_list *)(world->win))->window, 
+			SCREEN_WIDTH, SCREEN_HEIGHT);
 }
