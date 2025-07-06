@@ -115,6 +115,16 @@ typedef enum e_obj_type {
 // } t_obj_list;
 
 // Represents the main world state, including window and screen info
+// Hit parameters structure for creating hits
+typedef struct s_hit_params {
+    t_vec3  hit_point;
+    t_vec3  norm;
+    t_vec3  light_dir;
+    double  t;
+    int     is_hit;
+    t_obj_type obj_type;
+} t_hit_params;
+
 // Hit structure for ray-object intersection
 typedef struct s_hit {
     t_vec3  hit_point;

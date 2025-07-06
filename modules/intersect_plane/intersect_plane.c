@@ -23,18 +23,18 @@ static t_hit	plane_intersection_calc(t_vec3 dir, t_vec3 origin,
 	norm = vec_norm(plane.normal_vector);
 	denominator = vec_dot(dir, norm);
 	if (fabs(denominator) < DBL_EPSILON)
-		return (new_hit(vec_new(0, 0, 0), vec_new(0, 0, 0), vec_new(0, 0, 0),
-				-1, 0, NONE));
+		return (new_hit((t_hit_params){vec_new(0, 0, 0), vec_new(0, 0, 0), vec_new(0, 0, 0),
+				-1, 0, NONE}));
 	t = vec_dot(vec_sub(plane.point, origin), norm) / denominator;
 	if (t <= 0)
-		return (new_hit(vec_new(0, 0, 0), vec_new(0, 0, 0), vec_new(0, 0, 0),
-				-1, 0, NONE));
+		return (new_hit((t_hit_params){vec_new(0, 0, 0), vec_new(0, 0, 0), vec_new(0, 0, 0),
+				-1, 0, NONE}));
 	hp = get_hitpoint(t, dir, origin);
 	if (denominator < 0)
-		return (new_hit(hp, norm, get_light_dir(hp, light_pos), t, 1, PLANE));
+		return (new_hit((t_hit_params){hp, norm, get_light_dir(hp, light_pos), t, 1, PLANE}));
 	else
-		return (new_hit(hp, vec_mul_scalar(norm, -1), get_light_dir(hp,
-					light_pos), t, 1, PLANE));
+		return (new_hit((t_hit_params){hp, vec_mul_scalar(norm, -1), get_light_dir(hp,
+					light_pos), t, 1, PLANE}));
 }
 
 t_hit	intersect_plane(t_vec3 dir, t_vec3 origin, t_plane plane,

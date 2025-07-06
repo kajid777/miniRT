@@ -38,12 +38,12 @@ static t_hit	sphere_intersection_calc(t_vec3 dir, t_vec3 origin,
 
 	t = calc_sphere_quadratic(dir, origin, sphere);
 	if (t == -1)
-		return (new_hit(vec_new(0, 0, 0), vec_new(0, 0, 0), vec_new(0, 0, 0),
-				-1, 0, NONE));
+		return (new_hit((t_hit_params){vec_new(0, 0, 0), vec_new(0, 0, 0), vec_new(0, 0, 0),
+				-1, 0, NONE}));
 	hp = get_hitpoint(t, dir, origin);
 	light_dir = get_light_dir(hp, light_pos);
-	return (new_hit(hp, get_norm_sphere(hp, sphere.center), light_dir, t, 1,
-			SPHERE));
+	return (new_hit((t_hit_params){hp, get_norm_sphere(hp, sphere.center), light_dir, t, 1,
+			SPHERE}));
 }
 
 t_vec3	get_norm_sphere(t_vec3 hit_point, t_vec3 center)

@@ -26,12 +26,12 @@ static void	set_hit_extra(t_hit *hit, double t, int is_hit, t_obj_type obj_type)
 	hit->obj_type = obj_type;
 }
 
-t_hit	new_hit(t_vec3 hp, t_vec3 norm, t_vec3 light_dir, double t, int is_hit, t_obj_type obj_type)
+t_hit	new_hit(t_hit_params params)
 {
 	t_hit	new;
 
-	set_hit_basic(&new, hp, norm, light_dir);
-	set_hit_extra(&new, t, is_hit, obj_type);
+	set_hit_basic(&new, params.hit_point, params.norm, params.light_dir);
+	set_hit_extra(&new, params.t, params.is_hit, params.obj_type);
 	return (new);
 }
 
