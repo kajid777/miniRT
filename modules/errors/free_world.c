@@ -12,6 +12,29 @@
 
 #include "../../includes/miniRT.h"
 
+// Free all object lists (spheres, planes, cylinders)
+void	free_obj_lists(t_world *world)
+{
+	while (world->sphere)
+	{
+		t_sphere *temp = world->sphere;
+		world->sphere = world->sphere->next;
+		free(temp);
+	}
+	while (world->plane)
+	{
+		t_plane *temp = world->plane;
+		world->plane = world->plane->next;
+		free(temp);
+	}
+	while (world->cylinder)
+	{
+		t_cylinder *temp = world->cylinder;
+		world->cylinder = world->cylinder->next;
+		free(temp);
+	}
+}
+
 void	free_world(t_world *world)
 {
 	if (!world)
@@ -38,26 +61,8 @@ void	free_world(t_world *world)
 		world->ambient = NULL;
 	}
 	
-	// Free sphere
-	if (world->sphere)
-	{
-		free(world->sphere);
-		world->sphere = NULL;
-	}
-	
-	// Free plane
-	if (world->plane)
-	{
-		free(world->plane);
-		world->plane = NULL;
-	}
-	
-	// Free cylinder
-	if (world->cylinder)
-	{
-		free(world->cylinder);
-		world->cylinder = NULL;
-	}
+	// Free all object lists
+	free_obj_lists(world);
 	
 	// Free MLX resources
 	if (world->mlx)

@@ -58,6 +58,7 @@ typedef struct s_sphere {
     t_vec3      center;
     double      diameter;
     t_fcolor    color;
+    struct s_sphere *next;  // Next sphere in the list
 } t_sphere;
 
 // Represents a plane with a point, normal vector, and color
@@ -65,6 +66,7 @@ typedef struct s_plane {
     t_vec3      point;
     t_vec3      normal_vector;
     t_fcolor    color;
+    struct s_plane *next;   // Next plane in the list
 } t_plane;
 
 // Represents a cylinder with center, direction, diameter, height, and color
@@ -74,6 +76,7 @@ typedef struct s_cylinder {
     double      diameter;
     double      height;
     t_fcolor    color;
+    struct s_cylinder *next;  // Next cylinder in the list
 } t_cylinder;
 
 // Enum for object type

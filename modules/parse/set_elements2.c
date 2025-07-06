@@ -75,7 +75,22 @@ void	set_sphere(t_world *world, char **strs)
 	
 	sphere->diameter = diameter;
 	sphere->color = str_to_rgb(strs[3], world);
-	world->sphere = sphere;
+	sphere->next = NULL;  // Initialize next pointer
+	
+	// Add to end of linked list
+	if (world->sphere == NULL)
+	{
+		world->sphere = sphere;
+	}
+	else
+	{
+		t_sphere *current = world->sphere;
+		while (current->next != NULL)
+		{
+			current = current->next;
+		}
+		current->next = sphere;
+	}
 }
 
 // シーンに平面（plane）を追加する関数
@@ -95,7 +110,22 @@ void	set_plane(t_world *world, char **strs)
 	
 	plane->normal_vector = vec_norm(normal);
 	plane->color = str_to_rgb(strs[3], world);
-	world->plane = plane;
+	plane->next = NULL;  // Initialize next pointer
+	
+	// Add to end of linked list
+	if (world->plane == NULL)
+	{
+		world->plane = plane;
+	}
+	else
+	{
+		t_plane *current = world->plane;
+		while (current->next != NULL)
+		{
+			current = current->next;
+		}
+		current->next = plane;
+	}
 }
 
 // シーンに円柱（cylinder）を追加する関数
@@ -121,6 +151,21 @@ void	set_cylinder(t_world *world, char **strs)
 	validate_cylinder_height(cy->height, cy, world);
 	
 	cy->color = str_to_rgb(strs[5], world);
-	world->cylinder = cy;
+	cy->next = NULL;  // Initialize next pointer
+	
+	// Add to end of linked list
+	if (world->cylinder == NULL)
+	{
+		world->cylinder = cy;
+	}
+	else
+	{
+		t_cylinder *current = world->cylinder;
+		while (current->next != NULL)
+		{
+			current = current->next;
+		}
+		current->next = cy;
+	}
 }
 

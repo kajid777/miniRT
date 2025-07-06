@@ -75,6 +75,7 @@ int		exit_with_cross(t_world *game);
 
 //errors/free_world.c
 void	free_world(t_world *world);
+void	free_obj_lists(t_world *world);
 
 //intersect_utils_basic.c
 t_hit	new_hit(t_vec3 hp, t_vec3 norm, t_vec3 light_dir, double t, int is_hit, t_obj_type obj_type);
