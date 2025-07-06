@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split_set_3.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dkajiwar <dkajiwar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/06 15:36:25 by dkajiwar          #+#    #+#             */
-/*   Updated: 2025/07/06 17:26:28 by dkajiwar         ###   ########.fr       */
+/*   Updated: 2025/07/06 17:41:37 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,8 @@ int	handle_delimiter(t_split_segment *seg, int *seg_start, int i)
 	set_segment_range(seg, *seg_start, i - *seg_start);
 	if (!process_segment(seg))
 		return (0);
-	process_delimiter(seg_start, i);
-	return (1);
-}
-
-void	process_delimiter(int *seg_start, int i)
-{
 	*seg_start = i + 1;
+	return (1);
 }
 
 int	process_segment(t_split_segment *seg)

@@ -3,26 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   set_cylinders.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dkajiwar <dkajiwar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/06 14:10:00 by marvin            #+#    #+#             */
-/*   Updated: 2025/07/06 17:27:02 by dkajiwar         ###   ########.fr       */
+/*   Updated: 2025/07/06 17:57:41 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/miniRT.h"
-
-static void	val_normalized_vector(t_vec3 vector, void *object, t_world *world)
-{
-	if (vector.x < -1.0 || vector.x > 1.0 || vector.y < -1.0 || vector.y > 1.0
-		|| vector.z < -1.0 || vector.z > 1.0)
-	{
-		free(object);
-		free_world(world);
-		print_err_and_exit("Normalized vector must be in range [-1,1] for axis",
-			1);
-	}
-}
 
 static void	add_cylinder_to_list(t_world *world, t_cylinder *cylinder)
 {

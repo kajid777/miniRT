@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thashimo <thashimo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 15:28:26 by dkajiwar          #+#    #+#             */
-/*   Updated: 2025/07/06 17:23:18 by thashimo         ###   ########.fr       */
+/*   Updated: 2025/07/06 17:48:42 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,6 +152,22 @@ void			set_segment_range(t_split_segment *seg, int seg_start,
 int				handle_delimiter(t_split_segment *seg, int *seg_start, int i);
 int				create_segment(t_split_segment *seg);
 int				process_segment(t_split_segment *seg);
-void			process_delimiter(int *seg_start, int i);
+
+// set_validation.c
+void			val_camera_direction(t_vec3 direction, t_camera *camera,
+					t_world *world);
+void			val_camera_fov(double fov, t_camera *camera, t_world *world);
+void			val_ambient_ratio(double ratio, t_ambient_lighting *ambient,
+					t_world *world);
+void			val_normalized_vector(t_vec3 vector, void *object,
+					t_world *world);
+void			val_light_brightness(double brightness, t_light *light,
+					t_world *world);
+
+// set_colors.c
+t_fcolor		*int_to_rgb(const int r, const int g, const int b,
+					t_world *world);
+t_fcolor		*mult_rgb_double(const t_fcolor rgb, const double mult,
+					t_world *world);
 
 #endif

@@ -13,7 +13,9 @@ SRCS		=	main.c \
 				modules/parse/ft_split_set_2.c \
 				modules/parse/ft_split_set_3.c \
 				modules/parse/ray.c \
-				modules/parse/set_elements.c \
+				modules/parse/set_colors.c \
+				modules/parse/set_validation.c \
+				modules/parse/set_basic_elements.c \
 				modules/parse/set_spheres.c \
 				modules/parse/set_planes.c \
 				modules/parse/set_cylinders.c \
