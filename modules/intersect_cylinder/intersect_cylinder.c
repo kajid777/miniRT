@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   intersect_cylinder.c                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tac <tac@student.42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/07/06 12:55:12 by tac               #+#    #+#             */
+/*   Updated: 2025/07/06 12:55:13 by tac              ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/miniRT.h"
 
 t_vec3	get_norm_cylinder(t_vec3 hitpoint, t_cylinder cylinder)
@@ -17,7 +29,7 @@ t_vec3	get_norm_cylinder(t_vec3 hitpoint, t_cylinder cylinder)
 }
 
 static t_hit	check_cylinder_cap(t_vec3 dir, t_vec3 origin,
-		t_cylinder cylinder, t_vec3 cap_center)
+		t_cylinder cylinder, t_vec3 cap_center, t_cylinder *cylinder_ptr)
 {
 	double	t;
 	t_vec3	hp;
@@ -30,19 +42,19 @@ static t_hit	check_cylinder_cap(t_vec3 dir, t_vec3 origin,
 		/ vec_dot(dir, cylinder.direction);
 	if (t <= 0)
 		return (new_hit(vec_new(0, 0, 0), vec_new(0, 0, 0),
-				vec_new(0, 0, 0), INFINITY, 0, NONE));
+				vec_new(0, 0, 0), INFINITY, 0, NONE, NULL));
 	hp = get_hitpoint(t, dir, origin);
 	to_center = vec_sub(hp, cap_center);
 	distance_sq = vec_dot(to_center, to_center);
 	if (distance_sq <= radius_sq)
 		return (new_hit(hp, cylinder.direction,
-				get_light_dir(hp, vec_new(0, 0, 0)), t, 1, CYLINDER));
+				get_light_dir(hp, vec_new(0, 0, 0)), t, 1, CYLINDER, cylinder_ptr));
 	return (new_hit(vec_new(0, 0, 0), vec_new(0, 0, 0),
-			vec_new(0, 0, 0), INFINITY, 0, NONE));
+			vec_new(0, 0, 0), INFINITY, 0, NONE, NULL));
 }
 
 t_hit	intersect_cylinder_caps(t_vec3 dir, t_vec3 origin,
-		t_cylinder cylinder)
+		t_cylinder cylinder, t_cylinder *cylinder_ptr)
 {
 	t_vec3	cap_center_bottom;
 	t_vec3	cap_center_top;
@@ -51,15 +63,15 @@ t_hit	intersect_cylinder_caps(t_vec3 dir, t_vec3 origin,
 
 	if (vec_dot(dir, cylinder.direction) == 0)
 		return (new_hit(vec_new(0, 0, 0), vec_new(0, 0, 0),
-				vec_new(0, 0, 0), INFINITY, 0, NONE));
+				vec_new(0, 0, 0), INFINITY, 0, NONE, NULL));
 	cap_center_bottom = vec_add(cylinder.center,
 			vec_mul_scalar(cylinder.direction, -cylinder.height / 2));
 	cap_center_top = vec_add(cylinder.center,
 			vec_mul_scalar(cylinder.direction, cylinder.height / 2));
-	bottom_hit = check_cylinder_cap(dir, origin, cylinder, cap_center_bottom);
+	bottom_hit = check_cylinder_cap(dir, origin, cylinder, cap_center_bottom, cylinder_ptr);
 	if (bottom_hit.is_hit)
 		bottom_hit.norm = vec_mul_scalar(cylinder.direction, -1);
-	top_hit = check_cylinder_cap(dir, origin, cylinder, cap_center_top);
+	top_hit = check_cylinder_cap(dir, origin, cylinder, cap_center_top, cylinder_ptr);
 	if (bottom_hit.is_hit && top_hit.is_hit)
 	{
 		if (bottom_hit.t < top_hit.t)
@@ -72,13 +84,13 @@ t_hit	intersect_cylinder_caps(t_vec3 dir, t_vec3 origin,
 }
 
 t_hit	intersect_cylinder(t_vec3 dir, t_vec3 origin,
-		t_cylinder cylinder, t_vec3 light_pos)
+		t_cylinder cylinder, t_vec3 light_pos, t_cylinder *cylinder_ptr)
 {
 	t_hit	side_hit;
 	t_hit	cap_hit;
 
-	side_hit = get_cylinder_side_hit(dir, origin, cylinder, light_pos);
-	cap_hit = intersect_cylinder_caps(dir, origin, cylinder);
+	side_hit = get_cylinder_side_hit(dir, origin, cylinder, light_pos, cylinder_ptr);
+	cap_hit = intersect_cylinder_caps(dir, origin, cylinder, cylinder_ptr);
 	if (side_hit.is_hit && cap_hit.is_hit)
 	{
 		if (side_hit.t < cap_hit.t)
@@ -90,5 +102,5 @@ t_hit	intersect_cylinder(t_vec3 dir, t_vec3 origin,
 	if (cap_hit.is_hit)
 		return (cap_hit);
 	return (new_hit(vec_new(0, 0, 0), vec_new(0, 0, 0),
-			vec_new(0, 0, 0), -1, 0, NONE));
+			vec_new(0, 0, 0), -1, 0, NONE, NULL));
 }

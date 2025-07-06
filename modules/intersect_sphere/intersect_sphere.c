@@ -1,6 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   intersect_sphere.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tac <tac@student.42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/07/06 12:52:41 by tac               #+#    #+#             */
+/*   Updated: 2025/07/06 12:54:33 by tac              ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/miniRT.h"
 
-static double	calc_sphere_quadratic(t_vec3 dir, t_vec3 origin, t_sphere sphere)
+static double	calc_sphere_quadratic(t_vec3 dir, t_vec3 origin,
+		t_sphere sphere)
 {
 	t_vec3	oc;
 	double	r;
@@ -16,8 +29,8 @@ static double	calc_sphere_quadratic(t_vec3 dir, t_vec3 origin, t_sphere sphere)
 	return (solve_quadratic(j_a, j_b, j_c));
 }
 
-static t_hit	sphere_intersection_calc(t_vec3 dir, t_vec3 origin, 
-		t_sphere sphere, t_vec3 light_pos)
+static t_hit	sphere_intersection_calc(t_vec3 dir, t_vec3 origin,
+		t_sphere sphere, t_vec3 light_pos, t_sphere *sphere_ptr)
 {
 	double	t;
 	t_vec3	hp;
@@ -25,16 +38,17 @@ static t_hit	sphere_intersection_calc(t_vec3 dir, t_vec3 origin,
 
 	t = calc_sphere_quadratic(dir, origin, sphere);
 	if (t == -1)
-		return (new_hit(vec_new(0, 0, 0), vec_new(0, 0, 0), 
-				vec_new(0, 0, 0), -1, 0, NONE));
+		return (new_hit(vec_new(0, 0, 0), vec_new(0, 0, 0), vec_new(0, 0, 0),
+				-1, 0, NONE, NULL));
 	hp = get_hitpoint(t, dir, origin);
 	light_dir = get_light_dir(hp, light_pos);
-	return (new_hit(hp, get_norm_sphere(hp, sphere.center), 
-			light_dir, t, 1, SPHERE));
+	return (new_hit(hp, get_norm_sphere(hp, sphere.center), light_dir, t, 1,
+			SPHERE, sphere_ptr));
 }
 
-t_hit	intersect_sphere(t_vec3 dir, t_vec3 origin, t_sphere sphere, 
-		t_vec3 light_pos)
+t_hit	intersect_sphere(t_vec3 dir, t_vec3 origin, t_sphere sphere,
+		t_vec3 light_pos, t_sphere *sphere_ptr)
 {
-	return (sphere_intersection_calc(dir, origin, sphere, light_pos));
+	return (sphere_intersection_calc(dir, origin, sphere, light_pos,
+			sphere_ptr));
 }

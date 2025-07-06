@@ -111,6 +111,7 @@ typedef struct s_hit {
     double  t;
     int     is_hit;
     t_obj_type obj_type;
+    void    *hit_object;
 } t_hit;
 
 typedef struct s_world {

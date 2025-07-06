@@ -137,7 +137,6 @@ void	set_light(t_world *world, char **data)
 {
 	t_light		*light;
 	double		brightness;
-	int			ratio;
 
 	if (!(light = malloc(sizeof(*light))))
 	{

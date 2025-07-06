@@ -87,13 +87,13 @@ void	free_world(t_world *world);
 void	free_obj_lists(t_world *world);
 
 //intersect_utils_basic.c
-t_hit	new_hit(t_vec3 hp, t_vec3 norm, t_vec3 light_dir, double t, int is_hit, t_obj_type obj_type);
+t_hit	new_hit(t_vec3 hp, t_vec3 norm, t_vec3 light_dir, double t, int is_hit, t_obj_type obj_type, void *hit_object);
 t_vec3	get_hitpoint(double t, t_vec3 d, t_vec3 origin);
 t_vec3	get_light_dir(t_vec3 hitpoint, t_vec3 light_pos);
 int		is_in_shadow(t_vec3 point, t_vec3 light_pos, t_world *world);
 
 //intersect_sphere.c
-t_hit	intersect_sphere(t_vec3 dir, t_vec3 origin, t_sphere sphere, t_vec3 light_pos);
+t_hit	intersect_sphere(t_vec3 dir, t_vec3 origin, t_sphere sphere, t_vec3 light_pos, t_sphere *sphere_ptr);
 
 //intersect_utils.c (assuming this exists)
 double	solve_quadratic(double a, double b, double c);
@@ -102,9 +102,9 @@ t_vec3	get_norm_sphere(t_vec3 hit_point, t_vec3 center);
 //intersect_cylinder.c
 t_vec3	get_norm_cylinder(t_vec3 hitpoint, t_cylinder cylinder);
 t_hit	intersect_cylinder_caps(t_vec3 dir, t_vec3 origin,
-		t_cylinder cylinder);
+		t_cylinder cylinder, t_cylinder *cylinder_ptr);
 t_hit	intersect_cylinder(t_vec3 dir, t_vec3 origin,
-		t_cylinder cylinder, t_vec3 light_pos);
+		t_cylinder cylinder, t_vec3 light_pos, t_cylinder *cylinder_ptr);
 
 //cylinder_calc.c
 void	calc_cylinder_vectors(t_vec3 d, t_vec3 o,
@@ -114,12 +114,12 @@ int		solve_cylinder_quadratic(t_cylinder_calc calc, t_cylinder cylinder,
 
 //cylinder_utils.c
 t_hit	select_best_cylinder_hit(double t1, double t2, int num_solutions,
-		t_cylinder_params params);
+		t_cylinder_params params, t_cylinder *cylinder_ptr);
 t_hit	get_cylinder_side_hit(t_vec3 d, t_vec3 o,
-		t_cylinder cylinder, t_vec3 light_pos);
+		t_cylinder cylinder, t_vec3 light_pos, t_cylinder *cylinder_ptr);
 
 //intersect_plane.c
-t_hit	intersect_plane(t_vec3 dir, t_vec3 origin, t_plane plane, t_vec3 light_pos);
+t_hit	intersect_plane(t_vec3 dir, t_vec3 origin, t_plane plane, t_vec3 light_pos, t_plane *plane_ptr);
 
 //render.c
 t_hit	find_closest_intersection(t_vec3 ray_origin, t_vec3 ray_dir, t_world *world);
