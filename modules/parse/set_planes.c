@@ -31,7 +31,7 @@ void	add_plane_to_list(t_world *world, t_plane *plane)
 	}
 }
 
-void	set_plane(t_world *world, char **strs)
+void	set_plane(t_world *world, t_parse_ctx *ctx)
 {
 	t_plane		*plane;
 	t_vec3		normal;
@@ -42,11 +42,11 @@ void	set_plane(t_world *world, char **strs)
 		free_world(world);
 		print_err_and_exit("Malloc failed", 1);
 	}
-	plane->point = str_to_vect(strs[1], world);
-	normal = str_to_vect(strs[2], world);
-	val_normalized_vector(normal, plane, world);
+	plane->point = str_to_vect(ctx->data[1], world);
+	normal = str_to_vect(ctx->data[2], world);
+	val_normalized_vector(normal, plane, world, ctx);
 	plane->normal_vector = vec_norm(normal);
-	plane->color = str_to_rgb(strs[3], world);
+	plane->color = str_to_rgb(ctx->data[3], world);
 	plane->next = NULL;
 	add_plane_to_list(world, plane);
 }

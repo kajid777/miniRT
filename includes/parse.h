@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dkajiwar <dkajiwar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 09:51:14 by hthomas           #+#    #+#             */
-/*   Updated: 2025/07/06 16:44:43 by dkajiwar         ###   ########.fr       */
+/*   Updated: 2025/07/06 19:21:38 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,14 +59,14 @@ t_fcolor	char_to_rgb(const char *r, const char *g, const char *b,
 				t_world *world);
 
 /* set_elements.c */
-void		set_ambient_light(t_world *world, char **data);
-void		set_camera(t_world *world, char **data);
-void		set_light(t_world *world, char **data);
+void		set_ambient_light(t_world *world, t_parse_ctx *ctx);
+void		set_camera(t_world *world, t_parse_ctx *ctx);
+void		set_light(t_world *world, t_parse_ctx *ctx);
 t_fcolor	*mult_rgb_rgb(const t_fcolor rgb, const t_fcolor mult);
 
 /* set_elements2.c */
-void		set_sphere(t_world *world, char **strs);
-void		set_plane(t_world *world, char **strs);
-void		set_cylinder(t_world *world, char **strs);
+void		set_sphere(t_world *world, t_parse_ctx *ctx);
+void		set_plane(t_world *world, t_parse_ctx *ctx);
+void		set_cylinder(t_world *world, t_parse_ctx *ctx);
 
 #endif

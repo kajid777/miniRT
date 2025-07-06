@@ -32,17 +32,21 @@ static void	add_sphere_to_list(t_world *world, t_sphere *sphere)
 }
 
 static void	val_sphere_diameter(double diameter,
-	t_sphere *sphere, t_world *world)
+	t_sphere *sphere, t_world *world, t_parse_ctx *ctx)
 {
 	if (diameter <= 0)
 	{
 		free(sphere);
+		if (ctx->line)
+			free(ctx->line);
+		if (ctx->data)
+			ft_free_tab(ctx->data);
 		free_world(world);
 		print_err_and_exit("Error: Sphere diameter must be greater than 0", 1);
 	}
 }
 
-void	set_sphere(t_world *world, char **strs)
+void	set_sphere(t_world *world, t_parse_ctx *ctx)
 {
 	t_sphere	*sphere;
 	double		diameter;
@@ -53,11 +57,11 @@ void	set_sphere(t_world *world, char **strs)
 		free_world(world);
 		print_err_and_exit("Malloc failed", 1);
 	}
-	sphere->center = str_to_vect(strs[1], world);
-	diameter = ft_atod(strs[2]);
-	val_sphere_diameter(diameter, sphere, world);
+	sphere->center = str_to_vect(ctx->data[1], world);
+	diameter = ft_atod(ctx->data[2]);
+	val_sphere_diameter(diameter, sphere, world, ctx);
 	sphere->diameter = diameter;
-	sphere->color = str_to_rgb(strs[3], world);
+	sphere->color = str_to_rgb(ctx->data[3], world);
 	sphere->next = NULL;
 	add_sphere_to_list(world, sphere);
 }

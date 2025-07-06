@@ -83,6 +83,13 @@ typedef struct s_ambient_lighting
 	t_fcolor	color;
 }	t_ambient_lighting;
 
+// Structure to hold parsing context data
+typedef struct s_parse_ctx
+{
+	char	*line;
+	char	**data;
+}	t_parse_ctx;
+
 // Represents a sphere with center, diameter, and color
 typedef struct s_sphere
 {
