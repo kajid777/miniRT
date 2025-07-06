@@ -19,6 +19,10 @@ SRCS		=	main.c \
 				modules/parse/ft_atod.c \
 				modules/generate_rays/generate_rays.c \
 				modules/generate_rays/camera_prepare.c \
+				modules/generate_rays/ray_generation.c \
+				modules/generate_rays/ray_intersection.c \
+				modules/generate_rays/ray_lighting.c \
+				modules/generate_rays/rendering.c \
 				modules/intersect_sphere/intersect_sphere.c \
 				modules/intersect_plane/intersect_plane.c \
 				modules/intersect_cylinder/intersect_cylinder.c \

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tac <tac@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 17:51:22 by hthomas           #+#    #+#             */
-/*   Updated: 2025/07/06 13:04:56 by marvin           ###   ########.fr       */
+/*   Updated: 2025/07/06 14:00:52 by tac              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,14 +43,12 @@ t_fcolor	char_to_rgb(const char *r, const char *g, const char *b, t_world *world
 {
 	t_fcolor	color;
 
-	color.red = ft_atod(r);
-	color.green = ft_atod(g);
-	color.blue = ft_atod(b);
-	
+	color.red = ft_atod(r) / 255;
+	color.green = ft_atod(g) / 255;
+	color.blue = ft_atod(b) / 255;
 	validate_rgb_value(color.red, world);
 	validate_rgb_value(color.green, world);
 	validate_rgb_value(color.blue, world);
-	
 	return (color);
 }
 

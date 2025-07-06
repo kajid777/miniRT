@@ -3,29 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   parse_2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tac <tac@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/09 12:21:27 by hthomas           #+#    #+#             */
-/*   Updated: 2022/01/27 10:41:13 by hthomas          ###   ########.fr       */
+/*   Created: 2025/07/06 14:10:20 by tac               #+#    #+#             */
+/*   Updated: 2025/07/06 14:10:20 by tac              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/miniRT.h"
 
-void *init_world(t_world *world)
+
+void	*init_world(t_world *world)
 {
-    world->ambient = NULL;
-    world->camera = NULL;
-    world->light = NULL;
-    world->sphere = NULL;
-    world->plane = NULL;
-    world->cylinder = NULL;
-    world->mlx = NULL;
-    world->win = NULL;    
-    return (world);
+	world->ambient = NULL;
+	world->camera = NULL;
+	world->light = NULL;
+	world->sphere = NULL;
+	world->plane = NULL;
+	world->cylinder = NULL;
+	world->mlx = NULL;
+	world->win = NULL;
+	return (world);
 }
 
-bool	check_line(const char *line, char **data, const char *type, const int nb_elements)
+bool	check_line(const char *line, char **data, const char *type,
+		const int nb_elements)
 {
 	if (!line)
 		return (false);
@@ -63,9 +65,9 @@ static void	process_line(t_world *world, char *line, char **data)
 
 t_world	*parse(int fd)
 {
-	t_world	*world;
-	char	*line;
-	char	**data;
+	t_world *world;
+	char *line;
+	char **data;
 
 	if (!(world = malloc(sizeof(*world))))
 		print_err_and_exit("malloc failed in parse", 1);
@@ -90,8 +92,8 @@ t_world	*parse(int fd)
 
 t_world	*get_world(const int argc, char *argv[])
 {
-	int			fd;
-	t_world		*world;
+	int fd;
+	t_world *world;
 
 	if (argc < 2)
 		print_err_and_exit("expecting a '.rt'file", 1);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_cylinders.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tac <tac@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/06 14:10:00 by marvin            #+#    #+#             */
-/*   Updated: 2025/07/06 14:10:00 by marvin           ###   ########.fr       */
+/*   Updated: 2025/07/06 14:35:35 by tac              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 static void	validate_normalized_vector(t_vec3 vector, void *object, t_world *world)
 {
-	if (vector.x < -1.0 || vector.x > 1.0 || 
-		vector.y < -1.0 || vector.y > 1.0 || 
-		vector.z < -1.0 || vector.z > 1.0)
+	if (vector.x < -1.0 || vector.x > 1.0 || vector.y < -1.0 || vector.y > 1.0
+		|| vector.z < -1.0 || vector.z > 1.0)
 	{
 		free(object);
 		free_world(world);
-		print_err_and_exit("Error: Normalized vector must be in range [-1,1] for each axis", 1);
+		print_err_and_exit("Error: Normalized vector must be in range [-1,1] for each axis",
+			1);
 	}
 }
 
@@ -43,17 +43,20 @@ static void	add_cylinder_to_list(t_world *world, t_cylinder *cylinder)
 	}
 }
 
-static void	validate_cylinder_diameter(double diameter, t_cylinder *cylinder, t_world *world)
+static void	validate_cylinder_diameter(double diameter, t_cylinder *cylinder,
+		t_world *world)
 {
 	if (diameter <= 0)
 	{
 		free(cylinder);
 		free_world(world);
-		print_err_and_exit("Error: Cylinder diameter must be greater than 0", 1);
+		print_err_and_exit("Error: Cylinder diameter must be greater than 0",
+			1);
 	}
 }
 
-static void	validate_cylinder_height(double height, t_cylinder *cylinder, t_world *world)
+static void	validate_cylinder_height(double height, t_cylinder *cylinder,
+		t_world *world)
 {
 	if (height <= 0)
 	{
@@ -67,6 +70,7 @@ void	set_cylinder(t_world *world, char **strs)
 {
 	t_cylinder	*cy;
 	t_vec3		direction;
+	t_cylinder	*current;
 
 	if (!(cy = malloc(sizeof(*cy))))
 	{

@@ -2,20 +2,24 @@
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   ft_atod.c                                          :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: dkajiwar <dkajiwar@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/12 15:28:26 by dkajiwar          #+#    #+#             */
-/*   Updated: 2025/06/18 16:58:42 by dkajiwar         ###   ########.fr       */
+/*                                                    +:+ +:+
+	+:+     */
+/*   By: tac <tac@student.42.fr>                    +#+  +:+
+	+#+        */
+/*                                                +#+#+#+#+#+
+	+#+           */
+/*   Created: 2025/07/06 14:09:11 by tac               #+#    #+#             */
+/*   Updated: 2025/07/06 14:09:11 by tac              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/miniRT.h"
 
+
 double	ten_to(int pow)
 {
-	int		i;
-	double	result;
+	int i;
+	double result;
 
 	result = 1;
 	i = 0;
@@ -29,8 +33,8 @@ double	ten_to(int pow)
 
 double	dot_part(const char *str, int *len)
 {
-	int		i;
-	double	result;
+	int i;
+	double result;
 
 	i = 0;
 	result = 0;
@@ -47,8 +51,8 @@ double	dot_part(const char *str, int *len)
 
 void	skip_whitespace(const char *str, int *i)
 {
-	while (str[*i] == '\t' || str[*i] == '\n' || str[*i] == '\v' || str[*i] == '\f'
-		|| str[*i] == '\r' || str[*i] == ' ')
+	while (str[*i] == '\t' || str[*i] == '\n' || str[*i] == '\v'
+		|| str[*i] == '\f' || str[*i] == '\r' || str[*i] == ' ')
 		(*i)++;
 }
 
@@ -68,9 +72,9 @@ double	parse_sign(const char *str, int *i)
 
 double	ft_atod(const char *str)
 {
-	double		nbr;
-	double		sign;
-	int			i;
+	double nbr;
+	double sign;
+	int i;
 
 	nbr = 0;
 	sign = 1;

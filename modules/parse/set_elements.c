@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_elements.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tac <tac@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 16:54:10 by hthomas           #+#    #+#             */
-/*   Updated: 2025/07/06 13:04:30 by marvin           ###   ########.fr       */
+/*   Updated: 2025/07/06 14:02:22 by tac              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,8 +95,7 @@ void	set_ambient_light(t_world *world, char **data)
 	}
 	ratio = ft_atod(data[1]);
 	validate_ambient_ratio(ratio, ambient_light, world);
-	
-	ambient_light->color = *mult_rgb_double(str_to_rgb(data[2], world), ratio, world);
+	ambient_light->color = str_to_rgb(data[2], world);
 	ambient_light->lighting_ratio = ratio;
 	world->ambient = ambient_light;
 }
@@ -139,8 +138,9 @@ void	set_light(t_world *world, char **data)
 	light->position = str_to_vect(data[1]);
 	brightness = ft_atod(data[2]);
 	validate_light_brightness(brightness, light, world);
-	
-	ratio = brightness * 255;
-	light->color = *mult_rgb_double(str_to_rgb(data[3], world), ratio, world);
+	light->intensity = brightness;	
+	// ratio = brightness * 255;
+	light->color = str_to_rgb(data[3], world);
+	// light->color = *mult_rgb_double(str_to_rgb(data[3], world), ratio, world);
 	world->light = light;
 }
