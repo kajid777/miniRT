@@ -40,6 +40,25 @@ bool	check_line(const char *line, char **data, const char *type,
 	return (0);
 }
 
+static void	validate_required_elements(t_world *world)
+{
+	if (!world->ambient)
+	{
+		free_world(world);
+		print_err_and_exit("Error: Missing ambient light (A)", 1);
+	}
+	if (!world->camera)
+	{
+		free_world(world);
+		print_err_and_exit("Error: Missing camera (C)", 1);
+	}
+	if (!world->light)
+	{
+		free_world(world);
+		print_err_and_exit("Error: Missing light (L)", 1);
+	}
+}
+
 static void	process_line(t_world *world, char *line, char **data)
 {
 	t_parse_ctx	ctx;
@@ -91,6 +110,7 @@ t_world	*parse(int fd)
 		ft_free_tab(data);
 		line = get_next_line(fd);
 	}
+	validate_required_elements(world);
 	return (world);
 }
 
