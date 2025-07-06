@@ -6,7 +6,7 @@
 /*   By: thashimo <thashimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/06 18:38:02 by thashimo          #+#    #+#             */
-/*   Updated: 2025/07/06 18:38:06 by thashimo         ###   ########.fr       */
+/*   Updated: 2025/07/06 19:09:21 by thashimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,3 @@ t_vec3	get_hitpoint(double t, t_vec3 d, t_vec3 origin)
 	p = vec_add(origin, vec_mul_scalar(d, t));
 	return (p);
 }
-
