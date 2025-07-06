@@ -35,31 +35,8 @@ void	free_obj_lists(t_world *world)
 	}
 }
 
-void	free_world(t_world *world)
+static void	free_mlx_resources(t_world *world)
 {
-	if (!world)
-		return;
-	
-	if (world->camera)
-	{
-		free(world->camera);
-		world->camera = NULL;
-	}
-	
-	if (world->light)
-	{
-		free(world->light);
-		world->light = NULL;
-	}
-	
-	if (world->ambient)
-	{
-		free(world->ambient);
-		world->ambient = NULL;
-	}
-	
-	free_obj_lists(world);
-	
 	if (world->mlx)
 	{
 		if (world->win)
@@ -71,6 +48,28 @@ void	free_world(t_world *world)
 		free(world->mlx);
 		world->mlx = NULL;
 	}
-	
+}
+
+void	free_world(t_world *world)
+{
+	if (!world)
+		return;
+	if (world->camera)
+	{
+		free(world->camera);
+		world->camera = NULL;
+	}
+	if (world->light)
+	{
+		free(world->light);
+		world->light = NULL;
+	}
+	if (world->ambient)
+	{
+		free(world->ambient);
+		world->ambient = NULL;
+	}
+	free_obj_lists(world);
+	free_mlx_resources(world);
 	free(world);
 } 

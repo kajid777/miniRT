@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 16:53:11 by hthomas           #+#    #+#             */
-/*   Updated: 2025/07/06 13:19:03 by marvin           ###   ########.fr       */
+/*   Updated: 2025/07/06 14:06:44 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,63 @@ static void	validate_normalized_vector(t_vec3 vector, void *object, t_world *wor
 		free(object);
 		free_world(world);
 		print_err_and_exit("Error: Normalized vector must be in range [-1,1] for each axis", 1);
+	}
+}
+
+static void	add_sphere_to_list(t_world *world, t_sphere *sphere)
+{
+	t_sphere *current;
+
+	if (world->sphere == NULL)
+	{
+		world->sphere = sphere;
+	}
+	else
+	{
+		current = world->sphere;
+		while (current->next != NULL)
+		{
+			current = current->next;
+		}
+		current->next = sphere;
+	}
+}
+
+static void	add_plane_to_list(t_world *world, t_plane *plane)
+{
+	t_plane *current;
+
+	if (world->plane == NULL)
+	{
+		world->plane = plane;
+	}
+	else
+	{
+		current = world->plane;
+		while (current->next != NULL)
+		{
+			current = current->next;
+		}
+		current->next = plane;
+	}
+}
+
+static void	add_cylinder_to_list(t_world *world, t_cylinder *cylinder)
+{
+	t_cylinder *current;
+
+	if (world->cylinder == NULL)
+	{
+		world->cylinder = cylinder;
+	}
+	else
+	{
+		current = world->cylinder;
+		while (current->next != NULL)
+		{
+			current = current->next;
+		}
+		current->next = cylinder;
 	}
 }
 
@@ -71,19 +128,7 @@ void	set_sphere(t_world *world, char **strs)
 	sphere->diameter = diameter;
 	sphere->color = str_to_rgb(strs[3], world);
 	sphere->next = NULL;
-	if (world->sphere == NULL)
-	{
-		world->sphere = sphere;
-	}
-	else
-	{
-		t_sphere *current = world->sphere;
-		while (current->next != NULL)
-		{
-			current = current->next;
-		}
-		current->next = sphere;
-	}
+	add_sphere_to_list(world, sphere);
 }
 
 void	set_plane(t_world *world, char **strs)
@@ -102,19 +147,7 @@ void	set_plane(t_world *world, char **strs)
 	plane->normal_vector = vec_norm(normal);
 	plane->color = str_to_rgb(strs[3], world);
 	plane->next = NULL;
-	if (world->plane == NULL)
-	{
-		world->plane = plane;
-	}
-	else
-	{
-		t_plane *current = world->plane;
-		while (current->next != NULL)
-		{
-			current = current->next;
-		}
-		current->next = plane;
-	}
+	add_plane_to_list(world, plane);
 }
 
 void	set_cylinder(t_world *world, char **strs)
@@ -137,18 +170,6 @@ void	set_cylinder(t_world *world, char **strs)
 	validate_cylinder_height(cy->height, cy, world);
 	cy->color = str_to_rgb(strs[5], world);
 	cy->next = NULL;
-	if (world->cylinder == NULL)
-	{
-		world->cylinder = cy;
-	}
-	else
-	{
-		t_cylinder *current = world->cylinder;
-		while (current->next != NULL)
-		{
-			current = current->next;
-		}
-		current->next = cy;
-	}
+	add_cylinder_to_list(world, cy);
 }
 
