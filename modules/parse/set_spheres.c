@@ -14,7 +14,7 @@
 
 static void	add_sphere_to_list(t_world *world, t_sphere *sphere)
 {
-	t_sphere *current;
+	t_sphere	*current;
 
 	if (world->sphere == NULL)
 	{
@@ -31,7 +31,8 @@ static void	add_sphere_to_list(t_world *world, t_sphere *sphere)
 	}
 }
 
-static void	validate_sphere_diameter(double diameter, t_sphere *sphere, t_world *world)
+static void	val_sphere_diameter(double diameter,
+	t_sphere *sphere, t_world *world)
 {
 	if (diameter <= 0)
 	{
@@ -46,14 +47,15 @@ void	set_sphere(t_world *world, char **strs)
 	t_sphere	*sphere;
 	double		diameter;
 
-	if (!(sphere = malloc(sizeof(*sphere))))
+	sphere = malloc(sizeof(*sphere));
+	if (!(sphere))
 	{
 		free_world(world);
 		print_err_and_exit("Malloc failed", 1);
 	}
-	sphere->center = str_to_vect(strs[1]);
+	sphere->center = str_to_vect(strs[1], world);
 	diameter = ft_atod(strs[2]);
-	validate_sphere_diameter(diameter, sphere, world);
+	val_sphere_diameter(diameter, sphere, world);
 	sphere->diameter = diameter;
 	sphere->color = str_to_rgb(strs[3], world);
 	sphere->next = NULL;

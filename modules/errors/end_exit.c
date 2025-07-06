@@ -15,7 +15,6 @@
 
 #include "../../includes/miniRT.h"
 
-
 void	print_err_and_exit(char *message, int exit_code)
 {
 	ft_printf("Error: %s\n", message);
@@ -31,7 +30,6 @@ int	ft_strncmp_rev(const char *s1, const char *s2, size_t n)
 	len2 = strlen(s2);
 	if (len1 < n || len2 < n)
 		return (1);
-
 	return (strncmp(s1 + len1 - n, s2, n));
 }
 
@@ -39,7 +37,6 @@ void	when_mlx_ptr_failed(t_world *world)
 {
 	(void)world;
 	ft_printf("Error\nmalloc failed.");
-	// free_all_2darray(game->map, game->map_height);
 	exit(0);
 }
 

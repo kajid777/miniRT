@@ -2,11 +2,11 @@
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   free_world.c                                       :+:      :+:    :+:   */
-/*                                                    +:+ +:+        
+/*                                                    +:+ +:+
 	+:+     */
-/*   By: dkajiwar <dkajiwar@student.42.fr>          +#+  +:+      
+/*   By: dkajiwar <dkajiwar@student.42.fr>          +#+  +:+
 	+#+        */
-/*                                                +#+#+#+#+#+  
+/*                                                +#+#+#+#+#+
 	+#+           */
 /*   Created: 2025/01/01 00:00:00 by dkajiwar          #+#    #+#             */
 /*   Updated: 2025/01/01 00:00:00 by dkajiwar         ###   ########.fr       */
@@ -15,27 +15,30 @@
 
 #include "../../includes/miniRT.h"
 
-
 // Free all object lists (spheres, planes, cylinders)
 void	free_obj_lists(t_world *world)
 {
+	t_sphere	*temp_sphere;
+	t_plane		*temp_plane;
+	t_cylinder	*temp_cylinder;
+
 	while (world->sphere)
 	{
-		t_sphere *temp = world->sphere;
+		temp_sphere = world->sphere;
 		world->sphere = world->sphere->next;
-		free(temp);
+		free(temp_sphere);
 	}
 	while (world->plane)
 	{
-		t_plane *temp = world->plane;
+		temp_plane = world->plane;
 		world->plane = world->plane->next;
-		free(temp);
+		free(temp_plane);
 	}
 	while (world->cylinder)
 	{
-		t_cylinder *temp = world->cylinder;
+		temp_cylinder = world->cylinder;
 		world->cylinder = world->cylinder->next;
-		free(temp);
+		free(temp_cylinder);
 	}
 }
 
@@ -57,7 +60,7 @@ static void	free_mlx_resources(t_world *world)
 void	free_world(t_world *world)
 {
 	if (!world)
-		return;
+		return ;
 	if (world->camera)
 	{
 		free(world->camera);

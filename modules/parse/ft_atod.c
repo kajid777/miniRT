@@ -15,11 +15,10 @@
 
 #include "../../includes/miniRT.h"
 
-
 double	ten_to(int pow)
 {
-	int i;
-	double result;
+	int		i;
+	double	result;
 
 	result = 1;
 	i = 0;
@@ -33,8 +32,8 @@ double	ten_to(int pow)
 
 double	dot_part(const char *str, int *len)
 {
-	int i;
-	double result;
+	int		i;
+	double	result;
 
 	i = 0;
 	result = 0;
@@ -72,9 +71,9 @@ double	parse_sign(const char *str, int *i)
 
 double	ft_atod(const char *str)
 {
-	double nbr;
-	double sign;
-	int i;
+	double	nbr;
+	double	sign;
+	int		i;
 
 	nbr = 0;
 	sign = 1;

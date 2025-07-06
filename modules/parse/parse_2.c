@@ -12,7 +12,6 @@
 
 #include "../../includes/miniRT.h"
 
-
 void	*init_world(t_world *world)
 {
 	world->ambient = NULL;
@@ -65,11 +64,12 @@ static void	process_line(t_world *world, char *line, char **data)
 
 t_world	*parse(int fd)
 {
-	t_world *world;
-	char *line;
-	char **data;
+	t_world	*world;
+	char	*line;
+	char	**data;
 
-	if (!(world = malloc(sizeof(*world))))
+	world = malloc(sizeof(*world));
+	if (!(world))
 		print_err_and_exit("malloc failed in parse", 1);
 	init_world(world);
 	line = get_next_line(fd);
@@ -92,8 +92,8 @@ t_world	*parse(int fd)
 
 t_world	*get_world(const int argc, char *argv[])
 {
-	int fd;
-	t_world *world;
+	int		fd;
+	t_world	*world;
 
 	if (argc < 2)
 		print_err_and_exit("expecting a '.rt'file", 1);
@@ -101,9 +101,11 @@ t_world	*get_world(const int argc, char *argv[])
 		print_err_and_exit("expecting a 2 arguments maximum", 1);
 	if (argc == 2 && ft_strncmp_rev(argv[1], ".rt", 3))
 		print_err_and_exit("First argument must be a '.rt' file", 1);
-	if ((fd = open(argv[1], O_RDONLY)) == -1)
+	fd = open(argv[1], O_RDONLY);
+	if (fd == -1)
 		print_err_and_exit("open failed", 1);
-	if (!(world = parse(fd)))
+	world = parse(fd);
+	if (!(world))
 		print_err_and_exit("Parsing error", 1);
 	if (close(fd) == -1)
 	{

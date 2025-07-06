@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cylinder_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tac <tac@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: thashimo <thashimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/06 14:08:26 by tac               #+#    #+#             */
-/*   Updated: 2025/07/06 14:34:00 by tac              ###   ########.fr       */
+/*   Updated: 2025/07/06 16:17:27 by thashimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,13 @@ static t_hit	process_cylinder_intersect(double t, t_cylinder_params params)
 	t_vec3	hp;
 
 	if (t <= 0)
-		return (new_hit((t_hit_params){vec_new(0, 0, 0), vec_new(0, 0, 0), vec_new(0, 0, 0),
+		return (new_hit((t_hit_params){vec_new(0, 0, 0),
+				vec_new(0, 0, 0), vec_new(0, 0, 0),
 				INFINITY, 0, NONE}));
 	hp = get_hitpoint(t, params.d, params.o);
 	if (!check_cylinder_height(hp, params.cylinder))
-		return (new_hit((t_hit_params){vec_new(0, 0, 0), vec_new(0, 0, 0), vec_new(0, 0, 0),
+		return (new_hit((t_hit_params){vec_new(0, 0, 0),
+				vec_new(0, 0, 0), vec_new(0, 0, 0),
 				INFINITY, 0, NONE}));
 	return (new_hit((t_hit_params){hp, get_norm_cylinder(hp, params.cylinder),
 			get_light_dir(hp, params.light_pos), t, 1, CYLINDER}));
@@ -62,10 +64,10 @@ t_hit	select_best_cylinder_hit(double t1, double t2, int num_solutions,
 t_hit	get_cylinder_side_hit(t_vec3 d, t_vec3 o, t_cylinder cylinder,
 		t_vec3 light_pos)
 {
-	t_cylinder_calc calc;
-	double results[2];
-	int num_solutions;
-	t_cylinder_params params;
+	t_cylinder_calc		calc;
+	double				results[2];
+	int					num_solutions;
+	t_cylinder_params	params;
 
 	params.d = d;
 	params.o = o;
@@ -74,8 +76,8 @@ t_hit	get_cylinder_side_hit(t_vec3 d, t_vec3 o, t_cylinder cylinder,
 	calc_cylinder_vectors(d, o, cylinder, &calc);
 	num_solutions = solve_cylinder_quadratic(calc, cylinder, results);
 	if (num_solutions == 0)
-		return (new_hit((t_hit_params){vec_new(0, 0, 0), vec_new(0, 0, 0), vec_new(0, 0, 0),
-				INFINITY, 0, NONE}));
+		return (new_hit((t_hit_params){vec_new(0, 0, 0), vec_new(0, 0, 0),
+				vec_new(0, 0, 0), INFINITY, 0, NONE}));
 	if (num_solutions == -1)
 		return (process_cylinder_intersect(0, params));
 	return (select_best_cylinder_hit(results[0], results[1], num_solutions,

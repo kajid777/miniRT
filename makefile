@@ -11,6 +11,7 @@ SRCS		=	main.c \
 				modules/parse/parse_2.c \
 				modules/parse/ft_split_set.c \
 				modules/parse/ft_split_set_2.c \
+				modules/parse/ft_split_set_3.c \
 				modules/parse/ray.c \
 				modules/parse/set_elements.c \
 				modules/parse/set_spheres.c \
@@ -34,8 +35,6 @@ SRCS		=	main.c \
 				modules/vector_cal/vector_basic.c \
 				modules/vector_cal/vector_ops.c \
 				modules/color_cal/color.c \
-				modules/helper_functions.c \
-				modules/vector_helpers.c
 
 OBJS		=	$(SRCS:.c=.o)
 

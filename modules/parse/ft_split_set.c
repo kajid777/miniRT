@@ -15,10 +15,9 @@
 
 #include "../../includes/miniRT.h"
 
-
 void	ft_free_tab(char **tab)
 {
-	int i;
+	int	i;
 
 	if (!tab)
 		return ;
@@ -33,7 +32,7 @@ void	ft_free_tab(char **tab)
 
 int	is_in_charset(char c, const char *charset)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (charset[i])
@@ -47,8 +46,8 @@ int	is_in_charset(char c, const char *charset)
 
 int	count_segments_set(const char *str, const char *charset)
 {
-	int count;
-	int inside_segment;
+	int	count;
+	int	inside_segment;
 
 	count = 0;
 	inside_segment = 0;

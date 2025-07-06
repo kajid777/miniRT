@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rendering.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tac <tac@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: thashimo <thashimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/06 14:07:58 by tac               #+#    #+#             */
-/*   Updated: 2025/07/06 14:07:59 by tac              ###   ########.fr       */
+/*   Updated: 2025/07/06 15:35:32 by thashimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ static void	render_pixel_loop(t_world *world, t_screen *screen,
 			pixel_color = trace_ray(world->camera->position, ray_dir, world);
 			color_int = color_to_int(pixel_color);
 			*(int *)(data->addr + (y * data->line_length
-					+ x * (data->bits_per_pixel / 8))) = color_int;
+						+ x * (data->bits_per_pixel / 8))) = color_int;
 			x++;
 		}
 		y++;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersect_sphere.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tac <tac@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: thashimo <thashimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/06 14:08:45 by tac               #+#    #+#             */
-/*   Updated: 2025/07/06 14:34:22 by tac              ###   ########.fr       */
+/*   Updated: 2025/07/06 16:22:45 by thashimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,12 @@ static t_hit	sphere_intersection_calc(t_vec3 dir, t_vec3 origin,
 
 	t = calc_sphere_quadratic(dir, origin, sphere);
 	if (t == -1)
-		return (new_hit((t_hit_params){vec_new(0, 0, 0), vec_new(0, 0, 0), vec_new(0, 0, 0),
-				-1, 0, NONE}));
+		return (new_hit((t_hit_params){vec_new(0, 0, 0),
+				vec_new(0, 0, 0), vec_new(0, 0, 0), -1, 0, NONE}));
 	hp = get_hitpoint(t, dir, origin);
 	light_dir = get_light_dir(hp, light_pos);
-	return (new_hit((t_hit_params){hp, get_norm_sphere(hp, sphere.center), light_dir, t, 1,
-			SPHERE}));
+	return (new_hit((t_hit_params){hp, get_norm_sphere(hp, sphere.center),
+			light_dir, t, 1, SPHERE}));
 }
 
 t_vec3	get_norm_sphere(t_vec3 hit_point, t_vec3 center)

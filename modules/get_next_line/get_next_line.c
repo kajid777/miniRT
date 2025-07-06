@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tac <tac@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: dkajiwar <dkajiwar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/25 18:36:06 by dkajiwar          #+#    #+#             */
-/*   Updated: 2025/07/06 14:08:15 by tac              ###   ########.fr       */
+/*   Updated: 2025/07/06 17:30:24 by dkajiwar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,8 +94,8 @@ char	*read_file(int fd, char *res)
 
 char	*get_next_line(int fd)
 {
-	static char *buffer;
-	char *line;
+	static char	*buffer;
+	char		*line;
 
 	if (fd < 0 || read(fd, buffer, 0) == -1)
 		return (NULL);

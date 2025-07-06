@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cylinder_calc.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tac <tac@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: thashimo <thashimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/06 14:08:18 by tac               #+#    #+#             */
-/*   Updated: 2025/07/06 14:33:53 by tac              ###   ########.fr       */
+/*   Updated: 2025/07/06 16:28:25 by thashimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	calc_cylinder_vectors(t_vec3 d, t_vec3 o, t_cylinder cylinder,
 int	solve_cylinder_quadratic(t_cylinder_calc calc, t_cylinder cylinder,
 		double results[2])
 {
-	double quad[3];
+	double	quad[3];
 
 	quad[0] = vec_dot(calc.d_perp, calc.d_perp);
 	quad[1] = 2.0 * vec_dot(calc.w_perp, calc.d_perp);

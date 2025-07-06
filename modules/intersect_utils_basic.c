@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersect_utils_basic.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tac <tac@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: dkajiwar <dkajiwar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/06 14:11:19 by tac               #+#    #+#             */
-/*   Updated: 2025/07/06 14:32:47 by tac              ###   ########.fr       */
+/*   Created: Invalid date        by                   #+#    #+#             */
+/*   Updated: 2025/07/06 17:29:35 by dkajiwar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ t_hit	new_hit(t_hit_params params)
 {
 	t_hit	new;
 
-	set_hit_basic(&new, params.hit_point, params.norm, params.light_dir);
+	set_hit_basic(&new, params.hp, params.norm, params.light_dir);
 	set_hit_extra(&new, params.t, params.is_hit, params.obj_type);
 	return (new);
 }
