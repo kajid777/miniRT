@@ -3,106 +3,106 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: thashimo <thashimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/25 18:36:06 by dkajiwar          #+#    #+#             */
-/*   Updated: 2025/07/06 18:56:48 by marvin           ###   ########.fr       */
+/*   Created: 2023/10/23 19:32:00 by thashimo          #+#    #+#             */
+/*   Updated: 2024/02/24 01:24:24 by thashimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/get_next_line.h"
+#include "get_next_line.h"
 
-char	*ft_free(char *buffer, char *buf)
+static char	*read_buff(int *ret, char *buff, char *str)
 {
-	char	*temp;
-
-	temp = ft_strjoin(buffer, buf);
-	free(buffer);
-	return (temp);
-}
-
-char	*ft_next(char *buffer)
-{
-	int		i;
-	int		j;
-	char	*line;
+	int	i;
+	int	l_nl;
 
 	i = 0;
-	while (buffer[i] && buffer[i] != '\n')
-		i++;
-	if (!buffer[i])
+	l_nl = 0;
+	while (buff[i] && 0 < *ret)
 	{
-		free(buffer);
-		return (NULL);
-	}
-	line = ft_calloc((ft_strlen(buffer) - i + 1), sizeof(char));
-	i++;
-	j = 0;
-	while (buffer[i])
-		line[j++] = buffer[i++];
-	free(buffer);
-	return (line);
-}
-
-char	*ft_line(char *buffer)
-{
-	char	*line;
-	int		i;
-
-	i = 0;
-	if (!buffer[i])
-		return (NULL);
-	while (buffer[i] && buffer[i] != '\n')
-		i++;
-	line = ft_calloc(i + 2, sizeof(char));
-	i = 0;
-	while (buffer[i] && buffer[i] != '\n')
-	{
-		line[i] = buffer[i];
-		i++;
-	}
-	if (buffer[i] && buffer[i] == '\n')
-		line[i++] = '\n';
-	return (line);
-}
-
-char	*read_file(int fd, char *res)
-{
-	char	*buffer;
-	int		byte_read;
-
-	if (!res)
-		res = ft_calloc(1, 1);
-	buffer = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
-	byte_read = 1;
-	while (byte_read)
-	{
-		byte_read = read(fd, buffer, BUFFER_SIZE);
-		if (byte_read == -1)
+		if (buff[i] == '\n')
 		{
-			free(buffer);
-			return (NULL);
+			str = ft_strnjoin(str, buff, i + 1);
+			*ret = *ret - (i + 1);
+			l_nl = ft_strlen(buff + i + 1);
+			ft_memmove(buff, buff + i + 1, l_nl);
+			ft_bzero(buff + l_nl, ft_strlen(buff + l_nl));
+			return (str);
 		}
-		buffer[byte_read] = 0;
-		res = ft_free(res, buffer);
-		if (ft_strchr(buffer, '\n'))
-			break ;
+		i++;
 	}
-	free(buffer);
-	return (res);
+	return (NULL);
+}
+
+static char	*read_line(int fd, int *ret, char *buff, char *str)
+{
+	*ret = read(fd, buff, BUFFER_SIZE);
+	if (*ret == 0)
+	{
+		free(str);
+		return (NULL);
+	}
+	while (0 < *ret)
+	{
+		if (ft_strchr(buff, '\n'))
+		{
+			return (read_buff(ret, buff, str));
+		}
+		else
+		{
+			buff[*ret] = '\0';
+			str = ft_strnjoin(str, buff, ft_strlen(buff));
+			*ret = read(fd, buff, BUFFER_SIZE);
+		}
+	}
+	if (*ret == -1)
+		return (free(str), NULL);
+	if (!ft_strchr(buff, '\n'))
+		ft_bzero(buff, ft_strlen(buff));
+	return (str);
+}
+
+static char	*read_nextline(int fd, int *ret, char *buff, char *str)
+{
+	if (*ret == 0)
+	{
+		free(str);
+		return (NULL);
+	}
+	while (0 < *ret)
+	{
+		if (ft_strchr(buff, '\n'))
+		{
+			return (read_buff(ret, buff, str));
+		}
+		else
+		{	
+			buff[*ret] = '\0';
+			str = ft_strnjoin(str, buff, ft_strlen(buff));
+			*ret = read(fd, buff, BUFFER_SIZE);
+		}
+	}
+	if (*ret == -1)
+		return (free(str), NULL);
+	if (!ft_strchr(buff, '\n'))
+		ft_bzero(buff, ft_strlen(buff));
+	return (str);
 }
 
 char	*get_next_line(int fd)
 {
-	static char	*buffer;
-	char		*line;
+	static char	buff[BUFFER_SIZE + 1UL];
+	char		*str;
+	static int	ret;
 
-	if (fd < 0 || read(fd, buffer, 0) == -1)
+	if (fd < 0 || read(fd, buff, 0) == -1 || BUFFER_SIZE <= 0)
 		return (NULL);
-	buffer = read_file(fd, buffer);
-	if (!buffer)
+	str = malloc(1);
+	if (!str)
 		return (NULL);
-	line = ft_line(buffer);
-	buffer = ft_next(buffer);
-	return (line);
+	ft_bzero(str, 1);
+	if (*buff)
+		return (read_nextline(fd, &ret, buff, str));
+	return (read_line(fd, &ret, buff, str));
 }
