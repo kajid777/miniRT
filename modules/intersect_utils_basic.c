@@ -26,12 +26,12 @@ static void	set_hit_extra(t_hit *hit, double t, int is_hit, t_obj_type obj_type)
 	hit->obj_type = obj_type;
 }
 
-t_hit	new_hit(t_vec3 hp, t_vec3 norm, t_vec3 light_dir, double t)
+t_hit	new_hit(t_vec3 hp, t_vec3 norm, t_vec3 light_dir, double t, int is_hit, t_obj_type obj_type)
 {
 	t_hit	new;
 
 	set_hit_basic(&new, hp, norm, light_dir);
-	set_hit_extra(&new, t, 1, SPHERE);
+	set_hit_extra(&new, t, is_hit, obj_type);
 	return (new);
 }
 

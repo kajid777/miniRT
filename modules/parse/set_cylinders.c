@@ -70,7 +70,6 @@ void	set_cylinder(t_world *world, char **strs)
 {
 	t_cylinder	*cy;
 	t_vec3		direction;
-	t_cylinder	*current;
 
 	if (!(cy = malloc(sizeof(*cy))))
 	{

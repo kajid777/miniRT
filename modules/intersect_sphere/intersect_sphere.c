@@ -46,6 +46,11 @@ static t_hit	sphere_intersection_calc(t_vec3 dir, t_vec3 origin,
 			SPHERE));
 }
 
+t_vec3	get_norm_sphere(t_vec3 hit_point, t_vec3 center)
+{
+	return (vec_norm(vec_sub(hit_point, center)));
+}
+
 t_hit	intersect_sphere(t_vec3 dir, t_vec3 origin, t_sphere sphere,
 		t_vec3 light_pos)
 {
