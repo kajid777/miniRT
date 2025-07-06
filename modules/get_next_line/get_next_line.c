@@ -6,7 +6,7 @@
 /*   By: thashimo <thashimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 19:32:00 by thashimo          #+#    #+#             */
-/*   Updated: 2024/02/24 01:24:24 by thashimo         ###   ########.fr       */
+/*   Updated: 2025/07/06 21:13:39 by thashimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ static char	*read_nextline(int fd, int *ret, char *buff, char *str)
 			return (read_buff(ret, buff, str));
 		}
 		else
-		{	
+		{
 			buff[*ret] = '\0';
 			str = ft_strnjoin(str, buff, gnl_strlen(buff));
 			*ret = read(fd, buff, BUFFER_SIZE);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dkajiwar <dkajiwar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: thashimo <thashimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 23:50:01 by dkajiwar          #+#    #+#             */
-/*   Updated: 2024/05/06 18:59:24 by dkajiwar         ###   ########.fr       */
+/*   Updated: 2025/07/06 21:11:30 by thashimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@
 static char	*dest_zero(char *dest)
 {
 	dest = (char *)malloc(sizeof(char) * 1);
-		dest[0] = 0;
+	dest[0] = 0;
 	return (dest);
 }
 

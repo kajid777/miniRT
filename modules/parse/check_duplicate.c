@@ -49,4 +49,4 @@ void	check_duplicate_light(t_world *world, t_parse_ctx *ctx)
 		free_world(world);
 		print_err_and_exit("Error: Duplicate light", 1);
 	}
-} 
+}

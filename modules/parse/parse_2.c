@@ -40,8 +40,6 @@ bool	check_line(const char *line, char **data, const char *type,
 	return (0);
 }
 
-
-
 static void	process_line(t_world *world, char *line, char **data)
 {
 	t_parse_ctx	ctx;
@@ -109,5 +107,3 @@ t_world	*parse(int fd)
 	validate_required_elements(world);
 	return (world);
 }
-
-

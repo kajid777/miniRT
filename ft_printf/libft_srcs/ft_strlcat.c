@@ -3,19 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dkajiwar <dkajiwar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: thashimo <thashimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 21:18:45 by dkajiwar          #+#    #+#             */
-/*   Updated: 2024/05/07 22:32:20 by dkajiwar         ###   ########.fr       */
+/*   Updated: 2025/07/06 21:10:49 by thashimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include<stdio.h>
+#include <stdio.h>
 
 size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
 {
-	// size_t	i;
 	size_t	j;
 	size_t	copy_limit;
 	size_t	original_dst_len;
@@ -28,7 +27,6 @@ size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
 	src_len = ft_strlen(src);
 	if (original_dst_len >= dstsize)
 		return (dstsize + src_len);
-	// i = 0;
 	copy_limit = dstsize - original_dst_len - 1;
 	j = 0;
 	while (src[j] != '\0' && j < copy_limit)
