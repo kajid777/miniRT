@@ -62,6 +62,7 @@ static void	process_line(t_world *world, char *line, char **data)
 	{
 		free(line);
 		ft_free_tab(data);
+		free_world(world);
 		print_err_and_exit("Parse error", PARSE_ERROR);
 	}
 }
