@@ -36,20 +36,19 @@ t_vec3	str_to_vect(const char *str, t_world *world)
 	return (set_vect(tab));
 }
 
-static void	val_rgb_value(double value, t_world *world, t_parse_ctx *ctx, 
-		char **tab, void *current_object)
+static void	val_rgb_value(double value, t_validation_ctx *val_ctx)
 {
 	if (value < 0 || value > 255)
 	{
-		if (current_object)
-			free(current_object);
-		if (tab)
-			ft_free_tab(tab);
-		if (ctx->line)
-			free(ctx->line);
-		if (ctx->data)
-			ft_free_tab(ctx->data);
-		free_world(world);
+		if (val_ctx->current_object)
+			free(val_ctx->current_object);
+		if (val_ctx->tab)
+			ft_free_tab(val_ctx->tab);
+		if (val_ctx->ctx->line)
+			free(val_ctx->ctx->line);
+		if (val_ctx->ctx->data)
+			ft_free_tab(val_ctx->ctx->data);
+		free_world(val_ctx->world);
 		print_err_and_exit("RGB values must be between 0 and 255", 1);
 	}
 }
@@ -57,14 +56,19 @@ static void	val_rgb_value(double value, t_world *world, t_parse_ctx *ctx,
 t_fcolor	char_to_rgb(char **tab, t_world *world, t_parse_ctx *ctx, 
 		void *current_object)
 {
-	t_fcolor	color;
+	t_fcolor		color;
+	t_validation_ctx	val_ctx;
 
+	val_ctx.world = world;
+	val_ctx.ctx = ctx;
+	val_ctx.tab = tab;
+	val_ctx.current_object = current_object;
 	color.red = ft_atod(tab[0]) / 255;
 	color.green = ft_atod(tab[1]) / 255;
 	color.blue = ft_atod(tab[2]) / 255;
-	val_rgb_value(color.red, world, ctx, tab, current_object);
-	val_rgb_value(color.green, world, ctx, tab, current_object);
-	val_rgb_value(color.blue, world, ctx, tab, current_object);
+	val_rgb_value(color.red, &val_ctx);
+	val_rgb_value(color.green, &val_ctx);
+	val_rgb_value(color.blue, &val_ctx);
 	return (color);
 }
 

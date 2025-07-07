@@ -54,6 +54,15 @@ int			count_segments_set(const char *str, const char *charset);
 /* ft_split_set_2.c */
 char		**ft_split_set(const char *str, const char *charset);
 
+/* Validation context structure */
+typedef struct s_validation_ctx
+{
+	t_world		*world;
+	t_parse_ctx	*ctx;
+	char		**tab;
+	void		*current_object;
+}	t_validation_ctx;
+
 /* ray.c */
 t_vec3		set_vect(char **tab);
 t_vec3		str_to_vect(const char *str, t_world *world);
