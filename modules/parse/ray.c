@@ -36,30 +36,35 @@ t_vec3	str_to_vect(const char *str, t_world *world)
 	return (set_vect(tab));
 }
 
-static void	val_rgb_value(double value, t_world *world)
+static void	val_rgb_value(double value, t_world *world, t_parse_ctx *ctx, char **tab)
 {
 	if (value < 0 || value > 255)
 	{
+		if (tab)
+			ft_free_tab(tab);
+		if (ctx->line)
+			free(ctx->line);
+		if (ctx->data)
+			ft_free_tab(ctx->data);
 		free_world(world);
 		print_err_and_exit("RGB values must be between 0 and 255", 1);
 	}
 }
 
-t_fcolor	char_to_rgb(const char *r, const char *g, const char *b,
-		t_world *world)
+t_fcolor	char_to_rgb(char **tab, t_world *world, t_parse_ctx *ctx)
 {
 	t_fcolor	color;
 
-	color.red = ft_atod(r) / 255;
-	color.green = ft_atod(g) / 255;
-	color.blue = ft_atod(b) / 255;
-	val_rgb_value(color.red, world);
-	val_rgb_value(color.green, world);
-	val_rgb_value(color.blue, world);
+	color.red = ft_atod(tab[0]) / 255;
+	color.green = ft_atod(tab[1]) / 255;
+	color.blue = ft_atod(tab[2]) / 255;
+	val_rgb_value(color.red, world, ctx, tab);
+	val_rgb_value(color.green, world, ctx, tab);
+	val_rgb_value(color.blue, world, ctx, tab);
 	return (color);
 }
 
-t_fcolor	str_to_rgb(const char *str, t_world *world)
+t_fcolor	str_to_rgb(const char *str, t_world *world, t_parse_ctx *ctx)
 {
 	char		**tab;
 	t_fcolor	color;
@@ -67,10 +72,14 @@ t_fcolor	str_to_rgb(const char *str, t_world *world)
 	tab = ft_split(str, ',');
 	if (!tab)
 	{
+		if (ctx->line)
+			free(ctx->line);
+		if (ctx->data)
+			ft_free_tab(ctx->data);
 		free_world(world);
 		print_err_and_exit("Malloc failed", MALLOC_ERROR);
 	}
-	color = char_to_rgb(tab[0], tab[1], tab[2], world);
+	color = char_to_rgb(tab, world, ctx);
 	ft_free_tab(tab);
 	return (color);
 }

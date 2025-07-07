@@ -26,7 +26,7 @@ void	set_ambient_light(t_world *world, t_parse_ctx *ctx)
 	}
 	ratio = ft_atod(ctx->data[1]);
 	val_ambient_ratio(ratio, ambient_light, world, ctx);
-	ambient_light->color = str_to_rgb(ctx->data[2], world);
+	ambient_light->color = str_to_rgb(ctx->data[2], world, ctx);
 	ambient_light->lighting_ratio = ratio;
 	world->ambient = ambient_light;
 }
@@ -71,6 +71,6 @@ void	set_light(t_world *world, t_parse_ctx *ctx)
 	brightness = ft_atod(ctx->data[2]);
 	val_light_brightness(brightness, light, world, ctx);
 	light->intensity = brightness;
-	light->color = str_to_rgb(ctx->data[3], world);
+	light->color = str_to_rgb(ctx->data[3], world, ctx);
 	world->light = light;
 }

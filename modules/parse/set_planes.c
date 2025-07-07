@@ -46,7 +46,7 @@ void	set_plane(t_world *world, t_parse_ctx *ctx)
 	normal = str_to_vect(ctx->data[2], world);
 	val_normalized_vector(normal, plane, world, ctx);
 	plane->normal_vector = vec_norm(normal);
-	plane->color = str_to_rgb(ctx->data[3], world);
+	plane->color = str_to_rgb(ctx->data[3], world, ctx);
 	plane->next = NULL;
 	add_plane_to_list(world, plane);
 }
