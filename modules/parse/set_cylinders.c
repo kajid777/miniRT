@@ -81,7 +81,7 @@ void	set_cylinder(t_world *world, t_parse_ctx *ctx)
 	cy->height = ft_atod(ctx->data[4]);
 	val_cylinder_diameter(cy->diameter, cy, world, ctx);
 	val_cylinder_height(cy->height, cy, world, ctx);
-	cy->color = str_to_rgb(ctx->data[5], world, ctx);
+	cy->color = str_to_rgb(ctx->data[5], world, ctx, cy);
 	cy->next = NULL;
 	add_cylinder_to_list(world, cy);
 }
