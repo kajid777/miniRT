@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thashimo <thashimo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tac <tac@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 17:51:22 by hthomas           #+#    #+#             */
-/*   Updated: 2025/07/06 18:42:11 by thashimo         ###   ########.fr       */
+/*   Updated: 2025/07/08 17:26:46 by tac              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,10 @@ static void	val_rgb_value(double value, t_validation_ctx *val_ctx)
 	}
 }
 
-t_fcolor	char_to_rgb(char **tab, t_world *world, t_parse_ctx *ctx, 
+t_fcolor	char_to_rgb(char **tab, t_world *world, t_parse_ctx *ctx,
 		void *current_object)
 {
-	t_fcolor		color;
+	t_fcolor			color;
 	t_validation_ctx	val_ctx;
 
 	val_ctx.world = world;
@@ -72,7 +72,7 @@ t_fcolor	char_to_rgb(char **tab, t_world *world, t_parse_ctx *ctx,
 	return (color);
 }
 
-t_fcolor	str_to_rgb(const char *str, t_world *world, t_parse_ctx *ctx, 
+t_fcolor	str_to_rgb(const char *str, t_world *world, t_parse_ctx *ctx,
 		void *current_object)
 {
 	char		**tab;
