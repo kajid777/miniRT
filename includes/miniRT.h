@@ -6,7 +6,7 @@
 /*   By: thashimo <thashimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 15:28:26 by dkajiwar          #+#    #+#             */
-/*   Updated: 2025/07/06 20:23:41 by thashimo         ###   ########.fr       */
+/*   Updated: 2025/07/08 19:44:48 by thashimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,9 +172,9 @@ void			val_light_brightness(double brightness, t_light *light,
 
 // set_colors.c
 t_fcolor		*int_to_rgb(const int r, const int g, const int b,
-				t_world *world);
+					t_world *world);
 t_fcolor		*mult_rgb_double(const t_fcolor rgb, const double mult,
-				t_world *world);
+					t_world *world);
 
 // check_duplicate.c
 void			check_duplicate_ambient(t_world *world, t_parse_ctx *ctx);

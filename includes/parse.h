@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: thashimo <thashimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 09:51:14 by hthomas           #+#    #+#             */
-/*   Updated: 2025/07/06 20:12:53 by marvin           ###   ########.fr       */
+/*   Updated: 2025/07/08 19:45:30 by thashimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,9 +66,9 @@ typedef struct s_validation_ctx
 /* ray.c */
 t_vec3		set_vect(char **tab);
 t_vec3		str_to_vect(const char *str, t_world *world);
-t_fcolor	str_to_rgb(const char *str, t_world *world, t_parse_ctx *ctx, 
+t_fcolor	str_to_rgb(const char *str, t_world *world, t_parse_ctx *ctx,
 				void *current_object);
-t_fcolor	char_to_rgb(char **tab, t_world *world, t_parse_ctx *ctx, 
+t_fcolor	char_to_rgb(char **tab, t_world *world, t_parse_ctx *ctx,
 				void *current_object);
 
 /* set_elements.c */
