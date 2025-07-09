@@ -9,7 +9,6 @@
 /*   Updated: 2025/07/06 14:10:20 by tac              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "../../includes/miniRT.h"
 
 void	*init_world(t_world *world)
@@ -40,12 +39,30 @@ bool	check_line(const char *line, char **data, const char *type,
 	return (0);
 }
 
+static bool	is_empty_or_whitespace_only(const char *line)
+{
+	int	i;
+
+	if (!line)
+		return (true);
+	i = 0;
+	while (line[i])
+	{
+		if (line[i] != ' ' && line[i] != '\t' && line[i] != '\n' && line[i] != '\r')
+			return (false);
+		i++;
+	}
+	return (true);
+}
+
 static void	process_line(t_world *world, char *line, char **data)
 {
 	t_parse_ctx	ctx;
 
 	ctx.line = line;
 	ctx.data = data;
+	if (is_empty_or_whitespace_only(line))
+		return;
 	if (check_line(line, data, "A", NB_ELEM_AL))
 		set_ambient_light(world, &ctx);
 	else if (check_line(line, data, "C", NB_ELEM_CAMERA))
@@ -58,7 +75,7 @@ static void	process_line(t_world *world, char *line, char **data)
 		set_plane(world, &ctx);
 	else if (check_line(line, data, "cy", NB_ELEM_CYLINDER))
 		set_cylinder(world, &ctx);
-	else if (!ft_is_from_charset(line, WHITE_SPACES))
+	else
 	{
 		free(line);
 		ft_free_tab(data);
