@@ -82,4 +82,20 @@ void		set_sphere(t_world *world, t_parse_ctx *ctx);
 void		set_plane(t_world *world, t_parse_ctx *ctx);
 void		set_cylinder(t_world *world, t_parse_ctx *ctx);
 
+/* set_validation.c */
+void		val_camera_direction(t_vec3 direction, t_camera *camera,
+				t_world *world, t_parse_ctx *ctx);
+void		val_camera_fov(double fov, t_camera *camera, t_world *world,
+				t_parse_ctx *ctx);
+void		val_ambient_ratio(double ratio, t_ambient_lighting *ambient,
+				t_world *world, t_parse_ctx *ctx);
+void		val_normalized_vector(t_vec3 vector, void *object, t_world *world,
+				t_parse_ctx *ctx);
+void		val_light_brightness(double brightness, t_light *light,
+				t_world *world, t_parse_ctx *ctx);
+void		val_cylinder_direction(t_vec3 direction, t_cylinder *cylinder,
+				t_world *world, t_parse_ctx *ctx);
+void		val_plane_normal(t_vec3 normal, t_plane *plane,
+				t_world *world, t_parse_ctx *ctx);
+
 #endif
