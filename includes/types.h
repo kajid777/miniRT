@@ -88,6 +88,7 @@ typedef struct s_parse_ctx
 {
 	char	*line;
 	char	**data;
+	void	*tmp_object;
 }	t_parse_ctx;
 
 // Represents a sphere with center, diameter, and color

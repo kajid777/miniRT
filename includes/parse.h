@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 09:51:14 by hthomas           #+#    #+#             */
-/*   Updated: 2025/07/09 19:47:45 by marvin           ###   ########.fr       */
+/*   Updated: 2025/07/09 20:41:19 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,10 +66,8 @@ typedef struct s_validation_ctx
 /* ray.c */
 t_vec3		set_vect(char **tab);
 t_vec3		str_to_vect(const char *str, t_world *world, t_parse_ctx *ctx);
-t_fcolor	str_to_rgb(const char *str, t_world *world, t_parse_ctx *ctx,
-				void *current_object);
-t_fcolor	char_to_rgb(char **tab, t_world *world, t_parse_ctx *ctx,
-				void *current_object);
+t_fcolor	str_to_rgb(const char *str, t_world *world, t_parse_ctx *ctx);
+t_fcolor	char_to_rgb(char **tab, t_world *world, t_parse_ctx *ctx);
 
 /* set_elements.c */
 void		set_ambient_light(t_world *world, t_parse_ctx *ctx);
