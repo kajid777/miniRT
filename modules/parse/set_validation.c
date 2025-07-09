@@ -90,3 +90,33 @@ void	val_light_brightness(double brightness, t_light *light,
 			1);
 	}
 }
+
+void	val_cylinder_direction(t_vec3 direction, t_cylinder *cylinder,
+		t_world *world, t_parse_ctx *ctx)
+{
+	if (direction.x == 0 && direction.y == 0 && direction.z == 0)
+	{
+		free(cylinder);
+		if (ctx->line)
+			free(ctx->line);
+		if (ctx->data)
+			ft_free_tab(ctx->data);
+		free_world(world);
+		print_err_and_exit("Error: Cylinder direction cannot be (0,0,0)", 1);
+	}
+}
+
+void	val_plane_normal(t_vec3 normal, t_plane *plane,
+		t_world *world, t_parse_ctx *ctx)
+{
+	if (normal.x == 0 && normal.y == 0 && normal.z == 0)
+	{
+		free(plane);
+		if (ctx->line)
+			free(ctx->line);
+		if (ctx->data)
+			ft_free_tab(ctx->data);
+		free_world(world);
+		print_err_and_exit("Error: Plane normal cannot be (0,0,0)", 1);
+	}
+}

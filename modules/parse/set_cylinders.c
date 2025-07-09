@@ -75,6 +75,7 @@ void	set_cylinder(t_world *world, t_parse_ctx *ctx)
 	}
 	cy->center = str_to_vect(ctx->data[1], world);
 	direction = str_to_vect(ctx->data[2], world);
+	val_cylinder_direction(direction, cy, world, ctx);
 	val_normalized_vector(direction, cy, world, ctx);
 	cy->direction = vec_norm(direction);
 	cy->diameter = ft_atod(ctx->data[3]);
