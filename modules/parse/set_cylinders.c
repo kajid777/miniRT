@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/06 14:10:00 by marvin            #+#    #+#             */
-/*   Updated: 2025/07/06 19:23:03 by marvin           ###   ########.fr       */
+/*   Updated: 2025/07/09 19:47:34 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,8 @@ void	set_cylinder(t_world *world, t_parse_ctx *ctx)
 		free_world(world);
 		print_err_and_exit("Malloc failed", MALLOC_ERROR);
 	}
-	cy->center = str_to_vect(ctx->data[1], world);
-	direction = str_to_vect(ctx->data[2], world);
+	cy->center = str_to_vect(ctx->data[1], world, ctx);
+	direction = str_to_vect(ctx->data[2], world, ctx);
 	val_normalized_vector(direction, cy, world, ctx);
 	cy->direction = vec_norm(direction);
 	cy->diameter = ft_atod(ctx->data[3]);

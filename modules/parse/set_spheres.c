@@ -57,7 +57,7 @@ void	set_sphere(t_world *world, t_parse_ctx *ctx)
 		free_world(world);
 		print_err_and_exit("Malloc failed", 1);
 	}
-	sphere->center = str_to_vect(ctx->data[1], world);
+	sphere->center = str_to_vect(ctx->data[1], world, ctx);
 	diameter = ft_atod(ctx->data[2]);
 	val_sphere_diameter(diameter, sphere, world, ctx);
 	sphere->diameter = diameter;

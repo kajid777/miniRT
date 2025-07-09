@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tac <tac@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 17:51:22 by hthomas           #+#    #+#             */
-/*   Updated: 2025/07/08 17:26:46 by tac              ###   ########.fr       */
+/*   Updated: 2025/07/09 19:46:54 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,15 +23,33 @@ t_vec3	set_vect(char **tab)
 	return (vect);
 }
 
-t_vec3	str_to_vect(const char *str, t_world *world)
+t_vec3	str_to_vect(const char *str, t_world *world, t_parse_ctx *ctx)
 {
 	char	**tab;
+	int		tab_size;
 
 	tab = ft_split(str, ',');
 	if (!tab)
 	{
+		if (ctx->line)
+			free(ctx->line);
+		if (ctx->data)
+			ft_free_tab(ctx->data);
 		free_world(world);
 		print_err_and_exit("malloc failed", 1);
+	}
+	tab_size = 0;
+	while (tab[tab_size])
+		tab_size++;
+	if (tab_size != 3)
+	{
+		ft_free_tab(tab);
+		if (ctx->line)
+			free(ctx->line);
+		if (ctx->data)
+			ft_free_tab(ctx->data);
+		free_world(world);
+		print_err_and_exit("vectors are not valid not 3 numbers", 1);
 	}
 	return (set_vect(tab));
 }
@@ -77,8 +95,11 @@ t_fcolor	str_to_rgb(const char *str, t_world *world, t_parse_ctx *ctx,
 {
 	char		**tab;
 	t_fcolor	color;
+	int			tab_size;
 
 	tab = ft_split(str, ',');
+	tab_size = 0;
+	
 	if (!tab)
 	{
 		if (current_object)
@@ -89,6 +110,20 @@ t_fcolor	str_to_rgb(const char *str, t_world *world, t_parse_ctx *ctx,
 			ft_free_tab(ctx->data);
 		free_world(world);
 		print_err_and_exit("Malloc failed", MALLOC_ERROR);
+	}
+	while (tab[tab_size])
+		tab_size++;
+	if (tab_size != 3)
+	{
+		ft_free_tab(tab);
+		if (current_object)
+			free(current_object);
+		if (ctx->line)
+			free(ctx->line);
+		if (ctx->data)
+			ft_free_tab(ctx->data);
+		free_world(world);
+		print_err_and_exit("RGB are not valid", 1);
 	}
 	color = char_to_rgb(tab, world, ctx, current_object);
 	ft_free_tab(tab);

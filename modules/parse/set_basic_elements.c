@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "../../includes/miniRT.h"
-
 void	set_ambient_light(t_world *world, t_parse_ctx *ctx)
 {
 	t_ambient_lighting	*ambient_light;
@@ -44,8 +43,8 @@ void	set_camera(t_world *world, t_parse_ctx *ctx)
 		free_world(world);
 		print_err_and_exit("Malloc failed", MALLOC_ERROR);
 	}
-	camera->position = str_to_vect(ctx->data[1], world);
-	direction = str_to_vect(ctx->data[2], world);
+	camera->position = str_to_vect(ctx->data[1], world, ctx);
+	direction = str_to_vect(ctx->data[2], world, ctx);
 	fov = ft_atod(ctx->data[3]);
 	val_camera_direction(direction, camera, world, ctx);
 	val_normalized_vector(direction, camera, world, ctx);
@@ -67,7 +66,7 @@ void	set_light(t_world *world, t_parse_ctx *ctx)
 		free_world(world);
 		print_err_and_exit("Malloc failed", 1);
 	}
-	light->position = str_to_vect(ctx->data[1], world);
+	light->position = str_to_vect(ctx->data[1], world, ctx);
 	brightness = ft_atod(ctx->data[2]);
 	val_light_brightness(brightness, light, world, ctx);
 	light->intensity = brightness;
