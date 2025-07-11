@@ -11,49 +11,6 @@
 /* ************************************************************************** */
 #include "../../includes/miniRT.h"
 
-void	*init_world(t_world *world)
-{
-	world->ambient = NULL;
-	world->camera = NULL;
-	world->light = NULL;
-	world->sphere = NULL;
-	world->plane = NULL;
-	world->cylinder = NULL;
-	world->mlx = NULL;
-	world->win = NULL;
-	return (world);
-}
-
-bool	check_line(const char *line, char **data, const char *type,
-		const int nb_elements)
-{
-	if (!line)
-		return (false);
-	if (!data)
-		return (false);
-	if (!ft_strcmp(data[0], type))
-	{
-		if (ft_tab_size(data) == nb_elements)
-			return (true);
-	}
-	return (0);
-}
-
-static bool	is_empty_or_whitespace_only(const char *line)
-{
-	int	i;
-
-	if (!line)
-		return (true);
-	i = 0;
-	while (line[i])
-	{
-		if (line[i] != ' ' && line[i] != '\t' && line[i] != '\n' && line[i] != '\r')
-			return (false);
-		i++;
-	}
-	return (true);
-}
 
 static void	process_line(t_world *world, char *line, char **data)
 {
@@ -62,7 +19,7 @@ static void	process_line(t_world *world, char *line, char **data)
 	ctx.line = line;
 	ctx.data = data;
 	if (is_empty_or_whitespace_only(line))
-		return;
+		return ;
 	if (check_line(line, data, "A", NB_ELEM_AL))
 		set_ambient_light(world, &ctx);
 	else if (check_line(line, data, "C", NB_ELEM_CAMERA))
