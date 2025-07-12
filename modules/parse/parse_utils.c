@@ -3,13 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parse_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tac <tac@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: thashimo <thashimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/11 00:00:00 by tac               #+#    #+#             */
-/*   Updated: 2025/07/11 00:00:00 by tac              ###   ########.fr       */
+/*   Created: 2025/07/12 13:18:31 by thashimo          #+#    #+#             */
+/*   Updated: 2025/07/12 13:19:14 by thashimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "../../includes/miniRT.h"
+
+#include "../includes/miniRT.h"
 
 void	*init_world(t_world *world)
 {

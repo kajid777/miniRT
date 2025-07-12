@@ -3,20 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   generate_rays.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tac <tac@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: thashimo <thashimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 18:35:03 by dkajiwar          #+#    #+#             */
-/*   Updated: 2025/07/06 14:33:41 by tac              ###   ########.fr       */
+/*   Updated: 2025/07/12 13:12:34 by thashimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/miniRT.h"
 #include <math.h>
-
-// スクリーンの中心位置が決まる。
-// スクリーンの左上はしから右上はしまでfor文を回す。
-// スクリーンの左から１マス右、一マス下がどのくらいのベクトルの移動なのかを確定させる。
-// スクリーンの一マスの座標とカメラを通るレイを求める。
 
 void	calculate_viewplane_distance(t_camera camera, t_screen *screen)
 {

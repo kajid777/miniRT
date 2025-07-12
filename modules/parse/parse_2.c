@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parse_2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tac <tac@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: thashimo <thashimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/06 14:10:20 by tac               #+#    #+#             */
-/*   Updated: 2025/07/06 14:10:20 by tac              ###   ########.fr       */
+/*   Created: 2025/07/12 13:15:31 by thashimo          #+#    #+#             */
+/*   Updated: 2025/07/12 13:15:31 by thashimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "../../includes/miniRT.h"
 
+#include "../../includes/miniRT.h"
 
 static void	process_line(t_world *world, char *line, char **data)
 {
