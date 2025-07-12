@@ -59,7 +59,7 @@ void	set_sphere(t_world *world, t_parse_ctx *ctx)
 	}
 	ctx->tmp_object = sphere;
 	sphere->center = str_to_vect(ctx->data[1], world, ctx);
-	diameter = ft_atod(ctx->data[2]);
+	diameter = ft_atod_safe(ctx->data[2], world, ctx);
 	val_sphere_diameter(diameter, sphere, world, ctx);
 	sphere->diameter = diameter;
 	sphere->color = str_to_rgb(ctx->data[3], world, ctx);

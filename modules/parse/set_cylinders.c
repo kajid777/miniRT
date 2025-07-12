@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_cylinders.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tac <tac@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/06 14:10:00 by marvin            #+#    #+#             */
-/*   Updated: 2025/07/12 17:22:28 by tac              ###   ########.fr       */
+/*   Updated: 2025/07/12 18:28:17 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,8 @@ void	set_cylinder(t_world *world, t_parse_ctx *ctx)
 	direction = str_to_vect(ctx->data[2], world, ctx);
 	val_normalized_vector(direction, cy, world, ctx);
 	cy->direction = vec_norm(direction);
-	cy->diameter = ft_atod(ctx->data[3]);
-	cy->height = ft_atod(ctx->data[4]);
+	cy->diameter = ft_atod_safe(ctx->data[3], world, ctx);
+	cy->height = ft_atod_safe(ctx->data[4], world, ctx);
 	val_cylinder_diameter(cy->diameter, cy, world, ctx);
 	val_cylinder_height(cy->height, cy, world, ctx);
 	cy->color = str_to_rgb(ctx->data[5], world, ctx);

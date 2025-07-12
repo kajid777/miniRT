@@ -17,7 +17,7 @@
 
 void	print_err_and_exit(char *message, int exit_code)
 {
-	ft_printf("Error: %s\n", message);
+	ft_printf("Error\n: %s\n", message);
 	exit(exit_code);
 }
 

@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 09:51:14 by hthomas           #+#    #+#             */
-/*   Updated: 2025/07/09 20:41:19 by marvin           ###   ########.fr       */
+/*   Updated: 2025/07/12 18:26:53 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@
 double		ten_to(int pow);
 double		dot_part(const char *str, int *len);
 double		ft_atod(const char *str);
+double		ft_atod_safe(const char *str, t_world *world, t_parse_ctx *ctx);
 
 /* parse_1.c */
 int			ft_strcmp(const char *s1, const char *s2);
@@ -67,7 +68,7 @@ typedef struct s_validation_ctx
 }	t_validation_ctx;
 
 /* ray.c */
-t_vec3		set_vect(char **tab);
+t_vec3		set_vect(char **tab, t_world *world, t_parse_ctx *ctx);
 t_vec3		str_to_vect(const char *str, t_world *world, t_parse_ctx *ctx);
 t_fcolor	str_to_rgb(const char *str, t_world *world, t_parse_ctx *ctx);
 t_fcolor	char_to_rgb(char **tab, t_world *world, t_parse_ctx *ctx);

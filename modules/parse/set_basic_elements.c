@@ -24,7 +24,7 @@ void	set_ambient_light(t_world *world, t_parse_ctx *ctx)
 		print_err_and_exit("Malloc failed", 1);
 	}
 	ctx->tmp_object = ambient_light;
-	ratio = ft_atod(ctx->data[1]);
+	ratio = ft_atod_safe(ctx->data[1], world, ctx);
 	val_ambient_ratio(ratio, ambient_light, world, ctx);
 	ambient_light->color = str_to_rgb(ctx->data[2], world, ctx);
 	ambient_light->lighting_ratio = ratio;
@@ -46,7 +46,7 @@ void	set_camera(t_world *world, t_parse_ctx *ctx)
 	}
 	camera->position = str_to_vect(ctx->data[1], world, ctx);
 	direction = str_to_vect(ctx->data[2], world, ctx);
-	fov = ft_atod(ctx->data[3]);
+	fov = ft_atod_safe(ctx->data[3], world, ctx);
 	val_camera_direction(direction, camera, world, ctx);
 	val_normalized_vector(direction, camera, world, ctx);
 	val_camera_fov(fov, camera, world, ctx);
@@ -69,7 +69,7 @@ void	set_light(t_world *world, t_parse_ctx *ctx)
 	}
 	ctx->tmp_object = light;
 	light->position = str_to_vect(ctx->data[1], world, ctx);
-	brightness = ft_atod(ctx->data[2]);
+	brightness = ft_atod_safe(ctx->data[2], world, ctx);
 	val_light_brightness(brightness, light, world, ctx);
 	light->intensity = brightness;
 	light->color = str_to_rgb(ctx->data[3], world, ctx);
