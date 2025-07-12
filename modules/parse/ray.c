@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thashimo <thashimo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tac <tac@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/12 13:15:45 by thashimo          #+#    #+#             */
-/*   Updated: 2025/07/12 13:15:47 by thashimo         ###   ########.fr       */
+/*   Updated: 2025/07/12 17:22:12 by tac              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,15 +23,37 @@ t_vec3	set_vect(char **tab)
 	return (vect);
 }
 
-t_vec3	str_to_vect(const char *str, t_world *world)
+t_vec3	str_to_vect(const char *str, t_world *world, t_parse_ctx *ctx)
 {
 	char	**tab;
+	int		tab_size;
 
 	tab = ft_split(str, ',');
 	if (!tab)
 	{
+		if (ctx->tmp_object)
+			free(ctx->tmp_object);
+		if (ctx->line)
+			free(ctx->line);
+		if (ctx->data)
+			ft_free_tab(ctx->data);
 		free_world(world);
 		print_err_and_exit("malloc failed", 1);
+	}
+	tab_size = 0;
+	while (tab[tab_size])
+		tab_size++;
+	if (tab_size != 3)
+	{
+		ft_free_tab(tab);
+		if (ctx->tmp_object)
+			free(ctx->tmp_object);
+		if (ctx->line)
+			free(ctx->line);
+		if (ctx->data)
+			ft_free_tab(ctx->data);
+		free_world(world);
+		print_err_and_exit("vectors are not valid not 3 numbers", 1);
 	}
 	return (set_vect(tab));
 }
@@ -53,8 +75,7 @@ static void	val_rgb_value(double value, t_validation_ctx *val_ctx)
 	}
 }
 
-t_fcolor	char_to_rgb(char **tab, t_world *world, t_parse_ctx *ctx,
-		void *current_object)
+t_fcolor	char_to_rgb(char **tab, t_world *world, t_parse_ctx *ctx)
 {
 	t_fcolor			color;
 	t_validation_ctx	val_ctx;
@@ -62,7 +83,7 @@ t_fcolor	char_to_rgb(char **tab, t_world *world, t_parse_ctx *ctx,
 	val_ctx.world = world;
 	val_ctx.ctx = ctx;
 	val_ctx.tab = tab;
-	val_ctx.current_object = current_object;
+	val_ctx.current_object = ctx->tmp_object;
 	color.red = ft_atod(tab[0]) / 255;
 	color.green = ft_atod(tab[1]) / 255;
 	color.blue = ft_atod(tab[2]) / 255;
@@ -72,17 +93,19 @@ t_fcolor	char_to_rgb(char **tab, t_world *world, t_parse_ctx *ctx,
 	return (color);
 }
 
-t_fcolor	str_to_rgb(const char *str, t_world *world, t_parse_ctx *ctx,
-		void *current_object)
+t_fcolor	str_to_rgb(const char *str, t_world *world, t_parse_ctx *ctx)
 {
 	char		**tab;
 	t_fcolor	color;
+	int			tab_size;
 
 	tab = ft_split(str, ',');
+	tab_size = 0;
+	
 	if (!tab)
 	{
-		if (current_object)
-			free(current_object);
+		if (ctx->tmp_object)
+			free(ctx->tmp_object);
 		if (ctx->line)
 			free(ctx->line);
 		if (ctx->data)
@@ -90,7 +113,21 @@ t_fcolor	str_to_rgb(const char *str, t_world *world, t_parse_ctx *ctx,
 		free_world(world);
 		print_err_and_exit("Malloc failed", MALLOC_ERROR);
 	}
-	color = char_to_rgb(tab, world, ctx, current_object);
+	while (tab[tab_size])
+		tab_size++;
+	if (tab_size != 3)
+	{
+		ft_free_tab(tab);
+		if (ctx->tmp_object)
+			free(ctx->tmp_object);
+		if (ctx->line)
+			free(ctx->line);
+		if (ctx->data)
+			ft_free_tab(ctx->data);
+		free_world(world);
+		print_err_and_exit("RGB are not valid", 1);
+	}
+	color = char_to_rgb(tab, world, ctx);
 	ft_free_tab(tab);
 	return (color);
 }

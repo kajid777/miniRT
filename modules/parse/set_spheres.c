@@ -57,11 +57,12 @@ void	set_sphere(t_world *world, t_parse_ctx *ctx)
 		free_world(world);
 		print_err_and_exit("Malloc failed", 1);
 	}
-	sphere->center = str_to_vect(ctx->data[1], world);
+	ctx->tmp_object = sphere;
+	sphere->center = str_to_vect(ctx->data[1], world, ctx);
 	diameter = ft_atod(ctx->data[2]);
 	val_sphere_diameter(diameter, sphere, world, ctx);
 	sphere->diameter = diameter;
-	sphere->color = str_to_rgb(ctx->data[3], world, ctx, sphere);
+	sphere->color = str_to_rgb(ctx->data[3], world, ctx);
 	sphere->next = NULL;
 	add_sphere_to_list(world, sphere);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_cylinders.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thashimo <thashimo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tac <tac@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/12 13:15:54 by thashimo          #+#    #+#             */
-/*   Updated: 2025/07/12 13:15:56 by thashimo         ###   ########.fr       */
+/*   Created: 2025/07/06 14:10:00 by marvin            #+#    #+#             */
+/*   Updated: 2025/07/12 17:22:28 by tac              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,15 +73,16 @@ void	set_cylinder(t_world *world, t_parse_ctx *ctx)
 		free_world(world);
 		print_err_and_exit("Malloc failed", MALLOC_ERROR);
 	}
-	cy->center = str_to_vect(ctx->data[1], world);
-	direction = str_to_vect(ctx->data[2], world);
+	ctx->tmp_object = cy;
+	cy->center = str_to_vect(ctx->data[1], world, ctx);
+	direction = str_to_vect(ctx->data[2], world, ctx);
 	val_normalized_vector(direction, cy, world, ctx);
 	cy->direction = vec_norm(direction);
 	cy->diameter = ft_atod(ctx->data[3]);
 	cy->height = ft_atod(ctx->data[4]);
 	val_cylinder_diameter(cy->diameter, cy, world, ctx);
 	val_cylinder_height(cy->height, cy, world, ctx);
-	cy->color = str_to_rgb(ctx->data[5], world, ctx, cy);
+	cy->color = str_to_rgb(ctx->data[5], world, ctx);
 	cy->next = NULL;
 	add_cylinder_to_list(world, cy);
 }
