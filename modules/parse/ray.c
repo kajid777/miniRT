@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tac <tac@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/12 13:15:45 by thashimo          #+#    #+#             */
-/*   Updated: 2025/07/12 17:22:12 by tac              ###   ########.fr       */
+/*   Updated: 2025/07/12 18:05:48 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,17 +79,23 @@ t_fcolor	char_to_rgb(char **tab, t_world *world, t_parse_ctx *ctx)
 {
 	t_fcolor			color;
 	t_validation_ctx	val_ctx;
+	double				red_val;
+	double				green_val;
+	double				blue_val;
 
 	val_ctx.world = world;
 	val_ctx.ctx = ctx;
 	val_ctx.tab = tab;
 	val_ctx.current_object = ctx->tmp_object;
-	color.red = ft_atod(tab[0]) / 255;
-	color.green = ft_atod(tab[1]) / 255;
-	color.blue = ft_atod(tab[2]) / 255;
-	val_rgb_value(color.red, &val_ctx);
-	val_rgb_value(color.green, &val_ctx);
-	val_rgb_value(color.blue, &val_ctx);
+	red_val = ft_atod(tab[0]);
+	green_val = ft_atod(tab[1]);
+	blue_val = ft_atod(tab[2]);
+	val_rgb_value(red_val, &val_ctx);
+	val_rgb_value(green_val, &val_ctx);
+	val_rgb_value(blue_val, &val_ctx);
+	color.red = red_val / 255;
+	color.green = green_val / 255;
+	color.blue = blue_val / 255;
 	return (color);
 }
 
