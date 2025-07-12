@@ -20,6 +20,7 @@ SRCS		=	main.c \
 				modules/parse/set_spheres.c \
 				modules/parse/set_planes.c \
 				modules/parse/set_cylinders.c \
+				modules/parse/parse_utils.c \
 				modules/parse/check_duplicate.c \
 				modules/parse/ft_atod.c \
 				modules/generate_rays/generate_rays.c \
