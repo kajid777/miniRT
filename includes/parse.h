@@ -42,6 +42,9 @@ bool		check_line(const char *line, char **data, const char *type,
 				const int nb_elements);
 t_world		*parse(int fd);
 
+/* parse_utils.c */
+bool		is_empty_or_whitespace_only(const char *line);
+
 /* parse_3.c */
 void		validate_required_elements(t_world *world);
 t_world		*get_world(const int argc, char *argv[]);
