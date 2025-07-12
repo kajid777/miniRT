@@ -36,6 +36,7 @@ SRCS		=	main.c \
 				modules/intersect_shadow.c \
 				modules/intersect_utils.c \
 				modules/intersect_utils_basic.c \
+				modules/camera_inside_check.c \
 				modules/vector_cal/vector_cal.c \
 				modules/vector_cal/vector_basic.c \
 				modules/vector_cal/vector_ops.c \

@@ -34,6 +34,13 @@ t_fcolor	trace_ray(t_vec3 ray_origin, t_vec3 ray_dir, t_world *world)
 	t_fcolor	color;
 	t_fcolor	object_color;
 
+	if (is_camera_inside_object(world))
+	{
+		color.red = 0.0;
+		color.green = 0.0;
+		color.blue = 0.0;
+		return (color);
+	}
 	hit = find_closest_intersection(ray_origin, ray_dir, world);
 	if (!hit.is_hit)
 	{

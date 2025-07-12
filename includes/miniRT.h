@@ -181,4 +181,7 @@ void			check_duplicate_ambient(t_world *world, t_parse_ctx *ctx);
 void			check_duplicate_camera(t_world *world, t_parse_ctx *ctx);
 void			check_duplicate_light(t_world *world, t_parse_ctx *ctx);
 
+// camera_inside_check.c
+int				is_camera_inside_object(t_world *world);
+
 #endif
