@@ -46,6 +46,17 @@ void	calc_cylinder_vectors(t_vec3 d, t_vec3 o, t_cylinder cylinder,
 	calc->w_perp = vec_sub(w, vec_mul_scalar(cylinder.direction, w_parallel));
 }
 
+int	check_cylinder_height(t_vec3 hp, t_cylinder cylinder)
+{
+	t_vec3	from_center;
+	double	height_axis;
+
+	from_center = vec_sub(hp, cylinder.center);
+	height_axis = vec_dot(from_center, cylinder.direction);
+	return (height_axis >= -cylinder.height / 2
+		&& height_axis <= cylinder.height / 2);
+}
+
 int	solve_cylinder_quadratic(t_cylinder_calc calc, t_cylinder cylinder,
 		double results[2])
 {
