@@ -19,6 +19,8 @@ static void	process_line(t_world *world, char *line, char **data)
 	ctx.line = line;
 	ctx.data = data;
 	ctx.tmp_object = NULL;
+	if (is_empty_or_whitespace_only(line))
+		return;
 	if (check_line(line, data, "A", NB_ELEM_AL))
 		set_ambient_light(world, &ctx);
 	else if (check_line(line, data, "C", NB_ELEM_CAMERA))
