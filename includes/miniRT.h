@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thashimo <thashimo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 15:28:26 by dkajiwar          #+#    #+#             */
-/*   Updated: 2025/07/08 19:44:48 by thashimo         ###   ########.fr       */
+/*   Updated: 2025/07/15 20:23:06 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,7 @@ void			disable_window_resize(t_world *world);
 // errors/free_world.c
 void			free_world(t_world *world);
 void			free_obj_lists(t_world *world);
+void			free_ctx_and_world(t_world *world, t_parse_ctx *ctx);
 
 // intersect_utils_basic.c
 t_hit			new_hit(t_hit_params params);

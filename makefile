@@ -5,6 +5,7 @@ NAME		=	miniRT
 SRCS		=	main.c \
 				modules/errors/end_exit.c \
 				modules/errors/free_world.c \
+				modules/errors/free_ctx_and_world.c \
 				modules/get_next_line/get_next_line.c \
 				modules/get_next_line/get_next_line_utils.c \
 				modules/parse/parse_1.c \
