@@ -12,6 +12,14 @@
 
 #include "../../includes/miniRT.h"
 
+static void	handle_parse_error(char *line, char **data, t_world *world)
+{
+	free(line);
+	ft_free_tab(data);
+	free_world(world);
+	print_err_and_exit("Parse error", PARSE_ERROR);
+}
+
 static void	process_line(t_world *world, char *line, char **data)
 {
 	t_parse_ctx	ctx;
@@ -34,12 +42,7 @@ static void	process_line(t_world *world, char *line, char **data)
 	else if (check_line(line, data, "cy", NB_ELEM_CYLINDER))
 		set_cylinder(world, &ctx);
 	else
-	{
-		free(line);
-		ft_free_tab(data);
-		free_world(world);
-		print_err_and_exit("Parse error", PARSE_ERROR);
-	}
+		handle_parse_error(line, data, world);
 }
 
 static void	parse_file_content(t_world *world, int fd)
