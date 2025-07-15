@@ -28,6 +28,33 @@ t_vec3	get_norm_cylinder(t_vec3 hitpoint, t_cylinder cylinder)
 	return (norm);
 }
 
+static void	get_cap_centers(t_cylinder cylinder, t_vec3 *cap_center_bottom,
+		t_vec3 *cap_center_top)
+{
+	*cap_center_bottom = vec_add(cylinder.center,
+			vec_mul_scalar(cylinder.direction, -cylinder.height / 2));
+	*cap_center_top = vec_add(cylinder.center,
+			vec_mul_scalar(cylinder.direction, cylinder.height / 2));
+}
+
+static t_hit	process_cap_hits(t_hit bottom_hit, t_hit top_hit,
+		t_cylinder cylinder)
+{
+	if (bottom_hit.is_hit)
+		bottom_hit.norm = vec_mul_scalar(cylinder.direction, -1);
+	if (top_hit.is_hit)
+		top_hit.norm = cylinder.direction;
+	if (bottom_hit.is_hit && top_hit.is_hit)
+	{
+		if (bottom_hit.t < top_hit.t)
+			return (bottom_hit);
+		return (top_hit);
+	}
+	if (bottom_hit.is_hit)
+		return (bottom_hit);
+	return (top_hit);
+}
+
 static t_hit	check_cylinder_cap(t_vec3 dir, t_vec3 origin,
 		t_cylinder cylinder, t_vec3 cap_center)
 {
@@ -64,61 +91,9 @@ t_hit	intersect_cylinder_caps(t_vec3 dir, t_vec3 origin, t_cylinder cylinder)
 	if (vec_dot(dir, cylinder.direction) == 0)
 		return (new_hit((t_hit_params){vec_new(0, 0, 0),
 				vec_new(0, 0, 0), vec_new(0, 0, 0), INFINITY, 0, NONE, NULL}));
-	cap_center_bottom = vec_add(cylinder.center,
-			vec_mul_scalar(cylinder.direction, -cylinder.height / 2));
-	cap_center_top = vec_add(cylinder.center, vec_mul_scalar(cylinder.direction,
-				cylinder.height / 2));
+	get_cap_centers(cylinder, &cap_center_bottom, &cap_center_top);
 	bottom_hit = check_cylinder_cap(dir, origin, cylinder, cap_center_bottom);
-	if (bottom_hit.is_hit)
-		bottom_hit.norm = vec_mul_scalar(cylinder.direction, -1);
 	top_hit = check_cylinder_cap(dir, origin, cylinder, cap_center_top);
-	if (top_hit.is_hit)
-		top_hit.norm = cylinder.direction;
-	if (bottom_hit.is_hit && top_hit.is_hit)
-	{
-		if (bottom_hit.t < top_hit.t)
-			return (bottom_hit);
-		return (top_hit);
-	}
-	if (bottom_hit.is_hit)
-		return (bottom_hit);
-	return (top_hit);
+	return (process_cap_hits(bottom_hit, top_hit, cylinder));
 }
 
-static t_hit	choose_closest_hit(t_hit side_hit, t_hit cap_hit,
-		t_cylinder *cylinder)
-{
-	if (side_hit.is_hit && cap_hit.is_hit)
-	{
-		if (side_hit.t < cap_hit.t)
-		{
-			side_hit.hit_object = cylinder;
-			return (side_hit);
-		}
-		cap_hit.hit_object = cylinder;
-		return (cap_hit);
-	}
-	if (side_hit.is_hit)
-	{
-		side_hit.hit_object = cylinder;
-		return (side_hit);
-	}
-	if (cap_hit.is_hit)
-	{
-		cap_hit.hit_object = cylinder;
-		return (cap_hit);
-	}
-	return (new_hit((t_hit_params){vec_new(0, 0, 0),
-			vec_new(0, 0, 0), vec_new(0, 0, 0), -1, 0, NONE, NULL}));
-}
-
-t_hit	intersect_cylinder(t_vec3 dir, t_vec3 origin, t_cylinder *cylinder,
-		t_vec3 light_pos)
-{
-	t_hit	side_hit;
-	t_hit	cap_hit;
-
-	side_hit = get_cylinder_side_hit(dir, origin, *cylinder, light_pos);
-	cap_hit = intersect_cylinder_caps(dir, origin, *cylinder);
-	return (choose_closest_hit(side_hit, cap_hit, cylinder));
-}
