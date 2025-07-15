@@ -72,6 +72,8 @@ t_hit	intersect_cylinder_caps(t_vec3 dir, t_vec3 origin, t_cylinder cylinder)
 	if (bottom_hit.is_hit)
 		bottom_hit.norm = vec_mul_scalar(cylinder.direction, -1);
 	top_hit = check_cylinder_cap(dir, origin, cylinder, cap_center_top);
+	if (top_hit.is_hit)
+		top_hit.norm = cylinder.direction;
 	if (bottom_hit.is_hit && top_hit.is_hit)
 	{
 		if (bottom_hit.t < top_hit.t)
