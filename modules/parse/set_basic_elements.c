@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "../../includes/miniRT.h"
+
 void	set_ambient_light(t_world *world, t_parse_ctx *ctx)
 {
 	t_ambient_lighting	*ambient_light;

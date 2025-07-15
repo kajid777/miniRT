@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atod_2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: thashimo <thashimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/15 20:30:00 by marvin            #+#    #+#             */
-/*   Updated: 2025/07/15 20:30:00 by marvin           ###   ########.fr       */
+/*   Created: 2025/07/15 20:55:03 by thashimo          #+#    #+#             */
+/*   Updated: 2025/07/15 20:55:03 by thashimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,12 @@
 
 static bool	is_whitespace_char(char c)
 {
-	return (c == ' ' || c == '\t' || c == '\n' || c == '\v' || c == '\f' || c == '\r');
+	return (c == ' ' || c == '\t' || c == '\n' || c == '\v'
+		|| c == '\f' || c == '\r');
 }
 
-static bool	process_number_char(char c, int *has_digit, int *dot_count, int *number_end)
+static bool	process_number_char(char c, int *has_digit, int *dot_count,
+			int *number_end)
 {
 	if (c >= '0' && c <= '9')
 	{

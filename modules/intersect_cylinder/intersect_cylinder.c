@@ -6,7 +6,7 @@
 /*   By: thashimo <thashimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/12 13:14:27 by thashimo          #+#    #+#             */
-/*   Updated: 2025/07/12 13:14:30 by thashimo         ###   ########.fr       */
+/*   Updated: 2025/07/15 20:44:03 by thashimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,4 +96,3 @@ t_hit	intersect_cylinder_caps(t_vec3 dir, t_vec3 origin, t_cylinder cylinder)
 	top_hit = check_cylinder_cap(dir, origin, cylinder, cap_center_top);
 	return (process_cap_hits(bottom_hit, top_hit, cylinder));
 }
-
