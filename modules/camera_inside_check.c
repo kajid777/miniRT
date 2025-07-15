@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   camera_inside_check.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thashimo <thashimo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/12 13:16:41 by thashimo          #+#    #+#             */
-/*   Updated: 2025/07/12 13:16:44 by thashimo         ###   ########.fr       */
+/*   Updated: 2025/07/15 20:52:29 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static int	is_inside_sphere(t_vec3 point, t_sphere *sphere)
 	return (distance_squared < radius_squared);
 }
 
-static int	check_cylinder_height(t_vec3 point_vec, t_vec3 axis_vec,
+static int	check_cylinder_height_range(t_vec3 point_vec, t_vec3 axis_vec,
 	t_cylinder *cylinder)
 {
 	double	projection;
@@ -59,7 +59,7 @@ static int	is_inside_cylinder(t_vec3 point, t_cylinder *cylinder)
 
 	axis_vec = vec_norm(cylinder->direction);
 	point_vec = vec_sub(point, cylinder->center);
-	if (!check_cylinder_height(point_vec, axis_vec, cylinder))
+	if (!check_cylinder_height_range(point_vec, axis_vec, cylinder))
 		return (0);
 	return (check_cylinder_radius(point_vec, axis_vec, cylinder));
 }
