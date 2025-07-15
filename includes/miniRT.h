@@ -127,6 +127,7 @@ t_hit			intersect_cylinder(t_vec3 dir, t_vec3 origin,
 // cylinder_calc.c
 void			calc_cylinder_vectors(t_vec3 d, t_vec3 o, t_cylinder cylinder,
 					t_cylinder_calc *calc);
+int				check_cylinder_height(t_vec3 hp, t_cylinder cylinder);
 int				solve_cylinder_quadratic(t_cylinder_calc calc,
 					t_cylinder cylinder, double results[2]);
 

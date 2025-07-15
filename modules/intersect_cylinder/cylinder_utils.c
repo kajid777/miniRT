@@ -12,17 +12,6 @@
 
 #include "../../includes/miniRT.h"
 
-static int	check_cylinder_height(t_vec3 hp, t_cylinder cylinder)
-{
-	t_vec3	from_center;
-	double	height_axis;
-
-	from_center = vec_sub(hp, cylinder.center);
-	height_axis = vec_dot(from_center, cylinder.direction);
-	return (height_axis >= -cylinder.height / 2
-		&& height_axis <= cylinder.height / 2);
-}
-
 static t_hit	process_cylinder_intersect(double t, t_cylinder_params params)
 {
 	t_vec3	hp;
