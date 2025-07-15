@@ -24,6 +24,7 @@ SRCS		=	main.c \
 				modules/parse/parse_utils.c \
 				modules/parse/check_duplicate.c \
 				modules/parse/ft_atod.c \
+				modules/parse/ft_atod_2.c \
 				modules/generate_rays/generate_rays.c \
 				modules/generate_rays/camera_prepare.c \
 				modules/generate_rays/ray_generation.c \

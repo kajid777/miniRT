@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 09:51:14 by hthomas           #+#    #+#             */
-/*   Updated: 2025/07/12 18:26:53 by marvin           ###   ########.fr       */
+/*   Updated: 2025/07/15 20:45:26 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,11 @@
 /* ft_atod.c */
 double		ten_to(int pow);
 double		dot_part(const char *str, int *len);
+void		skip_whitespace(const char *str, int *i);
+double		parse_sign(const char *str, int *i);
 double		ft_atod(const char *str);
+
+/* ft_atod_2.c */
 double		ft_atod_safe(const char *str, t_world *world, t_parse_ctx *ctx);
 
 /* parse_1.c */
